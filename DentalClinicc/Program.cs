@@ -16,12 +16,14 @@ builder.Services.AddAutoMapper(typeof(AutoMapperProfile));
 // Regjistrimi i shërbimit të AppointmentService
 //builder.Services.AddScoped<IAppointmentService, AppointmentService>();
 builder.Services.AddScoped<IPatientService, PatientService>();
+builder.Services.AddScoped<IDentistService, DentistService>();
 
 
 
 //Regjistrimi i Repositoryt
 //builder.Services.AddScoped<IAppointmentRepository, AppointmentRepository>();
 builder.Services.AddScoped<IPatientRepository, PatientRepository>();
+builder.Services.AddScoped<IDentistRepository, DentistRepository>();
 
 
 

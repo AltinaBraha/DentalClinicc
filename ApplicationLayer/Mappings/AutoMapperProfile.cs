@@ -28,6 +28,10 @@ namespace ApplicationLayer.Mappings
             CreateMap<PatientCreateDto, Patient>();
             CreateMap<PatientUpdateDto, Patient>();
             CreateMap<Patient, PatientReadDto>();
+
+            CreateMap<DentistCreateDto, Dentist>();
+            CreateMap<DentistUpdateDto, Dentist>();
+            CreateMap<Dentist, DentistReadDto>();
         }
     }
 }
