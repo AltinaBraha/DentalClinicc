@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ApplicationLayer.DTOs.ContactDto
 {
-    internal class ContactReadDto
+    public class ContactReadDto
     {
         public int ContactId { get; set; }       
         public string Mesazhi { get; set; }         

@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ApplicationLayer.DTOs;
+using ApplicationLayer.DTOs.ComplaintsDto;
+using ApplicationLayer.DTOs.ContactDto;
 using ApplicationLayer.DTOs.DepartmentDto;
 using ApplicationLayer.DTOs.MedicalRecordDto;
 using ApplicationLayer.DTOs.PatientDto;
@@ -40,9 +42,17 @@ namespace ApplicationLayer.Mappings
             CreateMap<MedicalRecordUpdateDto, MedicalRecord>();
             CreateMap<MedicalRecord, MedicalRecordReadDto>();
 
-            CreateMap<DepartmentReadDto, Department>();
+            CreateMap<DepartmentUpdateDto, Department>();
             CreateMap<DepartmentCreateDto, Department>();
-            CreateMap<Department, DepartmentUpdateDto>();
+            CreateMap<Department, DepartmentReadDto>();
+
+            CreateMap<ContactCreateDto, Contact>();
+            CreateMap<ContactUpdateDto, Contact>();
+            CreateMap<Contact, ContactReadDto>();
+
+            CreateMap<ComplaintsCreateDto, Complaints>();
+            CreateMap<ComplaintsUpdateDto, Complaints>();
+            CreateMap<Complaints, ComplaintsReadDto>();
         }
     }
 }

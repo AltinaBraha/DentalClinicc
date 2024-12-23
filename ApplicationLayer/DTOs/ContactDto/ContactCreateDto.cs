@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ApplicationLayer.DTOs.ContactDto
 {
-    internal class ContactCreateDto
+    public class ContactCreateDto
     {
         public string Mesazhi { get; set; }      
         public DateTime? MessageDate { get; set; }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ApplicationLayer.DTOs.ComplaintsDto
 {
-    internal class ComplaintsUpdateDto
+    public class ComplaintsUpdateDto
     {
         public int ComplaintsId { get; set; }  
         public string Ankesa { get; set; }    
