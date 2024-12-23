@@ -43,32 +43,30 @@ namespace ApplicationLayer.Services
 
         public async Task<DentistReadDto> UpdateDentistAsync(DentistUpdateDto dentistDto)
         {
-            // Get the patient from the repository
             var dentist = await _dentistRepository.GetByIdAsync(dentistDto.DentistId);
 
-            // Check if the patient exists
             if (dentist == null)
             {
-                return null;  // Patient not found
+                return null;  
             }
 
-            // Update the patient properties
             dentist.Emri = dentistDto.Emri;
             dentist.Mbiemri = dentistDto.Mbiemri;
             dentist.Mosha = dentistDto.Mosha;
             dentist.NrTelefonit = dentistDto.NrTelefonit;
             dentist.Email = dentistDto.Email;
+            dentist.Specializimi = dentistDto.Specializimi;
+            dentist.OraFillimit = dentistDto.OraFillimit;
+            dentist.OraMbarimit = dentistDto.OraMbarimit;
 
             // Update ImageId if it's present in the DTO
             /* if (dentistDto.ImageId.HasValue)
              {
                  dentist.ImageId = dentistDto.ImageId.Value;
              }*/
-
-            // Call the repository to update the patient
+            //dentist.DepartmentId = dentistDto.DepartmentId;
             var updatedDentist = await _dentistRepository.UpdateAsync(dentist);
 
-            // Return the updated patient as a DTO
             return _mapper.Map<DentistReadDto>(updatedDentist);
         }
 

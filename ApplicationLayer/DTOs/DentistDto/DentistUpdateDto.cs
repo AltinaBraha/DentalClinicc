@@ -19,6 +19,6 @@ namespace ApplicationLayer.DTOs
         public TimeSpan OraFillimit { get; set; }
         public TimeSpan OraMbarimit { get; set; }
         //public int? ImageId { get; set; }
-        //public int DepartmentId { get; set; }
+        public int DepartmentId { get; set; }
     }
 }

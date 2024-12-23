@@ -1,4 +1,5 @@
 ﻿using ApplicationLayer.DTOs;
+using ApplicationLayer.DTOs.PatientDto;
 using ApplicationLayer.Interfaces;
 using AutoMapper;
 using DomainLayer.Entities;

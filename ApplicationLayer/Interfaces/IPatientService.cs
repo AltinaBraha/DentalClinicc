@@ -1,4 +1,5 @@
 ﻿using ApplicationLayer.DTOs;
+using ApplicationLayer.DTOs.PatientDto;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 

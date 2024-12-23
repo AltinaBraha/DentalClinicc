@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ApplicationLayer.DTOs;
+using ApplicationLayer.DTOs.MedicalRecordDto;
+using ApplicationLayer.DTOs.PatientDto;
 using AutoMapper;
 using DomainLayer.Entities;
 
@@ -32,6 +34,10 @@ namespace ApplicationLayer.Mappings
             CreateMap<DentistCreateDto, Dentist>();
             CreateMap<DentistUpdateDto, Dentist>();
             CreateMap<Dentist, DentistReadDto>();
+
+            CreateMap<MedicalRecordCreateDto, MedicalRecord>();
+            CreateMap<MedicalRecordUpdateDto, MedicalRecord>();
+            CreateMap<MedicalRecord, MedicalRecordReadDto>();
         }
     }
 }

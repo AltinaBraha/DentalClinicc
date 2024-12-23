@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ApplicationLayer.DTOs.PatientDto
 {
-    internal class PatientCreateDto
+    public class PatientCreateDto
     {
         public string Emri { get; set; }
         public string Mbiemri { get; set; }

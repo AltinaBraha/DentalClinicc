@@ -1,4 +1,5 @@
 ﻿using ApplicationLayer.DTOs;
+using ApplicationLayer.DTOs.PatientDto;
 using ApplicationLayer.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
