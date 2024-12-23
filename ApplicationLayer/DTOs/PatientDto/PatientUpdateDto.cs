@@ -15,7 +15,7 @@ namespace ApplicationLayer.DTOs
         public int NrTelefonit { get; set; }
         public string Email { get; set; }
         //public int? ImageId { get; set; } // ID i fotës që mund të përditësohet
-                                          // Mund të shtoni edhe më shumë fushat nëse është e nevojshme
+        // Mund të shtoni edhe më shumë fushat nëse është e nevojshme
     }
 
 }
