@@ -18,6 +18,7 @@ builder.Services.AddAutoMapper(typeof(AutoMapperProfile));
 builder.Services.AddScoped<IPatientService, PatientService>();
 builder.Services.AddScoped<IDentistService, DentistService>();
 builder.Services.AddScoped<IMedicalRecordService, MedicalRecordService>();
+builder.Services.AddScoped<IDepartmentService, DepartmentService>();
 
 
 
@@ -26,7 +27,7 @@ builder.Services.AddScoped<IMedicalRecordService, MedicalRecordService>();
 builder.Services.AddScoped<IPatientRepository, PatientRepository>();
 builder.Services.AddScoped<IDentistRepository, DentistRepository>();
 builder.Services.AddScoped<IMedicalRecordRepository, MedicalRecordRepository>();
-
+builder.Services.AddScoped<IDepartmentRepository, DepartmentRepository>();
 
 
 // Add services to the container.

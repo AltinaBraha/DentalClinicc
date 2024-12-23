@@ -14,7 +14,7 @@ namespace ApplicationLayer.DTOs.AppointmentDto
         public TimeOnly? Ora { get; set; }        
         public string Email { get; set; }         
 
-        public int PatientId { get; set; }         
+        public int PatientId { get; set; }
 
         public int DentistId { get; set; }         
         
