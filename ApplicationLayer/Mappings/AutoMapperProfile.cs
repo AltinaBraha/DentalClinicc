@@ -10,8 +10,10 @@ using ApplicationLayer.DTOs.DepartmentDto;
 using ApplicationLayer.DTOs.MedicalRecordDto;
 using ApplicationLayer.DTOs.PatientDto;
 using ApplicationLayer.DTOs.AppointmentDto;
+using ApplicationLayer.DTOs.PrescriptionDto;
 using AutoMapper;
 using DomainLayer.Entities;
+using ApplicationLayer.DTOs.PrescriptionDto;
 
 namespace ApplicationLayer.Mappings
 {
@@ -54,6 +56,10 @@ namespace ApplicationLayer.Mappings
             CreateMap<ComplaintsCreateDto, Complaints>();
             CreateMap<ComplaintsUpdateDto, Complaints>();
             CreateMap<Complaints, ComplaintsReadDto>();
+
+            CreateMap<PrescriptionCreateDto, Prescription>();
+            CreateMap<PrescriptionUpdateDto, Prescription>();
+            CreateMap<Prescription, PrescriptionReadDto>();
         }
     }
 }

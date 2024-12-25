@@ -21,6 +21,7 @@ builder.Services.AddScoped<IMedicalRecordService, MedicalRecordService>();
 builder.Services.AddScoped<IDepartmentService, DepartmentService>();
 builder.Services.AddScoped<IContactService, ContactService>();
 builder.Services.AddScoped<IComplaintsService, ComplaintsService>();
+builder.Services.AddScoped<IPrescriptionService, PrescriptionService>();
 
 
 
@@ -32,6 +33,7 @@ builder.Services.AddScoped<IMedicalRecordRepository, MedicalRecordRepository>();
 builder.Services.AddScoped<IDepartmentRepository, DepartmentRepository>();
 builder.Services.AddScoped<IContactRepository, ContactRepository>();
 builder.Services.AddScoped<IComplaintsRepository, ComplaintsRepository>();
+builder.Services.AddScoped<IPrescriptionRepository, PrescriptionRepository>();
 
 
 // Add services to the container.
