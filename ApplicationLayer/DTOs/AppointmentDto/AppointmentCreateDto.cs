@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ApplicationLayer.DTOs.AppointmentDto
 {
-    internal class AppointmentCreateDto
+    public class AppointmentCreateDto
     {
         public DateTime? Data { get; set; }
         public string Ceshtja { get; set; }

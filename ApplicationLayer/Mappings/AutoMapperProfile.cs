@@ -9,6 +9,7 @@ using ApplicationLayer.DTOs.ContactDto;
 using ApplicationLayer.DTOs.DepartmentDto;
 using ApplicationLayer.DTOs.MedicalRecordDto;
 using ApplicationLayer.DTOs.PatientDto;
+using ApplicationLayer.DTOs.AppointmentDto;
 using AutoMapper;
 using DomainLayer.Entities;
 
@@ -19,7 +20,7 @@ namespace ApplicationLayer.Mappings
         public AutoMapperProfile()
         {
             // Appointment -> AppointmentReadDto
-            /*CreateMap<Appointment, AppointmentReadDto>()
+            CreateMap<Appointment, AppointmentReadDto>()
                 .ForMember(dest => dest.PatientName, opt => opt.MapFrom(src => src.Patient.Emri))
                 .ForMember(dest => dest.DentistName, opt => opt.MapFrom(src => src.Dentist.Emri));
 
@@ -27,7 +28,7 @@ namespace ApplicationLayer.Mappings
             CreateMap<AppointmentCreateDto, Appointment>();
 
             // AppointmentUpdateDto -> Appointment
-            CreateMap<AppointmentUpdateDto, Appointment>();*/
+            CreateMap<AppointmentUpdateDto, Appointment>();
 
             //Patient
             CreateMap<PatientCreateDto, Patient>();
