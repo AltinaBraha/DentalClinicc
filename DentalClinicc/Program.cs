@@ -6,6 +6,7 @@ using ApplicationLayer.Interfaces;
 using ApplicationLayer.Services;
 using DatabaseLayer.Repositories;
 using DomainLayer.Interfaces;
+using InfrastructureLayer.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -22,6 +23,7 @@ builder.Services.AddScoped<IDepartmentService, DepartmentService>();
 builder.Services.AddScoped<IContactService, ContactService>();
 builder.Services.AddScoped<IComplaintsService, ComplaintsService>();
 builder.Services.AddScoped<IPrescriptionService, PrescriptionService>();
+builder.Services.AddScoped<IAdminService, AdminService>();
 
 
 
@@ -34,6 +36,7 @@ builder.Services.AddScoped<IDepartmentRepository, DepartmentRepository>();
 builder.Services.AddScoped<IContactRepository, ContactRepository>();
 builder.Services.AddScoped<IComplaintsRepository, ComplaintsRepository>();
 builder.Services.AddScoped<IPrescriptionRepository, PrescriptionRepository>();
+builder.Services.AddScoped<IAdminRepository, AdminRepository>();
 
 
 // Add services to the container.

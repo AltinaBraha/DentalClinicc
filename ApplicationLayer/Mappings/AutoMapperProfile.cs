@@ -13,7 +13,7 @@ using ApplicationLayer.DTOs.AppointmentDto;
 using ApplicationLayer.DTOs.PrescriptionDto;
 using AutoMapper;
 using DomainLayer.Entities;
-using ApplicationLayer.DTOs.PrescriptionDto;
+using ApplicationLayer.DTOs.AdminDto;
 
 namespace ApplicationLayer.Mappings
 {
@@ -60,6 +60,10 @@ namespace ApplicationLayer.Mappings
             CreateMap<PrescriptionCreateDto, Prescription>();
             CreateMap<PrescriptionUpdateDto, Prescription>();
             CreateMap<Prescription, PrescriptionReadDto>();
+
+            CreateMap<AdminCreateDto, Admin>();
+            CreateMap<AdminUpdateDto, Admin>();
+            CreateMap<Admin, AdminReadDto>();
         }
     }
 }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ApplicationLayer.DTOs.AdminDto
 {
-    internal class AdminUpdateDto
+    public class AdminUpdateDto
     {
         public int AdminId { get; set; }       
         public string Emri { get; set; }        
