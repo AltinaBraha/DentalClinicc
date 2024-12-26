@@ -14,6 +14,7 @@ using ApplicationLayer.DTOs.PrescriptionDto;
 using AutoMapper;
 using DomainLayer.Entities;
 using ApplicationLayer.DTOs.AdminDto;
+using ApplicationLayer.DTOs.RatingDto;
 
 namespace ApplicationLayer.Mappings
 {
@@ -64,6 +65,10 @@ namespace ApplicationLayer.Mappings
             CreateMap<AdminCreateDto, Admin>();
             CreateMap<AdminUpdateDto, Admin>();
             CreateMap<Admin, AdminReadDto>();
+
+            CreateMap<RatingCreateDto, Rating>();
+            CreateMap<RatingUpdateDto, Rating>();
+            CreateMap<Rating, RatingReadDto>();
         }
     }
 }

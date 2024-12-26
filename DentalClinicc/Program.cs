@@ -24,7 +24,7 @@ builder.Services.AddScoped<IContactService, ContactService>();
 builder.Services.AddScoped<IComplaintsService, ComplaintsService>();
 builder.Services.AddScoped<IPrescriptionService, PrescriptionService>();
 builder.Services.AddScoped<IAdminService, AdminService>();
-
+builder.Services.AddScoped<IRatingService, RatingService>();
 
 
 //Regjistrimi i Repositoryt
@@ -37,6 +37,7 @@ builder.Services.AddScoped<IContactRepository, ContactRepository>();
 builder.Services.AddScoped<IComplaintsRepository, ComplaintsRepository>();
 builder.Services.AddScoped<IPrescriptionRepository, PrescriptionRepository>();
 builder.Services.AddScoped<IAdminRepository, AdminRepository>();
+builder.Services.AddScoped<IRatingRepository, RatingRepository>();
 
 
 // Add services to the container.
