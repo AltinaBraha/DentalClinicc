@@ -14,6 +14,10 @@ namespace DomainLayer.Entities
         public int Mosha { get; set; }
         public int NrTelefonit { get; set; }
         public string Email { get; set; }
+        public byte[] PasswordHash { get; set; } = null!;
+        public byte[] PasswordSalt { get; set; } = null!;
+        public string RefreshToken { get; set; } = null!;
+        public DateTime RefreshTokenExpiryTime { get; set; }
         public int? ImageId { get; set; }
         public Image? Image { get; set; }
         public ICollection<Appointment> Appointments { get; set; } = new List<Appointment>();

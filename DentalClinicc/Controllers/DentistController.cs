@@ -1,4 +1,5 @@
 ﻿using ApplicationLayer.DTOs;
+using ApplicationLayer.DTOs.AdminDto;
 using ApplicationLayer.Interfaces;
 using ApplicationLayer.Services;
 using DomainLayer.Entities;
@@ -42,8 +43,20 @@ namespace PresentationLayer.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateDentist([FromBody] DentistCreateDto dentistDto)
         {
-            var dentist = await _dentistService.CreateDentistAsync(dentistDto);
-            return CreatedAtAction(nameof(GetDentistById), new { id = dentist.DentistId }, dentist);
+            var response = await _dentistService.CreateDentistAsync(dentistDto, dentistDto.Password);
+
+            if (!(bool)response.Success)
+            {
+                return BadRequest(response.Message);
+            }
+
+            var newDentist = response.Data?.FirstOrDefault(a => a.Email == dentistDto.Email);
+            if (newDentist == null)
+            {
+                return StatusCode(500, "Dentist creation succeeded but dentist could not be found.");
+            }
+
+            return CreatedAtAction(nameof(GetDentistById), new { id = newDentist.DentistId }, newDentist);
         }
 
         [HttpPut("{id}")]
@@ -74,6 +87,28 @@ namespace PresentationLayer.Controllers
 
             await _dentistService.DeleteDentistAsync(id);
             return NoContent();
+        }
+
+        [HttpPost("login")]
+        public async Task<ActionResult<ServiceResponse<LoginResponse>>> Login(Login request)
+        {
+            var response = await _dentistService.LoginAsync(request.Email, request.Password);
+            if (!(bool)response.Success)
+            {
+                return BadRequest(response);
+            }
+            return Ok(response);
+        }
+
+        [HttpPost("refresh-token")]
+        public async Task<ActionResult<ServiceResponse<LoginResponse>>> RefreshToken([FromBody] string refreshToken)
+        {
+            var response = await _dentistService.RefreshTokenAsync(refreshToken);
+            if (!(bool)response.Success)
+            {
+                return Unauthorized(response);
+            }
+            return Ok(response);
         }
     }
 }

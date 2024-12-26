@@ -1,6 +1,8 @@
 ﻿using ApplicationLayer.DTOs;
 using ApplicationLayer.DTOs.PatientDto;
 using ApplicationLayer.Interfaces;
+using ApplicationLayer.Services;
+using DomainLayer.Entities;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -39,8 +41,20 @@ namespace PresentationLayer.Controllers
         [HttpPost]
         public async Task<IActionResult> CreatePatient([FromBody] PatientCreateDto patientDto)
         {
-            var patient = await _patientService.CreatePatientAsync(patientDto);
-            return CreatedAtAction(nameof(GetPatientById), new { id = patient.PatientId }, patient);
+            var response = await _patientService.CreatePatientAsync(patientDto, patientDto.Password);
+
+            if (!(bool)response.Success)
+            {
+                return BadRequest(response.Message);
+            }
+
+            var newPatient = response.Data?.FirstOrDefault(a => a.Email == patientDto.Email);
+            if (newPatient == null)
+            {
+                return StatusCode(500, "Patient creation succeeded but patient could not be found.");
+            }
+
+            return CreatedAtAction(nameof(GetPatientById), new { id = newPatient.PatientId }, newPatient);
         }
 
         [HttpPut("{id}")]
@@ -71,6 +85,28 @@ namespace PresentationLayer.Controllers
 
             await _patientService.DeletePatientAsync(id);
             return NoContent();
+        }
+
+        [HttpPost("login")]
+        public async Task<ActionResult<ServiceResponse<LoginResponse>>> Login(Login request)
+        {
+            var response = await _patientService.LoginAsync(request.Email, request.Password);
+            if (!(bool)response.Success)
+            {
+                return BadRequest(response);
+            }
+            return Ok(response);
+        }
+
+        [HttpPost("refresh-token")]
+        public async Task<ActionResult<ServiceResponse<LoginResponse>>> RefreshToken([FromBody] string refreshToken)
+        {
+            var response = await _patientService.RefreshTokenAsync(refreshToken);
+            if (!(bool)response.Success)
+            {
+                return Unauthorized(response);
+            }
+            return Ok(response);
         }
     }
 }

@@ -13,6 +13,10 @@ namespace DomainLayer.Entities
         public string Emri { get; set; }
         public string Mbiemri { get; set; }
         public string Email { get; set; }
+        public byte[] PasswordHash { get; set; } = null!;
+        public byte[] PasswordSalt { get; set; } = null!;
+        public string RefreshToken { get; set; } = null!;
+        public DateTime RefreshTokenExpiryTime { get; set; }
         public int? ImageId { get; set; }
         public Image? Image { get; set; }
         public int DepartmentId { get; set; }

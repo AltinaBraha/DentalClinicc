@@ -13,6 +13,7 @@ namespace ApplicationLayer.DTOs.PatientDto
         public int Mosha { get; set; }
         public int NrTelefonit { get; set; }
         public string Email { get; set; }
+        public string Password { get; set; }
 
         //  public int? ImageId { get; set; }
         //ose public string Image { get; set; }

@@ -18,6 +18,7 @@ namespace ApplicationLayer.DTOs
         public string Specializimi { get; set; }
         public TimeSpan OraFillimit { get; set; }
         public TimeSpan OraMbarimit { get; set; }
+        public string Password { get; set; }
 
         //  public int? ImageId { get; set; }
         //ose public string Image { get; set; }
