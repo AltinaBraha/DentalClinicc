@@ -105,6 +105,11 @@ namespace ApplicationLayer.Services
            // admin.ImageId = adminDto.ImageId;
             admin.DepartmentId = adminDto.DepartmentId;
 
+            if (adminDto.ImageId.HasValue)
+            {
+                admin.ImageId = adminDto.ImageId.Value;
+            }
+
             var updatedAdmin = await _adminRepository.UpdateAsync(admin);
 
             return _mapper.Map<AdminReadDto>(updatedAdmin);

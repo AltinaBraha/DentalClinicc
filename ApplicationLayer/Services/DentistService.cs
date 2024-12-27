@@ -108,10 +108,10 @@ namespace ApplicationLayer.Services
             dentist.OraMbarimit = dentistDto.OraMbarimit;
 
             // Update ImageId if it's present in the DTO
-            /* if (dentistDto.ImageId.HasValue)
+             if (dentistDto.ImageId.HasValue)
              {
                  dentist.ImageId = dentistDto.ImageId.Value;
-             }*/
+             }
             //dentist.DepartmentId = dentistDto.DepartmentId;
             var updatedDentist = await _dentistRepository.UpdateAsync(dentist);
 

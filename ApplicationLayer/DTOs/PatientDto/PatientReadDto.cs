@@ -17,6 +17,6 @@ namespace ApplicationLayer.DTOs
 
         // public ImageDto Image { get; set; } 
 
-        // public int? ImageId { get; set; }
+        public int? ImageId { get; set; }
     }
 }

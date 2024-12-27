@@ -11,8 +11,9 @@ namespace ApplicationLayer.DTOs.AdminDto
         public int AdminId { get; set; }       
         public string Emri { get; set; }        
         public string Mbiemri { get; set; }    
-        public string Email { get; set; }       
-        //public int? ImageId { get; set; }
+        public string Email { get; set; }    
+        
+        public int? ImageId { get; set; }
         public int DepartmentId { get; set; }
     }
 }

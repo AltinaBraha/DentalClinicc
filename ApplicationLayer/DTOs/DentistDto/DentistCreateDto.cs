@@ -20,7 +20,7 @@ namespace ApplicationLayer.DTOs
         public TimeSpan OraMbarimit { get; set; }
         public string Password { get; set; }
 
-        //  public int? ImageId { get; set; }
+        public int? ImageId { get; set; }
         //ose public string Image { get; set; }
 
         public int DepartmentId { get; set; }

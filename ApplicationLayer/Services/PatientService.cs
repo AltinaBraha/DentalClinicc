@@ -103,10 +103,11 @@ namespace ApplicationLayer.Services
             patient.Email = patientDto.Email;
 
             // Update ImageId if it's present in the DTO
-           /* if (patientDto.ImageId.HasValue)
+           if (patientDto.ImageId.HasValue)
             {
                 patient.ImageId = patientDto.ImageId.Value;
-            }*/
+            }
+
 
             // Call the repository to update the patient
             var updatedPatient = await _patientRepository.UpdateAsync(patient);

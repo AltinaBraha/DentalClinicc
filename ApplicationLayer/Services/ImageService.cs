@@ -31,9 +31,15 @@ namespace ApplicationLayer.Services
                 Directory.CreateDirectory(uploadPath);
             }
 
-            // Rruga e plotë ku do të ruhet foto
-            var fileName = Guid.NewGuid().ToString() + Path.GetExtension(dto.File.FileName);
-            var fullPath = Path.Combine(uploadPath, fileName);
+            // Përdor emrin origjinal të skedarit
+            var sanitizedFileName = Path.GetFileName(dto.File.FileName); // Sigurohuni që të jetë vetëm emri
+            var fullPath = Path.Combine(uploadPath, sanitizedFileName);
+
+            // Kontrolloni nëse ekziston një skedar me të njëjtin emër
+            if (File.Exists(fullPath))
+            {
+                throw new Exception("Një skedar me këtë emër ekziston tashmë. Ju lutemi provoni me një emër tjetër.");
+            }
 
             // Ruaj foton në disk
             using (var stream = new FileStream(fullPath, FileMode.Create))
@@ -44,17 +50,18 @@ namespace ApplicationLayer.Services
             // Krijo objektin për bazën e të dhënave
             var image = new Image
             {
-                FileName = fileName,
+                FileName = sanitizedFileName,
                 FileDescription = dto.FileDescription,
                 FileExtension = Path.GetExtension(dto.File.FileName),
                 FileSizeInBytes = dto.File.Length,
-                FilePath = $"/Images/{fileName}" // Ruaj rrugën relative
+                FilePath = $"/Images/{sanitizedFileName}" // Ruaj rrugën relative
             };
 
             var result = await _imageRepository.AddImageAsync(image);
 
             return _mapper.Map<ImageResponseDto>(result);
         }
+
 
         public async Task<ImageResponseDto?> GetImageByIdAsync(int imageId)
             {
@@ -72,7 +79,7 @@ namespace ApplicationLayer.Services
             }
 
             // Përcakto rrugën e skedarit të ruajtur në disk
-            var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", image.FilePath.TrimStart('/'));
+            var filePath = Path.Combine(Directory.GetCurrentDirectory(), "Images", image.FilePath.TrimStart('/'));
 
             // Kontrollo nëse skedari ekziston në disk
             if (File.Exists(filePath))
@@ -81,6 +88,7 @@ namespace ApplicationLayer.Services
                 {
                     // Fshi skedarin fizikisht
                     File.Delete(filePath);
+                    Console.WriteLine($"Skedari {filePath} u fshi me sukses.");
                 }
                 catch (Exception ex)
                 {
@@ -89,10 +97,18 @@ namespace ApplicationLayer.Services
                     return false;
                 }
             }
+            else
+            {
+                Console.WriteLine($"Skedari {filePath} nuk ekziston në disk.");
+            }
 
             // Fshi të dhënat nga baza e të dhënave
-            return await _imageRepository.DeleteImageAsync(imageId);
+            var result = await _imageRepository.DeleteImageAsync(imageId);
+
+            // Kthe true nëse imazhi u fshi me sukses nga baza e të dhënave
+            return result;
         }
+
 
     }
 }
