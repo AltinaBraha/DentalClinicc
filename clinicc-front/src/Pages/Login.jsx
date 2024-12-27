@@ -1,18 +1,16 @@
 import React, { useState } from "react";
-import { Radio } from "antd";
+import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 import logo from "../Assets/logoo.png";
 import banner from "../Assets/banner.png";
 import "./CSS/Login.css";
-import { useNavigate } from "react-router-dom";
-import { ToastContainer, toast } from "react-toastify";
-import axios from "axios";
 
 const notify = (text) => toast(text);
 
 const Login = () => {
   const [loading, setLoading] = useState(false);
-  const [placement, setPlacement] = useState("Admin");
   const [formValue, setFormValue] = useState({
     email: "",
     password: "",
@@ -27,36 +25,37 @@ const Login = () => {
     e.preventDefault();
     setLoading(true);
 
-    const apiEndpoints = {
-      Admin: "https://localhost:7201/api/Admin/login",
-      Dentist: "https://localhost:7201/api/Dentist/login",
-      Patient: "https://localhost:7201/api/Patient/login",
-    };
+    const apiEndpoints = [
+      { role: "Admin", url: "https://localhost:7201/api/Admin/login" },
+      { role: "Dentist", url: "https://localhost:7201/api/Dentist/login" },
+      { role: "Patient", url: "https://localhost:7201/api/Patient/login" },
+    ];
 
-    const endpoint = apiEndpoints[placement];
+    for (const endpoint of apiEndpoints) {
+      try {
+        const response = await axios.post(endpoint.url, formValue);
 
-    try {
-      const response = await axios.post(endpoint, formValue);
-      setLoading(false);
-      notify(response.data.message);
+        // If successful, stop trying other endpoints
+        setLoading(false);
+        notify(`Logged in as ${endpoint.role}`);
 
-      console.log(response.data);
-      const { accessToken, refreshToken } = response.data.data;
-      localStorage.setItem("accessToken", accessToken);
-      localStorage.setItem("refreshToken", refreshToken);
-      console.log(accessToken);
-      console.log(refreshToken);
+        const { accessToken, refreshToken } = response.data.data;
+        localStorage.setItem("accessToken", accessToken);
+        localStorage.setItem("refreshToken", refreshToken);
 
-      navigate("/Home");
-      setFormValue({ email: "", password: "" });
-    } catch (error) {
-      setLoading(false);
-      notify(error.response?.data?.message || "An error occurred");
+        console.log(accessToken);
+        console.log(`Logged in as ${endpoint.role}`);
+        navigate("/Home");
+        setFormValue({ email: "", password: "" });
+        return;
+      } catch (error) {
+        console.error(`Failed to login as ${endpoint.role}`, error.response?.data);
+        // Continue to the next API if login fails
+      }
     }
-  };
 
-  const placementChange = (e) => {
-    setPlacement(e.target.value);
+    setLoading(false);
+    notify("Login failed. Please check your credentials.");
   };
 
   return (
@@ -71,35 +70,29 @@ const Login = () => {
           <div className="Profileimg">
             <img src={logo} alt="profile" />
           </div>
-          <div>
-            <h3>Select Role</h3>
-            <Radio.Group onChange={placementChange} value={placement}>
-              <Radio value="Admin">Admin</Radio>
-              <Radio value="Dentist">Dentist</Radio>
-              <Radio value="Patient">Patient</Radio>
-            </Radio.Group>
-            <form onSubmit={handleSubmit}>
-              <h3>Email</h3>
-              <input
-                type="email"
-                name="email"
-                value={formValue.email}
-                onChange={handleChange}
-                required
-              />
-              <h3>Password</h3>
-              <input
-                type="password"
-                name="password"
-                value={formValue.password}
-                onChange={handleChange}
-                required
-              />
-              <button type="submit">{loading ? "Loading..." : "Submit"}</button>
-              <h4 style={{ marginTop: "10px" }}>Don't have an account?</h4>
-              <a href="/">Click here</a>
-            </form>
-          </div>
+          <form onSubmit={handleSubmit}>
+            <h3>Email</h3>
+            <input
+              type="email"
+              name="email"
+              value={formValue.email}
+              onChange={handleChange}
+              required
+            />
+            <h3>Password</h3>
+            <input
+              type="password"
+              name="password"
+              value={formValue.password}
+              onChange={handleChange}
+              required
+            />
+            <button type="submit" disabled={loading}>
+              {loading ? "Loading..." : "Submit"}
+            </button>
+            <h4 style={{ marginTop: "10px" }}>Don't have an account?</h4>
+            <a href="/">Click here</a>
+          </form>
         </div>
       </div>
     </>
