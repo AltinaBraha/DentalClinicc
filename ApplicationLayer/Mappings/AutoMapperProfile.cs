@@ -69,6 +69,9 @@ namespace ApplicationLayer.Mappings
             CreateMap<RatingCreateDto, Rating>();
             CreateMap<RatingUpdateDto, Rating>();
             CreateMap<Rating, RatingReadDto>();
+
+            CreateMap<Image, ImageUploadRequestDto>().ReverseMap();
+            CreateMap<Image, ImageResponseDto>();
         }
     }
 }

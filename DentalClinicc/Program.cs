@@ -32,6 +32,7 @@ builder.Services.AddScoped<IComplaintsService, ComplaintsService>();
 builder.Services.AddScoped<IPrescriptionService, PrescriptionService>();
 builder.Services.AddScoped<IAdminService, AdminService>();
 builder.Services.AddScoped<IRatingService, RatingService>();
+builder.Services.AddScoped<IImageService, ImageService>();
 
 
 //Regjistrimi i Repositoryt
@@ -45,6 +46,7 @@ builder.Services.AddScoped<IComplaintsRepository, ComplaintsRepository>();
 builder.Services.AddScoped<IPrescriptionRepository, PrescriptionRepository>();
 builder.Services.AddScoped<IAdminRepository, AdminRepository>();
 builder.Services.AddScoped<IRatingRepository, RatingRepository>();
+builder.Services.AddScoped<IImageRepository, ImageRepository>();
 
 var tokenKey = builder.Configuration["AppSettings:Token"]; // Ensure this is set in appsettings.json
 var key = Encoding.UTF8.GetBytes(tokenKey);
