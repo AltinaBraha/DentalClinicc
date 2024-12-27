@@ -79,7 +79,7 @@ namespace ApplicationLayer.Services
             await _adminRepository.AddAsync(admin);
 
             // Return all admins
-            response.Data = admins.ToList(); // Use LINQ ToList on the list
+            response.Data = _context.Admins.ToList(); // Use LINQ ToList on the list
             response.Success = true;
             response.Message = "Admin created successfully";
             return response;

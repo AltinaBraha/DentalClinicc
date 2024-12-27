@@ -73,8 +73,7 @@ namespace ApplicationLayer.Services
             // Add admin to the repository
             await _patientRepository.AddAsync(patient);
 
-            // Return all admins
-            response.Data = patients.ToList(); // Use LINQ ToList on the list
+            response.Data = _context.Patients.ToList(); // Use LINQ ToList on the list
             response.Success = true;
             response.Message = "Patient created successfully";
             return response;

@@ -78,7 +78,7 @@ namespace ApplicationLayer.Services
             await _dentistRepository.AddAsync(dentist);
 
             // Return all admins
-            response.Data = dentists.ToList(); // Use LINQ ToList on the list
+            response.Data = _context.Dentists.ToList(); // Use LINQ ToList on the list
             response.Success = true;
             response.Message = "Dentist created successfully";
             return response;
