@@ -154,7 +154,14 @@ namespace ApplicationLayer.Services
             response.Data = new LoginResponse
             {
                 AccessToken = accessToken,
-                RefreshToken = refreshToken
+                RefreshToken = refreshToken,
+                Admin = new Admin 
+                { 
+                    AdminId = admin.AdminId,
+                    Emri = admin.Emri,
+                    Mbiemri = admin.Mbiemri,
+                    Email = admin.Email,
+                }
             };
             response.Success = true;
             response.Message = "Login successful";

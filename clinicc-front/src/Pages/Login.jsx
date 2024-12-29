@@ -41,11 +41,22 @@ const Login = () => {
         notify(`Logged in as ${endpoint.role}`);
 
         const { accessToken, refreshToken } = response.data.data;
+        const { patient, admin, dentist } = response.data.data;
         localStorage.setItem("accessToken", accessToken);
         localStorage.setItem("refreshToken", refreshToken);
         localStorage.setItem("role", endpoint.role);
+        if (patient) {
+          localStorage.setItem("patient", JSON.stringify(patient));
+        }
+        if (admin) {
+          localStorage.setItem("admin", JSON.stringify(admin));
+        }
+        if (dentist) {
+          localStorage.setItem("dentist", JSON.stringify(dentist));
+        }
 
-        console.log(accessToken);
+        console.log(response.data);
+        console.log(patient);
         console.log(`Logged in as ${endpoint.role}`);
         navigate("/Home");
         setFormValue({ email: "", password: "" });

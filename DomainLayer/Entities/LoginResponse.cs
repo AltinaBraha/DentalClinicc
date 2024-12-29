@@ -10,5 +10,9 @@ namespace DomainLayer.Entities
     {
         public string AccessToken { get; set; } = null!;
         public string RefreshToken { get; set; } = null!;
+        public Admin? Admin { get; set; }
+        public Patient? Patient { get; set; }
+        public Dentist? Dentist { get; set; }
+
     }
 }

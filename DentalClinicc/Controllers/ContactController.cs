@@ -3,6 +3,7 @@ using ApplicationLayer.DTOs.MedicalRecordDto;
 using ApplicationLayer.Interfaces;
 using ApplicationLayer.Services;
 using DomainLayer.Entities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -37,6 +38,7 @@ namespace PresentationLayer.Controllers
             return Ok(contacts);
         }
 
+        [Authorize(Roles = "Patient")]
         [HttpPost("add-contact")]
         public async Task<IActionResult> CreateContact([FromBody] ContactCreateDto contactDto)
         {

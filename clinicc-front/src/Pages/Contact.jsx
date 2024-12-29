@@ -3,9 +3,20 @@ import axios from "axios";
 import "./CSS/Contact.css";
 
 const Contact = () => {
+  const patient = (() => {
+    try {
+      return JSON.parse(localStorage.getItem("patient")) || {};
+    } catch {
+      console.error("Invalid patient data in localStorage");
+      return {};
+    }
+  })();
+  const role = localStorage.getItem("role");
+  
   const [formData, setFormData] = useState({
     mesazhi: "",
     messageDate: "",
+    patientId: patient.patientId,
   });
 
   const [successMessage, setSuccessMessage] = useState("");
@@ -21,8 +32,12 @@ const Contact = () => {
 
     const token = localStorage.getItem("accessToken");
 
-    if (!token) {
-      setErrorMessage("Ju nuk jeni autentikuar. Ju lutem kyçuni.");
+    if (!token || role !== "Patient") {
+      setErrorMessage(
+        role !== "Patient"
+          ? "Ju nuk jeni të autorizuar të përdorni këtë formë."
+          : "Ju nuk jeni autentikuar. Ju lutem kyçuni."
+      );
       return;
     }
 
@@ -41,6 +56,8 @@ const Contact = () => {
       setFormData({
         mesazhi: "",
         messageDate: "",
+        patientId: patient.patientId,
+
       });
     } catch (error) {
       console.error("Gabim gjatë dërgimit të mesazhit:", error.response?.data);
