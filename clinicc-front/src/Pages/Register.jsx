@@ -79,7 +79,7 @@ const Register = () => {
   return (
     <>
       <ToastContainer />
-      <div className="mainRegisterPage">
+      <div className="mainLoginPage">
         <div className="leftside">
           <img src={banner} alt="banner" />
         </div>

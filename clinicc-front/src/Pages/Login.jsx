@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Navbar from '../Components/Navbar/Navbar';
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import logo from "../Assets/logoo.png";
@@ -42,6 +43,7 @@ const Login = () => {
         const { accessToken, refreshToken } = response.data.data;
         localStorage.setItem("accessToken", accessToken);
         localStorage.setItem("refreshToken", refreshToken);
+        localStorage.setItem("role", endpoint.role);
 
         console.log(accessToken);
         console.log(`Logged in as ${endpoint.role}`);

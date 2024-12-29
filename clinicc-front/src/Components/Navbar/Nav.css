@@ -1,0 +1,103 @@
+.navbar {
+    background-color: #343a40; 
+    padding: 1rem; 
+}
+
+.navbar-brand {
+    display: flex;
+    align-items: center;
+    margin-right: auto; 
+}
+
+.navbar-brand img {
+    height: 40px; 
+}
+
+.navbar-nav {
+    display: flex;
+    align-items: center;
+    margin-left: 1000px; 
+}
+
+.nav-link {
+    color: white !important; 
+    margin-right: 1rem; 
+}
+
+.nav-link:hover {
+    color: #ddd !important; 
+}
+
+.navbar .dropdown {
+    margin-right: 20px; 
+}
+
+.navbar .dropdown-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    color: white !important;
+    font-size: 1.5rem; 
+}
+
+.navbar .dropdown-toggle::after {
+    display: none; 
+}
+
+.navbar .dropdown-menu {
+    background-color: #343a40; 
+    border: none; 
+    transform: none; 
+    min-width: 200px; 
+}
+
+.navbar .dropdown-menu .dropdown-item {
+    color: white; 
+    padding: 10px 20px;
+}
+
+.navbar .dropdown-menu .dropdown-item:hover {
+    background-color: #495057; 
+    color: #fff; 
+}
+
+.navbar .dropdown-menu .dropdown-divider {
+    background-color: #495057; 
+}
+
+.navbar .LogOutPath {
+    display: flex;
+    align-items: center;
+    color: white !important; 
+}
+
+.navbar .LogOutPath:hover {
+    color: #ddd !important; 
+}
+
+.navbar .LogOutPath .icon {
+    margin-left: 5px; 
+}
+
+@media (max-width: 768px) {
+    .navbar-collapse {
+        background-color: #343a40; 
+    }
+
+    .navbar .nav-link {
+        margin-right: 0; 
+    }
+    .navbar-nav{
+        margin-left: 0;
+    }
+
+    .navbar .dropdown-menu {
+        min-width: 100%; 
+        left: 0; 
+        transform: none; 
+    }
+
+    .navbar .dropdown {
+        margin-right: 0; 
+    }
+}

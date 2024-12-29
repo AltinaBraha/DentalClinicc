@@ -65,12 +65,12 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("AllowAllOrigin", builder =>
+    options.AddPolicy("AllowAllOrigin", policy =>
     {
-        builder.WithOrigins("https://localhost:3000") // Adjust your frontend URL
-               .AllowAnyHeader()
-               .AllowAnyMethod()
-               .AllowCredentials();
+        policy.WithOrigins("http://localhost:3000", "https://localhost:3001") // Add frontend URLs
+              .AllowAnyHeader()
+              .AllowAnyMethod()
+              .AllowCredentials(); // Use AllowCredentials only if necessary
     });
 });
 
