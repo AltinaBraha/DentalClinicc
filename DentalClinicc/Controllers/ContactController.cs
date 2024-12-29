@@ -37,7 +37,7 @@ namespace PresentationLayer.Controllers
             return Ok(contacts);
         }
 
-        [HttpPost]
+        [HttpPost("add-contact")]
         public async Task<IActionResult> CreateContact([FromBody] ContactCreateDto contactDto)
         {
             var contact = await _contactService.CreateContactAsync(contactDto);
