@@ -8,6 +8,10 @@
     align-items: center;
     margin-right: auto; 
 }
+.container{
+    display: flex;
+    justify-content: space-around;
+}
 
 .navbar-brand img {
     height: 40px; 
@@ -16,7 +20,7 @@
 .navbar-nav {
     display: flex;
     align-items: center;
-    margin-left: 1000px; 
+    margin-left: auto; 
 }
 
 .nav-link {
@@ -86,9 +90,6 @@
 
     .navbar .nav-link {
         margin-right: 0; 
-    }
-    .navbar-nav{
-        margin-left: 0;
     }
 
     .navbar .dropdown-menu {

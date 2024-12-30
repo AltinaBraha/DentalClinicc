@@ -30,6 +30,20 @@ namespace PresentationLayer.Controllers
             return Ok(prescription);
         }
 
+        [HttpGet("dentist/{dentistId}")]
+        public async Task<IActionResult> GetByDentistId(int dentistId)
+        {
+            var prescriptions = await _prescriptionService.GetByDentistIdAsync(dentistId);
+            return Ok(prescriptions);
+        }
+
+        [HttpGet("patient/{patientId}")]
+        public async Task<IActionResult> GetByPatientId(int patientId)
+        {
+            var prescriptions = await _prescriptionService.GetByPatientIdAsync(patientId);
+            return Ok(prescriptions);
+        }
+
         [HttpGet]
         public async Task<IActionResult> GetAllPrescriptions()
         {

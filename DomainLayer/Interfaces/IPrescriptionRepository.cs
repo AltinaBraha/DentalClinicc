@@ -11,6 +11,8 @@ namespace DomainLayer.Interfaces
     {
         Task<Prescription> AddAsync(Prescription prescription);
         Task<Prescription> GetByIdAsync(int id);
+        Task<List<Prescription>> GetByDentistIdAsync(int dentistId);
+        Task<List<Prescription>> GetByPatientIdAsync(int patientId);
         Task<List<Prescription>> GetAllAsync();
         Task<Prescription> UpdateAsync(Prescription prescription);
         Task DeleteAsync(int id);

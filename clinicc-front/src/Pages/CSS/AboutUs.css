@@ -3,13 +3,11 @@
   padding-bottom: 70px;
 
 }
-.section .row{
-  display: flex;
-  
-}
+
 .mb-30 {
   margin-bottom: 30px !important;
 }
+
 .about-images {
   margin-right: 30px;
   position: relative;
@@ -110,7 +108,6 @@ img {
 
 .heading-bx {
   margin-bottom: 45px;
-  
 }
 
   .heading-bx h6 {

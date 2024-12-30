@@ -6,7 +6,7 @@ import { IoWater } from "react-icons/io5";
 import "./CSS/AboutUs.css";
 function About() {
     return (
-        <div >
+        <div>
             <section className="section about-area">
                 <div className="container-fluid">
                     <div className="row align-items-center">

@@ -11,6 +11,8 @@ namespace DomainLayer.Interfaces
     {
         Task<MedicalRecord> AddAsync(MedicalRecord medicalRecord);
         Task<MedicalRecord> GetByIdAsync(int id);
+        Task<List<MedicalRecord>> GetByDentistIdAsync(int dentistId);
+        Task<List<MedicalRecord>> GetByPatientIdAsync(int patientId);
         Task<List<MedicalRecord>> GetAllAsync();
         Task<MedicalRecord> UpdateAsync(MedicalRecord medicalRecord);
         Task DeleteAsync(int id);

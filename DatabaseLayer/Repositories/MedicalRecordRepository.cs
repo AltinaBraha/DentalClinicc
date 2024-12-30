@@ -30,6 +30,22 @@ namespace DatabaseLayer.Repositories
             return await _context.MedicalRecords.FirstOrDefaultAsync(p => p.MedicalRecordId == id);
         }
 
+        public async Task<List<MedicalRecord>> GetByDentistIdAsync(int dentistId)
+        {
+            return await _context.MedicalRecords
+                .Include(a => a.Patient)
+                .Where(a => a.DentistId == dentistId)
+                .ToListAsync();
+        }
+
+        public async Task<List<MedicalRecord>> GetByPatientIdAsync(int patientId)
+        {
+            return await _context.MedicalRecords
+                .Include(a => a.Dentist)
+                .Where(a => a.PatientId == patientId)
+                .ToListAsync();
+        }
+
         public async Task<List<MedicalRecord>> GetAllAsync()
         {
             return await _context.MedicalRecords.ToListAsync();

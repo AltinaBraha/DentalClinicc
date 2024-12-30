@@ -1,7 +1,9 @@
 ﻿using ApplicationLayer.DTOs;
+using ApplicationLayer.DTOs.MedicalRecordDto;
 using ApplicationLayer.DTOs.PrescriptionDto;
 using ApplicationLayer.Interfaces;
 using AutoMapper;
+using DatabaseLayer.Repositories;
 using DomainLayer.Entities;
 using DomainLayer.Interfaces;
 using System;
@@ -28,7 +30,17 @@ namespace ApplicationLayer.Services
             var prescription = await _prescriptionRepository.GetByIdAsync(id);
             return _mapper.Map<PrescriptionReadDto>(prescription);
         }
+        public async Task<List<PrescriptionReadDto>> GetByDentistIdAsync(int dentistId)
+        {
+            var prescriptions = await _prescriptionRepository.GetByDentistIdAsync(dentistId);
+            return _mapper.Map<List<PrescriptionReadDto>>(prescriptions);
+        }
 
+        public async Task<List<PrescriptionReadDto>> GetByPatientIdAsync(int patientId)
+        {
+            var prescriptions = await _prescriptionRepository.GetByPatientIdAsync(patientId);
+            return _mapper.Map<List<PrescriptionReadDto>>(prescriptions);
+        }
         public async Task<List<PrescriptionReadDto>> GetAllPrescriptionsAsync()
         {
             var prescription = await _prescriptionRepository.GetAllAsync();

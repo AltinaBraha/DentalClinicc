@@ -1,4 +1,5 @@
 ﻿using ApplicationLayer.DTOs;
+using ApplicationLayer.DTOs.AppointmentDto;
 using ApplicationLayer.DTOs.MedicalRecordDto;
 using System;
 using System.Collections.Generic;
@@ -11,6 +12,8 @@ namespace ApplicationLayer.Interfaces
     public interface IMedicalRecordService
     {
         Task<MedicalRecordReadDto> GetMedicalRecordByIdAsync(int id);
+        Task<List<MedicalRecordReadDto>> GetByDentistIdAsync(int dentistId);
+        Task<List<MedicalRecordReadDto>> GetByPatientIdAsync(int patientId);
         Task<List<MedicalRecordReadDto>> GetAllMedicalRecordsAsync();
         Task<MedicalRecordReadDto> CreateMedicalRecordAsync(MedicalRecordCreateDto medicalRecordDto);
         Task<MedicalRecordReadDto> UpdateMedicalRecordAsync(MedicalRecordUpdateDto medicalRecordDto);

@@ -1,4 +1,5 @@
-﻿using ApplicationLayer.DTOs.PrescriptionDto;
+﻿using ApplicationLayer.DTOs.MedicalRecordDto;
+using ApplicationLayer.DTOs.PrescriptionDto;
 using DomainLayer.Entities;
 using System;
 using System.Collections.Generic;
@@ -11,6 +12,8 @@ namespace ApplicationLayer.Interfaces
     public interface IPrescriptionService
     {
         Task<PrescriptionReadDto> GetPrescriptionByIdAsync(int id);
+        Task<List<PrescriptionReadDto>> GetByDentistIdAsync(int dentistId);
+        Task<List<PrescriptionReadDto>> GetByPatientIdAsync(int patientId);
         Task<List<PrescriptionReadDto>> GetAllPrescriptionsAsync();
         Task<PrescriptionReadDto> CreatePrescriptionAsync(PrescriptionCreateDto prescriptionDto);
         Task<PrescriptionReadDto> UpdatePrescriptionAsync(PrescriptionUpdateDto prescriptionDto);

@@ -3,10 +3,6 @@ footer {
     padding: 40px 0;
     border-top: 1px solid #e0e0e0;
 }
-.row {
-    display: flex;
-    justify-content: space-around;
-}
 
 .footerlogo {
     max-width: 150px;

@@ -1,0 +1,186 @@
+.inputForm {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem; /* Add space between input fields */
+  padding: 1rem; /* Padding around the form */
+}
+
+.container1{
+    padding: 200px;
+    background-color: rgba(184, 133, 139, 0.849);
+}
+.inputForm input,
+.inputForm select {
+  width: 100%;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+  margin-top: 0.5rem;
+}
+
+.inputForm label {
+  font-size: 1.2rem;
+  margin-bottom: 0.3rem;
+  color: #333; /* Change label color for better visibility */
+}
+
+.inputForm button {
+  margin-top: 1rem; /* Add margin to the button for spacing */
+}
+
+.modal-content {
+  padding: 20px;
+}
+
+.firstBox {
+  background-color: white;
+  border-radius: 2rem;
+  width: 600px;
+}
+.container2{
+  width: 100%;
+  background-color: rgba(131,220,255,.29);
+  padding: 80px;
+}
+
+.maindoctorProfile {
+  display: flex;
+  justify-content: space-between;
+  gap: 3rem;
+}
+
+.singleitemdiv {
+  display: flex;
+  justify-content: left;
+  gap: 50px;
+  padding: 10px;
+  font-size: 1.9rem;
+  align-items: center;
+  margin: 0rem 1rem;
+}
+
+.singleitemdiv:nth-child(even) .singledivicons {
+  color: #ff6f6f;
+}
+
+.singleitemdiv:nth-child(odd) .singledivicons {
+  color: rgb(123 219 130);
+}
+
+
+.firstBox div {
+  display: flex;
+  padding: 1rem;
+}
+.firstBox img {
+  width: 20%;
+  margin-top: 70px;
+  margin-left: 230px;
+  border-radius: 10rem;
+  background-color: #efefef;
+}
+#editbtn{
+    margin-left: 230px;
+}
+
+.subfirstbox {
+  background-color: white;
+  border-radius: 2rem;
+  height: 45%;
+}
+.subSecondBox {
+  background-color: white;
+  border-radius: 2rem;
+  height: 45%;
+}
+
+.singleitemdiv button {
+  width: 50%;
+  margin: auto;
+  font-size: 1.5rem;
+  padding: 10px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  gap: 1rem;
+  box-shadow: 0px 0px 3px -1px #4f33ea;
+  background-color: #84adea;
+  text-align: center;
+}
+
+.SecondBox {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+@media only screen and (max-width: 1024px) {
+  .maindoctorProfile {
+    display: block;
+  }
+  .firstBox {
+    width: 100%;
+    margin-bottom: 4rem;
+  }
+
+  .SecondBox {
+    gap: 3rem;
+  }
+  .firstBox div img {
+    width: 40%;
+    margin: auto;
+    border-radius: 10rem;
+    background-color: #efefef;
+  }
+  .singleitemdiv button {
+    width: 50%;
+  }
+}
+@media only screen and (max-width: 800px) {
+    .maindoctorProfile {
+        display: block;
+        align-items: center;
+      }
+      .firstBox {
+        width: 100%;
+        margin-bottom: 4rem;
+        padding: 0;
+      }
+      .container1{
+        padding: 10px;
+        margin: 0;
+      }
+}
+
+@media only screen and (max-width: 500px) {
+    .maindoctorProfile {
+        display: block;
+      }
+      .firstBox {
+        width: 100%;
+        margin-bottom: 4rem;
+      }
+    
+      .SecondBox {
+        gap: 3rem;
+      }
+      .firstBox img {
+        width: 40%;
+        margin-top: 70px;
+        margin-left: 120px;
+        border-radius: 10rem;
+        background-color: #efefef;
+      }
+  .singleitemdiv button {
+    width: 70%;
+  }
+  #editbtn{
+    margin-left: 140px;
+}
+  .inputForm input,
+  .inputForm select {
+    width: 90%; /* Adjust width for smaller screens */
+  }
+}
