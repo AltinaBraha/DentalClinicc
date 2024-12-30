@@ -7,6 +7,7 @@ import Register from './Pages/Register';
 import Home from './Pages/Home';
 import Contact from './Pages/Contact';
 import PatientProfile from './Pages/PatientProfile';
+import Appointment from './Pages/Appointment';
 import {
   BrowserRouter as Router,
   Routes,
@@ -25,6 +26,7 @@ function App() {
               <Route path="/Footer" element={<Footer />} />
               <Route path="/Contact" element={<Contact />} />
               <Route path="/PatientProfile" element={<PatientProfile />} />
+              <Route path="/Appointment" element={<Appointment />} />
             </Routes>
         </Router>
   );

@@ -50,6 +50,11 @@ function Navbars() {
                                 <span>Dentists</span>
                             </Link>
                         )}
+                        {role === "Patient" && (
+                            <Link to="/Appointment" className="nav-link">
+                                <span>Make an appointment</span>
+                            </Link>
+                        )}
                         
                         <NavDropdown title={<FaUser />} id="basic-nav-dropdown">
                         {role === "Patient" && (
