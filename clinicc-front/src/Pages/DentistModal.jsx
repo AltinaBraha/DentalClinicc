@@ -24,12 +24,10 @@ const DentistModal = ({ dentist, onClose, departments }) => {
     };
 
     // Debugging - log the department array and dentist object
-    console.log('Departments:', departments); // Check the departments data
-    console.log('Dentist DepartmentId:', dentist?.departmentId); // Check the departmentId in dentist object
+    //console.log('Departments:', departments); // Check the departments data
+   // console.log('Dentist DepartmentId:', dentist?.departmentId); // Check the departmentId in dentist object
 
-    const departmentName = dentist?.departmentId
-        ? departments.find(department => department.DepartmentId === dentist.departmentId)?.emri || 'N/A'
-        : 'N/A';
+ 
 
     return (
         <>
@@ -47,7 +45,7 @@ const DentistModal = ({ dentist, onClose, departments }) => {
                     <p><strong>Specialization:</strong> {dentist?.specializimi || 'N/A'}</p>
                     <p><strong>Start Time:</strong> {dentist?.oraFillimit || 'N/A'}</p>
                     <p><strong>End Time:</strong> {dentist?.oraMbarimit || 'N/A'}</p>
-                    <p><strong>Department:</strong> {departmentName}</p>
+                    <p><strong>Department:</strong> {dentist?.Department ? dentist.Department.Emri : 'N/A'}</p>
                 </div>
 
                 <div className="modal-footer" style={{ textAlign: 'right' }}>
