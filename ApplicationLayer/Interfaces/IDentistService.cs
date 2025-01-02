@@ -16,6 +16,8 @@ namespace ApplicationLayer.Interfaces
         Task<ServiceResponse<List<Dentist>?>> CreateDentistAsync(DentistCreateDto dentist, string password); 
         Task<DentistReadDto> UpdateDentistAsync(DentistUpdateDto dentistDto);
         Task DeleteDentistAsync(int id);
+        Task<List<DentistReadDto>> SearchByNameAsync(string name);
+
         Task<ServiceResponse<LoginResponse>> LoginAsync(string email, string password);
         Task<ServiceResponse<LoginResponse>> RefreshTokenAsync(string refreshToken);
     }

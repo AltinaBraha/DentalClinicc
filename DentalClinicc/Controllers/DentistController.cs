@@ -89,6 +89,25 @@ namespace PresentationLayer.Controllers
             return NoContent();
         }
 
+        [HttpGet("search")]
+        public async Task<IActionResult> SearchPatients([FromQuery] string? name = null)
+        {
+            if (string.IsNullOrWhiteSpace(name))
+            {
+                return BadRequest("Search term cannot be empty.");
+            }
+
+            var patients = await _dentistService.SearchByNameAsync(name);
+
+            if (patients == null || !patients.Any())
+            {
+                return NotFound("No patients found with the given name.");
+            }
+
+            return Ok(patients);
+        }
+
+
         [HttpPost("login")]
         public async Task<ActionResult<ServiceResponse<LoginResponse>>> Login(Login request)
         {

@@ -1,0 +1,61 @@
+/* General Modal Styles */
+.dentist-modal .antd-modal {
+    border-radius: 8px; /* Rounded corners for the modal */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Modern font family */
+}
+
+.dentist-modal .antd-modal-header {
+    background: #007bff; /* Primary color for the header */
+    color: #ffffff; /* White text color */
+    border-bottom: 1px solid #0056b3; /* Darker border for better contrast */
+    border-radius: 8px 8px 0 0; /* Rounded top corners */
+}
+
+.dentist-modal .antd-modal-title {
+    color: #ffffff; /* White title text */
+    font-size: 18px; /* Slightly larger font size for the title */
+}
+
+.dentist-modal .antd-modal-body {
+    background: #f8f9fa; /* Light gray background for modal content */
+    color: #495057; /* Darker text color for readability */
+    font-size: 16px; /* Larger font size for better readability */
+    line-height: 1.5; /* Improve readability with line-height */
+}
+
+.dentist-modal .modal-footer {
+    display: flex;
+    justify-content: space-between; /* Position buttons in the corners */
+    padding: 16px; /* Add padding for spacing */
+    background: #f8f9fa; /* Match the body background color */
+    border-top: 1px solid #dee2e6; /* Subtle border to separate footer */
+}
+
+.dentist-modal .antd-btn-primary, .dentist-modal .antd-btn-default {
+    border-radius: 4px; /* Rounded corners for buttons */
+    padding: 10px 20px; /* Adequate padding for buttons */
+    font-size: 16px; /* Larger font size for button text */
+    transition: background-color 0.3s, border-color 0.3s; /* Smooth transition for hover effects */
+}
+
+.dentist-modal .antd-btn-primary {
+    background: #ffffff; /* Primary button background color */
+    border-color: #dee2e6; /* Primary button border color */
+    color: #007bff; /* White text color */
+}
+
+.dentist-modal .antd-btn-primary:hover {
+    background: #f1f3f5; /* Darker blue on hover */
+    border-color: #0056b3; /* Border color on hover */
+}
+
+.dentist-modal .antd-btn-default {
+    background: #ffffff; /* Default button background */
+    border-color: #dee2e6; /* Default button border color */
+    color: #007bff; /* Primary color for text */
+}
+
+.dentist-modal .antd-btn-default:hover {
+    background: #f1f3f5; /* Light gray background on hover */
+    border-color: #0056b3; /* Border color on hover */
+}

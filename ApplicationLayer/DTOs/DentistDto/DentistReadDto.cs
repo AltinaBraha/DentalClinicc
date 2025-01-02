@@ -21,7 +21,7 @@ namespace ApplicationLayer.DTOs
 
         public int? ImageId { get; set; }
         
-        //public int DepartmentId { get; set; }
+        public int DepartmentId { get; set; }
         //public DepartmentDto Department { get; set; }
     }
 }

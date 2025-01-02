@@ -8,6 +8,14 @@ import Home from './Pages/Home';
 import Contact from './Pages/Contact';
 import PatientProfile from './Pages/PatientProfile';
 import Appointment from './Pages/Appointment';
+import Dentists from './Pages/Dentists';
+import DentistModal from './Pages/DentistModal';
+import AddComplaints from './Pages/AddModals/AddComplaints';
+import AddRating from './Pages/AddModals/AddRating';
+
+
+
+
 import {
   BrowserRouter as Router,
   Routes,
@@ -27,6 +35,10 @@ function App() {
               <Route path="/Contact" element={<Contact />} />
               <Route path="/PatientProfile" element={<PatientProfile />} />
               <Route path="/Appointment" element={<Appointment />} />
+              <Route path="/Dentists" element={<Dentists />} />
+              <Route path="/DentistModal" element={<DentistModal />} />
+              <Route path="/AddComplainits" element={<AddComplaints />} />
+             <Route path="/AddRating" element={<AddRating />} />
             </Routes>
         </Router>
   );
