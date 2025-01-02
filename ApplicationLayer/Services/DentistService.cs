@@ -84,6 +84,21 @@ namespace ApplicationLayer.Services
             return response;
         }
 
+        public async Task<List<DentistReadDto>> SearchByNameAsync(string name)
+        {
+            var dentists = await _context.Dentists
+             .Where(d => d.Emri.ToLower().Contains(name.ToLower()) ||
+                d.Mbiemri.ToLower().Contains(name.ToLower()))
+            .ToListAsync();
+
+
+
+            // Map the list of Dentist entities to a list of DentistReadDto
+            return _mapper.Map<List<DentistReadDto>>(dentists);
+        }
+
+
+
         private string GenerateRefreshToken()
         {
             return Guid.NewGuid().ToString();
