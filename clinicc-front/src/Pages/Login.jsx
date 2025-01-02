@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import Navbar from '../Components/Navbar/Navbar';
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import logo from "../Assets/logoo.png";
@@ -73,7 +72,10 @@ const Login = () => {
 
   return (
     <>
-      <ToastContainer />
+    <div style={{ position: "fixed", top: 0, right: 0, zIndex: 9999 }}>
+  <ToastContainer />
+</div>
+
       <div className="mainLoginPage">
         <div className="leftside">
           <img src={banner} alt="banner" />

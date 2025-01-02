@@ -43,6 +43,7 @@
     border-radius: 5px;
     padding: 8px 15px;
     cursor: pointer;
+    width: 130px;
     transition: background-color 0.3s ease;
 }
 
@@ -121,6 +122,7 @@
     border-radius: 5px;
     padding: 10px 15px;
     cursor: pointer;
+    width: 130px;
     transition: background-color 0.3s ease;
     display: flex;
     align-items: center;

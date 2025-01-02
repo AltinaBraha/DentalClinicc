@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import termini from "../Assets/termini.png";
 import { ToastContainer, toast } from "react-toastify";
 import Navbar from "../Components/Navbar/Navbar";
 import "react-toastify/dist/ReactToastify.css";
 import Footer from "../Components/Footer/Footer";
 import "../Pages/CSS/Appointment.css";
+import termini from "../Assets/termini.png";
+import backgroundImage from "../Assets/appointmentImg.png";
 
 const Appointment = () => {
   const notify = (text) => toast(text);
@@ -20,7 +21,6 @@ const Appointment = () => {
   })();
 
   const token = localStorage.getItem("accessToken");
-  console.log(token);
 
   const [dentists, setDentists] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -29,20 +29,17 @@ const Appointment = () => {
     ceshtja: "",
     ora: "",
     email: "",
-    dentistId: "",
     patientId: patient1.patientId,
+    dentistId: "",
   });
 
-  // Fetch dentists data
   useEffect(() => {
     const fetchDentists = async () => {
       try {
         const response = await axios.get(`https://localhost:7201/api/Dentist`, {
           headers: { Authorization: `Bearer ${token}` },
         });
-        const dentistsData = response.data?.$values || [];
-        console.log(dentistsData);
-        setDentists(dentistsData);
+        setDentists(response.data?.$values || []);
       } catch (error) {
         console.error("Failed to fetch dentists:", error);
         notify("Failed to fetch dentists");
@@ -52,12 +49,10 @@ const Appointment = () => {
     if (token) fetchDentists();
   }, [token]);
 
-  // Handle form input changes
   const handleTerminiChange = (e) => {
     setTerminiValue({ ...terminiValue, [e.target.name]: e.target.value });
   };
 
-  // Handle form submission
   const handleTerminiSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
@@ -71,8 +66,7 @@ const Appointment = () => {
         }
       );
 
-      const resMessage = response.data.message;
-      if (resMessage === "Termini already exists") {
+      if (response.data.message === "Termini already exists") {
         notify("Appointment Already Exists");
       } else {
         setTerminiValue({
@@ -80,8 +74,8 @@ const Appointment = () => {
           ceshtja: "",
           ora: "",
           email: "",
-          dentistId: "",
           patientId: patient1.patientId,
+          dentistId: "",
         });
         notify("Appointment added successfully");
       }
@@ -96,85 +90,83 @@ const Appointment = () => {
   return (
     <>
       <Navbar />
-      <ToastContainer />
-      <div className="container1">
-        <div className="AfterSideBar1">
-          <div className="Main_Add_Pacient_div">
-            <h1>Add Appointment</h1>
+      <div style={{ position: "fixed", top: 0, right: 0, zIndex: 9999 }}>
+  <ToastContainer />
+</div>
+
+      <div
+        className="appointment-page"
+        style={{ backgroundImage: `url(${backgroundImage})` }}
+      >
+        <div className="content-container">
+          {/* Left Side */}
+          <div className="text-container">
+            <h1>The Complete Dental Examination</h1>
+            <p>
+              Get a free healthcare examination for your teeth. Just fill in the
+              form and we'll contact you back.
+            </p>
+            <div className="benefit-box">
+              <h2>Benefit No. 1</h2>
+              <p>Add a description of your offer and key benefits.</p>
+            </div>
+            <div className="benefit-box">
+              <h2>Benefit No. 2</h2>
+              <p>Add a description of your offer and key benefits.</p>
+            </div>
+          </div>
+
+          {/* Right Side */}
+          <div className="appointment-form">
+            <h1>Book an Appointment</h1>
             <img src={termini} alt="doctor" className="avatarimg" />
             <form onSubmit={handleTerminiSubmit}>
-              <div>
-                <label>Date</label>
-                <div className="inputdiv">
-                  <input
-                    type="date"
-                    placeholder="Date"
-                    name="data"
-                    value={terminiValue.dataT}
-                    onChange={handleTerminiChange}
-                    required
-                  />
-                </div>
-              </div>
-              <div>
-                <label>Reason</label>
-                <div className="inputdiv">
-                  <input
-                    type="text"
-                    placeholder="Reason"
-                    name="ceshtja"
-                    value={terminiValue.ceshtja}
-                    onChange={handleTerminiChange}
-                    required
-                  />
-                </div>
-              </div>
-              <div>
-                <label>Time</label>
-                <div className="inputdiv">
-                  <input
-                    type="text"
-                    placeholder="hh:mm:ss"
-                    name="ora"
-                    value={terminiValue.ora}
-                    onChange={handleTerminiChange}
-                    required
-                  />
-                </div>
-              </div>
-              <div>
-                <label>Email</label>
-                <div className="inputdiv">
-                  <input
-                    type="text"
-                    placeholder="Email"
-                    name="email"
-                    value={terminiValue.email}
-                    onChange={handleTerminiChange}
-                    required
-                  />
-                </div>
-              </div>
-              <div>
-                <label>Select Dentist</label>
-                <div className="inputdiv">
-                  <select
-                    name="dentistId"
-                    value={terminiValue.dentistId}
-                    onChange={handleTerminiChange}
-                    required
-                  >
-                    <option value="">Select a Dentist</option>
-                    {dentists.map((dentist) => (
-                      <option key={dentist.dentistId} value={dentist.dentistId}>
-                        {dentist.emri} {dentist.mbiemri}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-              </div>
-              <button type="submit" className="formsubmitbutton">
-                {loading ? "Loading..." : "Submit"}
+              <input
+                type="date"
+                name="data"
+                value={terminiValue.data}
+                onChange={handleTerminiChange}
+                required
+              />
+              <input
+                type="text"
+                name="ceshtja"
+                placeholder="Reason"
+                value={terminiValue.ceshtja}
+                onChange={handleTerminiChange}
+                required
+              />
+              <input
+                type="text"
+                name="ora"
+                placeholder="hh:mm:ss"
+                value={terminiValue.ora}
+                onChange={handleTerminiChange}
+                required
+              />
+              <input
+                type="email"
+                name="email"
+                placeholder="Enter your email"
+                value={terminiValue.email}
+                onChange={handleTerminiChange}
+                required
+              />
+              <select
+                name="dentistId"
+                value={terminiValue.dentistId}
+                onChange={handleTerminiChange}
+                required
+              >
+                <option value="">Select a Dentist</option>
+                {dentists.map((dentist) => (
+                  <option key={dentist.dentistId} value={dentist.dentistId}>
+                    {dentist.emri} {dentist.mbiemri}
+                  </option>
+                ))}
+              </select>
+              <button type="submit" disabled={loading}>
+                {loading ? "Loading..." : "Book Now"}
               </button>
             </form>
           </div>

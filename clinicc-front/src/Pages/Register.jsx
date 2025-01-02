@@ -18,7 +18,6 @@ const Register = () => {
     nrTelefonit: "",
     email: "",
     password: "",
-    confirmPassword: "",
   });
 
   const navigate = useNavigate(); // Hook to programmatically navigate to another page
@@ -30,10 +29,6 @@ const Register = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (formValue.password !== formValue.confirmPassword) {
-      notify("Passwords do not match!");
-      return;
-    }
 
     setLoading(true);
 
@@ -62,7 +57,6 @@ const Register = () => {
         nrTelefonit: "",
         email: "",
         password: "",
-        confirmPassword: "",
       });
 
       // Redirect to login page after successful registration
@@ -78,8 +72,11 @@ const Register = () => {
 
   return (
     <>
-      <ToastContainer />
-      <div className="mainLoginPage">
+    <div style={{ position: "fixed", top: 0, right: 0, zIndex: 9999 }}>
+  <ToastContainer />
+</div>
+
+      <div className="mainRegisterPage">
         <div className="leftside">
           <img src={banner} alt="banner" />
         </div>
@@ -90,7 +87,8 @@ const Register = () => {
           </div>
           <div>
             <form onSubmit={handleSubmit}>
-              <h3>Name</h3>
+              <div className="form-row">
+              <h5>Name:</h5>
               <input
                 type="text"
                 name="emri"
@@ -98,8 +96,10 @@ const Register = () => {
                 onChange={handleChange}
                 required
               />
+              </div>
 
-              <h3>Surname</h3>
+              <div className="form-row">
+              <h5>Surname:</h5>
               <input
                 type="text"
                 name="mbiemri"
@@ -107,8 +107,10 @@ const Register = () => {
                 onChange={handleChange}
                 required
               />
+              </div>
 
-              <h3>Age</h3>
+              <div className="form-row">
+              <h5>Age:</h5>
               <input
                 type="number"
                 name="mosha"
@@ -116,8 +118,10 @@ const Register = () => {
                 onChange={handleChange}
                 required
               />
+              </div>
 
-              <h3>Phone Number</h3>
+              <div className="form-row">
+              <h5>Phone Number:</h5>
               <input
                 type="number"
                 name="nrTelefonit"
@@ -125,8 +129,10 @@ const Register = () => {
                 onChange={handleChange}
                 required
               />
+              </div>
 
-              <h3>Email</h3>
+              <div className="form-row">
+              <h5>Email:</h5>
               <input
                 type="email"
                 name="email"
@@ -134,8 +140,10 @@ const Register = () => {
                 onChange={handleChange}
                 required
               />
+              </div>
 
-              <h3>Password</h3>
+              <div className="form-row">
+              <h5>Password:</h5>
               <input
                 type="password"
                 name="password"
@@ -143,15 +151,7 @@ const Register = () => {
                 onChange={handleChange}
                 required
               />
-
-              <h3>Confirm Password</h3>
-              <input
-                type="password"
-                name="confirmPassword"
-                value={formValue.confirmPassword}
-                onChange={handleChange}
-                required
-              />
+              </div>
 
               <button type="submit">{loading ? "Loading..." : "Register"}</button>
               <h4 style={{ marginTop: "10px" }}>Already have an account?</h4>

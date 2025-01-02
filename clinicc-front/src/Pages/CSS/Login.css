@@ -14,6 +14,24 @@ html, body {
   background-color: aliceblue;
 }
 
+.mainRegisterPage {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10rem;
+  min-height: 100vh;
+  background-color: aliceblue;
+}
+.mainRegisterPage .rightside {
+  padding: 2rem;
+  align-items: center;
+  text-align: center;
+  width: 35%;
+  border-radius: 10px;
+  background-color: white;
+  max-height: 100vh;
+}
+
 .leftside {
   width: 50%;
 }
@@ -36,21 +54,47 @@ html, body {
   width: 26%;
   margin-top: 2rem;
 }
+.mainRegisterPage .Profileimg {
+  margin: auto;
+  width: 26%;
+  margin-top: 0;
+}
 
 .Profileimg img {
   width: 5rem;
   border-radius: 5rem;
 }
 
-.radiobutton {
-  width: 33%;
-  font-size: 1.2rem;
-  font-weight: bold;
-}
 
 .rightside > h1 {
   margin: 2rem;
 }
+
+.mainRegisterPage .rightside > h1 {
+  margin: 0;
+}
+.mainRegisterPage form{
+  margin-top: 0;
+}
+
+.form-row {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px; /* Add spacing between rows */
+}
+
+.form-row h5 {
+  width: 150px; /* Adjust width for consistent alignment */
+  margin: 0; /* Remove default margin */
+}
+
+.form-row input {
+  flex: 1; /* Allow input to take the remaining space */
+  padding: 8px; /* Add padding for better usability */
+  border: 1px solid #ccc; /* Optional: Add a border */
+  border-radius: 4px; /* Optional: Add rounded corners */
+}
+
 
 .rightside input {
   display: block;
@@ -59,6 +103,19 @@ html, body {
   height: 3rem;
   font-size: 1.2rem;
   margin: 10px 0px;
+  border-radius: 5px;
+  border: none;
+  padding: 10px;
+}
+
+.mainRegisterPage .rightside input {
+  display: block;
+  width: 60%;
+  background-color: aliceblue;
+  height: 2.5rem;
+  font-size: 1.2rem;
+  margin: 10px 0px;
+  border:#6a6fdc;
   border-radius: 5px;
   border: none;
   padding: 10px;
@@ -75,9 +132,26 @@ html, body {
   border: none;
   margin-top: 1.5rem;
   color: white;
+  box-sizing: border-box;
+  border: 2px solid transparent;
 }
 
-form h3 {
+.mainRegisterPage .rightside button {
+  height: 2.5rem;
+  margin-top: 0;
+}
+.mainRegisterPage .rightside button:hover {
+  height: 2.5rem;
+}
+
+.rightside button:hover {
+  background-color: #6a6fdc; /* Ensure no padding or border changes */
+  width: 100%;
+  height: 3rem;
+  font-size: 1.3rem;
+}
+
+form h5 {
   text-align: left;
 }
 
