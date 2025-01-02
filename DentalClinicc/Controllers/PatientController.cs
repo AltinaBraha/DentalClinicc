@@ -87,6 +87,24 @@ namespace PresentationLayer.Controllers
             return NoContent();
         }
 
+        [HttpGet("search")]
+        public async Task<IActionResult> SearchPatients([FromQuery] string? name = null)
+        {
+            if (string.IsNullOrWhiteSpace(name))
+            {
+                return BadRequest("Search term cannot be empty.");
+            }
+
+            var patients = await _patientService.SearchByNameAsync(name);
+
+            if (patients == null || !patients.Any())
+            {
+                return NotFound("No patients found with the given name.");
+            }
+
+            return Ok(patients);
+        }
+
         [HttpPost("login")]
         public async Task<ActionResult<ServiceResponse<LoginResponse>>> Login(Login request)
         {
@@ -108,5 +126,19 @@ namespace PresentationLayer.Controllers
             }
             return Ok(response);
         }
+
+        [HttpGet("byDentist/{dentistId}")]
+        public async Task<IActionResult> GetPatientsByDentistId(int dentistId)
+        {
+            var patients = await _patientService.GetPatientsByDentistIdAsync(dentistId);
+
+            if (patients == null || !patients.Any())
+            {
+                return NotFound("No patients found for the given dentist.");
+            }
+
+            return Ok(patients);
+        }
+
     }
 }

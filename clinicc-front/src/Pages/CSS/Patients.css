@@ -1,0 +1,88 @@
+.background {
+    padding: 20px;
+    background-color: #f9f9f9;
+    min-height: 100vh;
+}
+
+h1 {
+    text-align: center;
+    font-size: 32px;
+    color: #4a4a4a;
+    margin-bottom: 40px;
+    font-weight: bold;
+}
+
+.patient-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+}
+
+.patient-card {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+    width: 280px;
+    transition: box-shadow 0.3s ease-in-out;
+}
+
+.patient-card:hover {
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+}
+
+.patient-card h2 {
+    margin-top: 0;
+    font-size: 20px;
+    color: #333;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.patient-card p {
+    margin: 5px 0;
+    font-size: 14px;
+    color: #666;
+}
+
+.patient-card p strong {
+    color: #333;
+}
+
+.patient-card button {
+    background-color: olivedrab;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px;
+    cursor: pointer;
+    font-size: 14px;
+    margin-top: 10px;
+    width: 100%;
+    transition: background-color 0.3s ease;
+}
+
+.patient-card button:hover {
+    background-color: #0056b3;
+}
+
+.patient-card button:focus {
+    outline: none;
+}
+
+p.no-patients {
+    text-align: center;
+    font-size: 18px;
+    color: #777;
+}
+
+/* Add media queries for better responsiveness */
+
+@media (max-width: 768px) {
+    .patient-list {
+        flex-direction: column;
+        align-items: center;
+    }
+}

@@ -11,5 +11,6 @@ namespace DomainLayer.Interfaces
         Task<List<Patient>> GetAllAsync();
         Task<Patient> UpdateAsync(Patient patient);
         Task DeleteAsync(int id);
+        Task<List<Patient>> GetByIdsAsync(List<int> patientIds);
     }
 }

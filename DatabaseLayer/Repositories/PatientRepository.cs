@@ -50,5 +50,12 @@ namespace DatabaseLayer.Repositories
                 await _context.SaveChangesAsync();
             }
         }
+
+        public async Task<List<Patient>> GetByIdsAsync(List<int> patientIds)
+        {
+            return await _context.Patients
+                .Where(p => patientIds.Contains(p.PatientId))
+                .ToListAsync();
+        }
     }
 }

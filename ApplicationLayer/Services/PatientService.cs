@@ -22,14 +22,16 @@ namespace ApplicationLayer.Services
         private readonly IPatientRepository _patientRepository;
         private readonly IMapper _mapper;
         private readonly IConfiguration _configuration;
+        private readonly IAppointmentRepository _appointmentRepository;
         private ClinicDbContext _context;
 
-        public PatientService(IPatientRepository patientRepository, IMapper mapper, IConfiguration configuration, ClinicDbContext context)
+        public PatientService(IPatientRepository patientRepository, IMapper mapper, IConfiguration configuration, ClinicDbContext context, IAppointmentRepository appointmentRepository)
         {
             _patientRepository = patientRepository;
             _mapper = mapper;
             _configuration = configuration;
             _context = context;
+            _appointmentRepository = appointmentRepository;
         }
 
         public async Task<PatientReadDto> GetPatientByIdAsync(int id)
@@ -247,5 +249,42 @@ namespace ApplicationLayer.Services
 
             return response;
         }
+
+        public async Task<List<PatientReadDto>> GetPatientsByDentistIdAsync(int dentistId)
+        {
+            // Fetch appointments for the dentist
+            var appointments = await _appointmentRepository.GetByDentistIdAsync(dentistId);
+
+            // Extract unique patient IDs
+            var patientIds = appointments
+                .Select(a => a.PatientId)
+                .Distinct()
+                .ToList();
+
+            if (!patientIds.Any())
+            {
+                return new List<PatientReadDto>();
+            }
+
+            // Fetch patient details by IDs
+            var patients = await _patientRepository.GetByIdsAsync(patientIds);
+
+            // Map to DTOs and return
+            return _mapper.Map<List<PatientReadDto>>(patients);
+        }
+
+        public async Task<List<PatientReadDto>> SearchByNameAsync(string name)
+        {
+            var patients = await _context.Patients
+             .Where(d => d.Emri.ToLower().Contains(name.ToLower()) ||
+                d.Mbiemri.ToLower().Contains(name.ToLower()))
+            .ToListAsync();
+
+
+
+            // Map the list of Dentist entities to a list of DentistReadDto
+            return _mapper.Map<List<PatientReadDto>>(patients);
+        }
+
     }
 }

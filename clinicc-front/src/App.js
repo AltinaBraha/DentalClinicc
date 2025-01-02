@@ -12,6 +12,7 @@ import Dentists from './Pages/Dentists';
 import DentistModal from './Pages/DentistModal';
 import AddComplaints from './Pages/AddModals/AddComplaints';
 import AddRating from './Pages/AddModals/AddRating';
+import Patients from './Pages/Patients';
 
 
 
@@ -38,7 +39,8 @@ function App() {
               <Route path="/Dentists" element={<Dentists />} />
               <Route path="/DentistModal" element={<DentistModal />} />
               <Route path="/AddComplainits" element={<AddComplaints />} />
-             <Route path="/AddRating" element={<AddRating />} />
+              <Route path="/AddRating" element={<AddRating />} />
+              <Route path="/Patients" element={<Patients />} />
             </Routes>
         </Router>
   );

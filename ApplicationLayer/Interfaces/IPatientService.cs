@@ -13,7 +13,9 @@ namespace ApplicationLayer.Interfaces
         Task<ServiceResponse<List<Patient>?>> CreatePatientAsync(PatientCreateDto patient, string password);
         Task<PatientReadDto> UpdatePatientAsync(PatientUpdateDto patientDto);
         Task DeletePatientAsync(int id);
+        Task<List<PatientReadDto>> SearchByNameAsync(string name);
         Task<ServiceResponse<LoginResponse>> LoginAsync(string email, string password);
         Task<ServiceResponse<LoginResponse>> RefreshTokenAsync(string refreshToken);
+        Task<List<PatientReadDto>> GetPatientsByDentistIdAsync(int dentistId);
     }
 }
