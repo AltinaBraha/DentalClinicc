@@ -22,14 +22,6 @@ const Sidebar = () => {
   };
 
   const token1 = localStorage.getItem("accessToken");
-  const dentist1 = (() => {
-    try {
-      return JSON.parse(localStorage.getItem("dentist")) || {};
-    } catch {
-      console.error("Invalid patient data in localStorage");
-      return {};
-    }
-  })();
   const admin1 = (() => {
     try {
       return JSON.parse(localStorage.getItem("admin")) || {};
@@ -40,7 +32,6 @@ const Sidebar = () => {
   })();
   
   const user = admin1;
-  const user1 = dentist1;
 
 
 
@@ -150,45 +141,6 @@ const Sidebar = () => {
                 </div>
               </Link>
             ) : null}
-
-
-            {!user?.adminId ? (
-              <Link
-                className="link1"
-                activeclassname="active"
-                to={"/DentistProfile"}
-              >
-                <div className="icon1">
-                  <SlUserFollow className="mainIcon1" />
-                </div>
-                <div
-                  style={{ display: isOpen ? "block" : "none" }}
-                  className="link_text1"
-                >
-                  Profile
-                </div>
-              </Link>
-            ) : null}
-           
-            {!user?.adminId ? (
-              <Link
-                className="link1"
-                activeclassname="active"
-                to={"/checkappointment"}
-              >
-                <div className="icon1">
-                  <BsFillBookmarkCheckFill className="mainIcon1" />
-                </div>
-                <div
-                  style={{ display: isOpen ? "block" : "none" }}
-                  className="link_text1"
-                >
-                  Appointments
-                </div>
-              </Link>
-            ) : null}
-            
-
             <Link
               className="LogOutPath1 link1"
               onClick={handleLogout} as={Link} to="/"

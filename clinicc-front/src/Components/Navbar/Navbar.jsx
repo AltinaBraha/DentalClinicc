@@ -39,7 +39,7 @@ function Navbars() {
                             </Link>
                         )}
 
-                        {(role === "Dentist" || role === "Admin") &&(
+                        {role === "Admin" &&(
                             <Link to="/dashboard" className="nav-link">
                                 <span>Dashboard</span>
                             </Link>
