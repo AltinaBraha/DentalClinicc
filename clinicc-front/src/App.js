@@ -15,6 +15,10 @@ import AddRating from './Pages/AddModals/AddRating';
 import Patients from './Pages/Patients';
 import Knowledge from './Pages/Knowledge';
 
+import FrontPage from './Pages/Dashboard/GlobalFiles/FrontPage';
+import Terminet from './Pages/Dashboard/GlobalFiles/Terminet';
+import EditPatient from './Pages/Dashboard/Update/EditPatient';
+import EditAppointment from './Pages/Dashboard/Update/EditAppointment';
 
 
 
@@ -41,7 +45,12 @@ function App() {
               <Route path="/DentistModal" element={<DentistModal />} />
               <Route path="/AddComplainits" element={<AddComplaints />} />
               <Route path="/AddRating" element={<AddRating />} />
+              <Route path="/Patients" element={<Patients />} />
               <Route path="/Knowledge" element={<Knowledge />} />
+              <Route path="/dashboard" element={<FrontPage />} />
+              <Route path="/terminet" element={<Terminet />} />
+              <Route path="EditPatient/:id" element={<EditPatient />} />
+              <Route path="EditAppointment/:id" element={<EditAppointment />} />
 
             </Routes>
         </Router>
