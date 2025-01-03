@@ -1,0 +1,128 @@
+/* General Styles */
+.knowledge-section {
+    text-align: center;
+    padding: 40px 20px;
+    background: linear-gradient(135deg, #ffffff, #e3f2fd);
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin-bottom: 50px;
+}
+
+.knowledge-container h3 {
+    font-size: 2.5em;
+    font-family: 'Georgia', serif;
+    color: #37474f;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    animation: fadeInDown 1s ease-in-out;
+}
+
+/* Content container styles */
+.content-container {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 30px;
+    align-items: center;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 1s ease-in-out forwards;
+}
+
+.content-container.reverse {
+    flex-direction: row-reverse;
+}
+
+/* Text Section Styles */
+.text-container {
+    width: 60%; /* Text takes 60% of the space */
+    text-align: left;
+    padding-right: 20px;
+    background-color: #ffffff; /* White background for better readability */
+    padding: 20px; /* Padding inside the text container */
+    border-radius: 8px; /* Rounded corners for the text box */
+}
+
+.title {
+    font-size: 1.6em;
+    font-weight: bold;
+    color: #00796b;
+    margin-bottom: 20px;
+    letter-spacing: 1px;
+}
+
+.text-container p, .text-container ul {
+    font-size: 1.1em;
+    color: #455a64;
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+.text-container ul {
+    padding-left: 20px;
+}
+
+.text-container ul li {
+    margin-bottom: 10px;
+}
+
+/* Image Section Styles */
+.image-container {
+    width: 35%; /* Image takes 35% of the space */
+    padding: 10px; /* Prevent photo from overflowing */
+}
+
+.Knowledge-pic {
+    width: 100%;
+    border-radius: 10px;
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.Knowledge-pic:hover {
+    transform: scale(1.1);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Keyframe Animations */
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsiveness for Mobile Devices */
+@media (max-width: 768px) {
+    .content-container {
+        flex-direction: column; /* Stack the text and image vertically */
+        align-items: center;
+    }
+
+    .content-container.reverse {
+        flex-direction: column; /* Stack the text and image vertically when reversed */
+    }
+
+    .text-container, .image-container {
+        width: 90%; /* Ensure both text and image take 90% of the width on mobile */
+        text-align: center; /* Center align the content on mobile */
+    }
+
+    .text-container {
+        padding-right: 0;
+    }
+}
