@@ -4,8 +4,9 @@ import { AiFillEdit } from "react-icons/ai";
 import { MdEmail, MdSick } from "react-icons/md";
 import { BsFillCalendarDateFill } from "react-icons/bs";
 import { Button, message, Modal, Select } from "antd";
-import { useParams } from "react-router-dom";
-import Sidebar from "../GlobalFiles/Sidebar";
+import { useNavigate, useParams } from "react-router-dom";
+import Navbar from '../../Components/Navbar/Navbar';
+import Footer from '../../Components/Footer/Footer';
 import "../CSS/Edit.css";
 import { FaTimes } from "react-icons/fa";
 import { toast } from "react-toastify";
@@ -13,64 +14,31 @@ import "react-toastify/dist/ReactToastify.css";
 
 const notify = (text) => toast(text);
 
-const EditAppointment = () => {
+const EditMedicalRecord = () => {
   const { id } = useParams(); // Get the patient ID from the URL
   const token = localStorage.getItem("accessToken"); // Retrieve the token from localStorage
 
   const [formData, setFormData] = useState({
-    appointmentId: id,
-    data: "",
-    ceshtja: "",
-    ora: "",
-    email: "",
+    medicalRecordId: id,
+    pershkrimi: "",
+    symptoms: "",
+    diagnosis: "",
+    results: "",
     patientId: "",
     dentistId: "",
   });
+  const navigate = useNavigate();
 
   const [loading, setLoading] = useState(true);
   const [open, setOpen] = useState(false);
   const [confirmLoading, setConfirmLoading] = useState(false);
   const [messageApi, contextHolder] = message.useMessage();
-  const [dentists, setDentists] = useState([]);
-  const [patients, setPatients] = useState([]);
-
-  useEffect(() => {
-    const fetchDentists = async () => {
-      try {
-        const response = await axios.get(`https://localhost:7201/api/Dentist`, {
-          headers: { Authorization: `Bearer ${token}` },
-        });
-        setDentists(response.data?.$values || []);
-      } catch (error) {
-        console.error("Failed to fetch dentists:", error);
-        notify("Failed to fetch dentists");
-      }
-    };
-
-    if (token) fetchDentists();
-  }, [token]);
-
-  useEffect(() => {
-    const fetchPatients = async () => {
-      try {
-        const response = await axios.get(`https://localhost:7201/api/Patient`, {
-          headers: { Authorization: `Bearer ${token}` },
-        });
-        setPatients(response.data?.$values || []);
-      } catch (error) {
-        console.error("Failed to fetch patients:", error);
-        notify("Failed to fetch patients");
-      }
-    };
-
-    if (token) fetchPatients();
-  }, [token]);
 
   // Fetch patient data when the component mounts
   useEffect(() => {
-    const fetchAppointment = async () => {
+    const fetchMedicalRecord = async () => {
       try {
-        const response = await axios.get(`https://localhost:7201/api/Appointments/${id}`, {
+        const response = await axios.get(`https://localhost:7201/api/MedicalRecord/${id}`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -78,23 +46,23 @@ const EditAppointment = () => {
 
         const data = response.data;
         setFormData({
-          appointmentId: data.appointmentId,
-          data: data.data || "",
-          ceshtja: data.ceshtja || "",
-          ora: data.ora || "",
-          email: data.email || "",
-          patientId: data.patientId || "",
+          medicalRecordId: data.medicalRecordId,
+          pershkrimi: data.pershkrimi || "",
+          symptoms: data.symptoms || "",
+          diagnosis: data.diagnosis || "",
+          results: data.results || "",
+          patientId: data.patientId ,
           dentistId:data.dentistId,
         });
         setLoading(false);
       } catch (error) {
-        console.error("Failed to fetch Appointment data:", error);
-        message.error("Failed to load Appointment data.");
+        console.error("Failed to fetch MedicalRecord data:", error);
+        message.error("Failed to load MedicalRecord data.");
         setLoading(false);
       }
     };
 
-    fetchAppointment();
+    fetchMedicalRecord();
   }, [id, token]);
 
   const success = (text) => {
@@ -131,7 +99,7 @@ const EditAppointment = () => {
   const handleFormSubmit = async () => {
     try {
       const response = await axios.put(
-        `https://localhost:7201/api/Appointments/${id}`,
+        `https://localhost:7201/api/MedicalRecord/${id}`,
         formData,
         {
           headers: {
@@ -139,9 +107,10 @@ const EditAppointment = () => {
           },
         }
       );
-      console.log(response);
-            message.success("Appointment updated successfully.");
-            setOpen(false);
+        console.log(response);
+        message.success("MedicalRecord updated successfully.");
+        setOpen(false);
+        navigate("/Patients");
           } catch (error) {
               if (error.response) {
                   console.error("Response data:", error.response.data);
@@ -152,7 +121,7 @@ const EditAppointment = () => {
               } else {
                   console.error("Error setting up the request:", error.message);
               }
-              message.error("Failed to update appointment.");
+              message.error("Failed to update MedicalRecord.");
     }
   };
 
@@ -162,35 +131,27 @@ const EditAppointment = () => {
 
   return (
     <>
+    <Navbar />
       {contextHolder}
       <div className="container1">
-        <Sidebar />
         <div className="AfterSideBar1" style={{ marginLeft: '26%', marginTop: '5%' }}>
           <div className="maindoctorProfile">
             <div className="firstBox">
               <div className="singleitemdiv">
-                <BsFillCalendarDateFill className="singledivicons" />
-                <p>Date: {formData.data}</p>
-              </div>
-              <div className="singleitemdiv">
-                <FaTimes className="singledivicons" />
-                <p>Reason: {formData.ceshtja}</p>
+                <MdSick className="singledivicons" />
+                <p>Description: {formData.pershkrimi}</p>
               </div>
               <div className="singleitemdiv">
                 <MdSick className="singledivicons" />
-                <p>Time: {formData.ora}</p>
-              </div>
-              <div className="singleitemdiv">
-                <MdEmail className="singledivicons" />
-                <p>Email: {formData.email}</p>
+                <p>Symptoms: {formData.symptoms}</p>
               </div>
               <div className="singleitemdiv">
                 <MdSick className="singledivicons" />
-                <p>Patient: {formData.patientId}</p>
+                <p>Diagnosis: {formData.diagnosis}</p>
               </div>
               <div className="singleitemdiv">
                 <MdSick className="singledivicons" />
-                <p>Dentist: {formData.dentistId}</p>
+                <p>Results: {formData.results}</p>
               </div>
               <div className="singleitemdiv">
                 <button onClick={showModal}>
@@ -214,66 +175,47 @@ const EditAppointment = () => {
                 ]}
               >
                 <form className="inputForm">
-                  <label htmlFor="data">Date</label>
+                  <label htmlFor="pershkrimi">Description</label>
                   <input
-                    name="data"
-                    value={formData.data}
-                    onChange={handleFormChange}
-                    type="date"
-                    placeholder="Date"
-                  />
-                  <label htmlFor="ceshtja">Reason</label>
-                  <input
-                    name="ceshtja"
-                    value={formData.ceshtja}
+                    name="pershkrimi"
+                    value={formData.pershkrimi}
                     onChange={handleFormChange}
                     type="text"
-                    placeholder="Reason"
+                    placeholder="Description"
                   />
-                  <label htmlFor="ora">Time</label>
+                  <label htmlFor="symptoms">Symptoms</label>
                   <input
-                    name="ora"
-                    value={formData.ora}
+                    name="symptoms"
+                    value={formData.symptoms}
                     onChange={handleFormChange}
                     type="text"
-                    placeholder="Time"
+                    placeholder="Symptoms"
                   />
-                  <label htmlFor="patientId">Select Patient</label>
-                  <Select
-                  name="patientId"
-                  value={formData.patientId}
-                  onChange={(value) => handleDropdownChange('patientId', value)}
-                  placeholder="Select Patient"
-                  style={{ width: '100%' }}
-                  >
-                  {patients.map((patient) => (
-                    <Select.Option key={patient.patientId} value={patient.patientId}>
-                      {patient.emri} {patient.mbiemri}{/* Adjust based on your patient object */}
-                    </Select.Option>
-                  ))}
-                  </Select>
-                  <label htmlFor="dentistId">Dentist</label>
-                  <Select
-                  name="dentistId"
-                  value={formData.dentistId}
-                  onChange={(value) => handleDropdownChange('dentistId', value)}
-                  placeholder="Select Dentist"
-                  style={{ width: '100%' }}
-                  >
-                  {dentists.map((dentist) => (
-                    <Select.Option key={dentist.dentistId} value={dentist.dentistId}>
-                      {dentist.emri} {dentist.mbiemri}{/* Adjust based on your dentist object */}
-                    </Select.Option>
-                  ))}
-                  </Select>
+                  <label htmlFor="diagnosis">Diagnosis</label>
+                  <input
+                    name="diagnosis"
+                    value={formData.diagnosis}
+                    onChange={handleFormChange}
+                    type="text"
+                    placeholder="Diagnosis"
+                  />
+                  <label htmlFor="results">Results</label>
+                  <input
+                    name="results"
+                    value={formData.results}
+                    onChange={handleFormChange}
+                    type="text"
+                    placeholder="Results"
+                  />
                 </form>
               </Modal>
             </div>
           </div>
         </div>
       </div>
+      <Footer />
     </>
   );
 };
 
-export default EditAppointment;
+export default EditMedicalRecord;

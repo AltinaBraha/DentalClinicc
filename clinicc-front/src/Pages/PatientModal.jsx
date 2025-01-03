@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Button } from "antd";
 import axios from "axios";
+import { EditFilled, DeleteOutlined } from "@ant-design/icons";
+import { useNavigate } from "react-router-dom";
 import MedicalRecordModal from "./AddModals/AddMedicalRecord";
 import PrescriptionModal from "./AddModals/AddPrescription";
 import "./CSS/PatientModal.css";
@@ -12,7 +14,9 @@ const PatientModal = ({ patient, onClose }) => {
   const [isPrescriptionVisible, setIsPrescriptionVisible] = useState(false);
   const [medicalRecords, setMedicalRecords] = useState([]);
   const [prescriptions, setPrescriptions] = useState([]);
+  const [refresh, setRefresh] = useState(false);
 
+  const navigate = useNavigate();
 
   const refetchData = async () => {
     const patientId = patient?.patientId;
@@ -36,11 +40,39 @@ const PatientModal = ({ patient, onClose }) => {
     }
   };
 
+  const deletePrescription = async (prescriptionId) => {
+    try {
+      await axios.delete(`https://localhost:7201/api/Prescription/${prescriptionId}`, {
+        headers: { Authorization: `Bearer ${token1}` },
+      });
+      setRefresh(!refresh); // Trigger re-fetch after deletion
+      console.log(`Prescription with ID ${prescriptionId} deleted successfully`);
+    } catch (error) {
+      console.error(`Failed to delete Prescription with ID ${prescriptionId}:`, error);
+    }
+  };
+
+  const deleteMedicalRecord = async (medicalRecordId) => {
+    try {
+      await axios.delete(`https://localhost:7201/api/MedicalRecord/${medicalRecordId}`, {
+        headers: { Authorization: `Bearer ${token1}` },
+      });
+      setRefresh(!refresh); // Trigger re-fetch after deletion
+      console.log(`Medical Record with ID ${medicalRecordId} deleted successfully`);
+    } catch (error) {
+      console.error(`Failed to delete Medical Record with ID ${medicalRecordId}:`, error);
+    }
+  };
+
   useEffect(() => {
     if (patient) {
       refetchData();
     }
   }, [patient, token1]);
+
+  useEffect(() => {
+    refetchData();
+    }, [refresh]);
 
   return (
     <div className="patient-modal-window">
@@ -73,6 +105,13 @@ const PatientModal = ({ patient, onClose }) => {
                     <p><strong>Symptoms:</strong> {record.symptoms}</p>
                     <p><strong>Diagnosis:</strong> {record.diagnosis}</p>
                     <p><strong>Results:</strong> {record.results}</p>
+                    <EditFilled className="edit"
+                      onClick={() => navigate(`/EditMedicalRecordPatient/${record.medicalRecordId}`)}
+                    />
+                    <DeleteOutlined className="edit"
+                      style={{ color: "red", marginLeft: 10 }}
+                      onClick={() => deleteMedicalRecord(record.medicalRecordId)}
+                    />
                   </div>
                 ))
               ) : (
@@ -96,6 +135,13 @@ const PatientModal = ({ patient, onClose }) => {
                     <p><strong>Prescription ID:</strong> {prescription.prescriptionId}</p>
                     <p><strong>Diagnosis:</strong> {prescription.diagnoza}</p>
                     <p><strong>Medicine:</strong> {prescription.medicina}</p>
+                    <EditFilled className="edit"
+                      onClick={() => navigate(`/EditPrescriptionPatient/${prescription.prescriptionId}`)}
+                    />
+                    <DeleteOutlined className="edit"
+                      style={{ color: "red", marginLeft: 10 }}
+                      onClick={() => deletePrescription(prescription.prescriptionId)}
+                    />
                   </div>
                 ))
               ) : (

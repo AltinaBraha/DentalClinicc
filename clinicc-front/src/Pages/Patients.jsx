@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Navbar from '../Components/Navbar/Navbar';
+import Footer from '../Components/Footer/Footer';
 import axios from 'axios';
 import PatientModal from './PatientModal';
 import './CSS/Patients.css';
@@ -127,6 +128,7 @@ const Patients = () => {
                     <PatientModal patient={selectedPatient} onClose={() => setSelectedPatient(null)} />
                 )}
             </div>
+            <Footer />
         </div>
     );
 }
