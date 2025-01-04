@@ -5,6 +5,11 @@ import { EditFilled, DeleteOutlined } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
 import Sidebar from "./Sidebar";
 import Terminet from "./Terminet";
+import Admins from "./Admin";
+import Dentists from "./Dentist";
+import Ratings from "./Rating";
+import Complaint from "./Complaint";
+import Contact from "./Contact";
 import "../CSS/CommonCSS.css";
 const FrontPage = () => {
     const [patients, setPatients] = useState([]);
@@ -104,7 +109,12 @@ const FrontPage = () => {
             </div>
           </div>): ("")}
            
+        <Admins/>
+        <Dentists/>
         <Terminet/>
+        <Ratings/>
+        <Complaint/>
+        <Contact/>
         </div>
     </div>
     )

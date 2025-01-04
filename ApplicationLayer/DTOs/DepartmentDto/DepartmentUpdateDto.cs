@@ -10,5 +10,6 @@ namespace ApplicationLayer.DTOs
     {
         public int DepartmentId { get; set; }   // Unique identifier for the department
         public string Emri { get; set; }
+        public int ClinicId { get; set; }
     }
 }

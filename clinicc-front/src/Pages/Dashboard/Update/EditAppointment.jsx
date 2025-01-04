@@ -83,7 +83,7 @@ const EditAppointment = () => {
           ceshtja: data.ceshtja || "",
           ora: data.ora || "",
           email: data.email || "",
-          patientId: data.patientId || "",
+          patientId: data.patientId,
           dentistId:data.dentistId,
         });
         setLoading(false);

@@ -50,6 +50,7 @@ namespace ApplicationLayer.Services
 
             // Update department properties
             department.Emri = departmentDto.Emri;
+            department.ClinicId = departmentDto.ClinicId;
 
             // Call repository to update department
             var updatedDepartment = await _departmentRepository.UpdateAsync(department);
