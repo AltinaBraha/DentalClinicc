@@ -15,6 +15,7 @@ using AutoMapper;
 using DomainLayer.Entities;
 using ApplicationLayer.DTOs.AdminDto;
 using ApplicationLayer.DTOs.RatingDto;
+using ApplicationLayer.DTOs.ClinicDto;
 
 namespace ApplicationLayer.Mappings
 {
@@ -69,6 +70,11 @@ namespace ApplicationLayer.Mappings
             CreateMap<RatingCreateDto, Rating>();
             CreateMap<RatingUpdateDto, Rating>();
             CreateMap<Rating, RatingReadDto>();
+
+            //Clinic
+            CreateMap<ClinicCreateDto, Clinic>();
+            CreateMap<ClinicUpdateDto, Clinic>();
+            CreateMap<Clinic, ClinicReadDto>();
 
             CreateMap<Image, ImageUploadRequestDto>().ReverseMap();
             CreateMap<Image, ImageResponseDto>();
