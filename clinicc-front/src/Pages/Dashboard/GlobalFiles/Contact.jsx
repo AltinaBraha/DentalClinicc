@@ -13,6 +13,16 @@ const Contact = () => {
   const navigate = useNavigate();
 
 
+   // Funksioni për formatimin e datës
+    const formatDate = (dateString) => {
+      const date = new Date(dateString);
+      const year = date.getFullYear();
+      const month = (date.getMonth() + 1).toString().padStart(2, "0");
+      const day = date.getDate().toString().padStart(2, "0");
+
+      return `${year}-${month}-${day}`;
+    };
+
     const fetchPatients = async () => {
       try {
         const response = await axios.get("https://localhost:7201/api/Patient", {
@@ -35,8 +45,9 @@ const Contact = () => {
       const contactsWithPatients = contactsData.map((contact) => {
         const patient = patientsList.find((d) => d.patientId === contact.patientId);
         return {
-          ...patient,
+          ...contact,
           patientName: patient ? patient.emri : "Unknown", // Fallback if department not found
+          messageDate: formatDate(contact.messageDate),
         };
       });
       setContacts(contactsWithPatients);
@@ -76,8 +87,8 @@ const Contact = () => {
   };
 
   const columns = [
-    { title: "Message", dataIndex: "mesazhi", key: "mesazhi" },
-    { title: "Message Date", dataIndex: "messageDate", key: "messageDate" },
+    { title: "Mesazhi", dataIndex: "mesazhi", key: "mesazhi" },
+    { title: "MessageDate", dataIndex: "messageDate", key: "messageDate" },
     { title: "Patient", dataIndex: "patientName", key: "patientName" },
     {
       title: "Actions",

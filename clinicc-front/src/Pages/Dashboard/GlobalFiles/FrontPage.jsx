@@ -10,6 +10,7 @@ import Dentists from "./Dentist";
 import Ratings from "./Rating";
 import Complaint from "./Complaint";
 import Contact from "./Contact";
+import MedicalRecords from "./MedicalRecords";
 import "../CSS/CommonCSS.css";
 const FrontPage = () => {
     const [patients, setPatients] = useState([]);
@@ -115,6 +116,7 @@ const FrontPage = () => {
         <Ratings/>
         <Complaint/>
         <Contact/>
+        <MedicalRecords/>
         </div>
     </div>
     )

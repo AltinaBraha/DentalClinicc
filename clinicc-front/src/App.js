@@ -20,6 +20,7 @@ import DentistProfile from './Pages/DentistProfile';
 
 import FrontPage from './Pages/Dashboard/GlobalFiles/FrontPage';
 import Terminet from './Pages/Dashboard/GlobalFiles/Terminet';
+import MedicalRecords from './Pages/Dashboard/GlobalFiles/MedicalRecords';
 import Admin from './Pages/Dashboard/GlobalFiles/Admin';
 import Dentist from './Pages/Dashboard/GlobalFiles/Dentist';
 import Rating from './Pages/Dashboard/GlobalFiles/Rating';
@@ -35,6 +36,7 @@ import EditPatient from './Pages/Dashboard/Update/EditPatient';
 import EditAppointment from './Pages/Dashboard/Update/EditAppointment';
 import EditAdmin from './Pages/Dashboard/Update/EditAdmin';
 import EditDentist from './Pages/Dashboard/Update/EditDentist';
+import EditMedicalRecords from './Pages/Dashboard/Update/EditMedicalRecords';
 
 
 
@@ -67,6 +69,7 @@ function App() {
               <Route path="/EditPrescriptionPatient/:id" element={<EditPrescription />} />
               <Route path="/dashboard" element={<FrontPage />} />
               <Route path="/terminet" element={<Terminet />} />
+              <Route path="/medicalRecords" element={<MedicalRecords />} />
               <Route path="/Admin" element={<Admin />} />
               <Route path="/Dentist" element={<Dentist />} />
               <Route path="/Rating" element={<Rating />} />
@@ -80,6 +83,7 @@ function App() {
               <Route path="/Add_Clinic" element={<AddClinic />} />
               <Route path="EditPatient/:id" element={<EditPatient />} />
               <Route path="EditAppointment/:id" element={<EditAppointment />} />
+              <Route path="EditMedicalRecords/:id" element={<EditMedicalRecords />} />
               <Route path="EditAdmin/:id" element={<EditAdmin />} />
               <Route path="EditDentist/:id" element={<EditDentist />} />
               <Route path="/DentistProfile" element={<DentistProfile />} />

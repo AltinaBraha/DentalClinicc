@@ -13,6 +13,16 @@ const Terminet = () => {
 
   const navigate = useNavigate();
 
+  // Funksioni për formatimin e datës
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    const year = date.getFullYear();
+    const month = (date.getMonth() + 1).toString().padStart(2, "0");
+    const day = date.getDate().toString().padStart(2, "0");
+
+    return `${year}-${month}-${day}`;
+  };
+
   const fetchDentists = async () => {
     try {
       const response = await axios.get("https://localhost:7201/api/Dentist", {
@@ -49,6 +59,7 @@ const Terminet = () => {
             ...terminet,
             dentistName: dentist ? dentist.emri : "Unknown Dentist", // Fallback if not found
             patientName: patient ? patient.emri : "Unknown Patient", // Fallback if not found
+            data: formatDate(terminet.data),
           };
         });
         setTerminet(appointmentsWithNames);
