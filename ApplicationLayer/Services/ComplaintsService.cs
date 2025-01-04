@@ -1,7 +1,9 @@
 ﻿using ApplicationLayer.DTOs.ComplaintsDto;
 using ApplicationLayer.DTOs.ContactDto;
+using ApplicationLayer.DTOs.MedicalRecordDto;
 using ApplicationLayer.Interfaces;
 using AutoMapper;
+using DatabaseLayer.Repositories;
 using DomainLayer.Entities;
 using DomainLayer.Interfaces;
 using System;
@@ -28,7 +30,17 @@ namespace ApplicationLayer.Services
             var complaints = await _complaintsRepository.GetByIdAsync(id);
             return _mapper.Map<ComplaintsReadDto>(complaints);
         }
+        public async Task<List<ComplaintsReadDto>> GetByDentistIdAsync(int dentistId)
+        {
+            var complaints = await _complaintsRepository.GetByDentistIdAsync(dentistId);
+            return _mapper.Map<List<ComplaintsReadDto>>(complaints);
+        }
 
+        public async Task<List<ComplaintsReadDto>> GetByPatientIdAsync(int patientId)
+        {
+            var complaints = await _complaintsRepository.GetByPatientIdAsync(patientId);
+            return _mapper.Map<List<ComplaintsReadDto>>(complaints);
+        }
         public async Task<List<ComplaintsReadDto>> GetAllComplaintsAsync()
         {
             var complaints = await _complaintsRepository.GetAllAsync();

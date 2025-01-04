@@ -43,6 +43,19 @@ namespace PresentationLayer.Controllers
             var complaints = await _complaintsService.CreateComplaintsAsync(complaintsDto);
             return CreatedAtAction(nameof(GetComplaintsById), new { id = complaints.ComplaintsId }, complaints);
         }
+        [HttpGet("dentist/{dentistId}")]
+        public async Task<IActionResult> GetByDentistId(int dentistId)
+        {
+            var complaints = await _complaintsService.GetByDentistIdAsync(dentistId);
+            return Ok(complaints);
+        }
+
+        [HttpGet("patient/{patientId}")]
+        public async Task<IActionResult> GetByPatientId(int patientId)
+        {
+            var complaints = await _complaintsService.GetByPatientIdAsync(patientId);
+            return Ok(complaints);
+        }
 
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateComplaints(int id, [FromBody] ComplaintsUpdateDto complaintsDto)

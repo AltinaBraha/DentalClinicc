@@ -11,6 +11,8 @@ namespace DomainLayer.Interfaces
     {
         Task<Rating> AddAsync(Rating rating);
         Task<Rating> GetByIdAsync(int id);
+        Task<List<Rating>> GetByDentistIdAsync(int dentistId);
+        Task<List<Rating>> GetByPatientIdAsync(int patientId);
         Task<List<Rating>> GetAllAsync();
         Task<Rating> UpdateAsync(Rating rating);
         Task DeleteAsync(int id);

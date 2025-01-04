@@ -43,7 +43,19 @@ namespace PresentationLayer.Controllers
             var rating = await _ratingService.CreateRatingAsync(ratingDto);
             return CreatedAtAction(nameof(GetRatingById), new { id = rating.RatingId }, rating);
         }
+        [HttpGet("dentist/{dentistId}")]
+        public async Task<IActionResult> GetByDentistId(int dentistId)
+        {
+            var rating = await _ratingService.GetByDentistIdAsync(dentistId);
+            return Ok(rating);
+        }
 
+        [HttpGet("patient/{patientId}")]
+        public async Task<IActionResult> GetByPatientId(int patientId)
+        {
+            var rating = await _ratingService.GetByPatientIdAsync(patientId);
+            return Ok(rating);
+        }
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateRating(int id, [FromBody] RatingUpdateDto ratingDto)
         {

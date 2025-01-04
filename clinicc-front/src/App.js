@@ -16,6 +16,7 @@ import Patients from './Pages/Patients';
 import Knowledge from './Pages/Knowledge';
 import EditMedicalRecord from './Pages/UpdateModals/EditMedicalRecord';
 import EditPrescription from './Pages/UpdateModals/EditPrescription';
+import DentistProfile from './Pages/DentistProfile';
 
 import FrontPage from './Pages/Dashboard/GlobalFiles/FrontPage';
 import Terminet from './Pages/Dashboard/GlobalFiles/Terminet';
@@ -57,6 +58,8 @@ function App() {
               <Route path="/Add_Termini" element={<AddAppointment />} />
               <Route path="EditPatient/:id" element={<EditPatient />} />
               <Route path="EditAppointment/:id" element={<EditAppointment />} />
+              <Route path="/DentistProfile" element={<DentistProfile />} />
+
 
             </Routes>
         </Router>

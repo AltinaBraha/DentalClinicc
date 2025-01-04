@@ -10,11 +10,12 @@ namespace ApplicationLayer.DTOs.ComplaintsDto
     {
 
         public int ComplaintsId { get; set; }  
-        public string Ankesa { get; set; }    
+        public string Ankesa { get; set; }
 
-        public int? PatientId { get; set; }    
+        public int? PatientId { get; set; }
+        public string PatientName { get; set; }
+        public int DentistId { get; set; }
+        public string DentistName { get; set; }
 
-        public int DentistId { get; set; }     
-       
     }
 }

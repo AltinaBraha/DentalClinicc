@@ -1,7 +1,9 @@
 ﻿using ApplicationLayer.DTOs;
+using ApplicationLayer.DTOs.MedicalRecordDto;
 using ApplicationLayer.DTOs.RatingDto;
 using ApplicationLayer.Interfaces;
 using AutoMapper;
+using DatabaseLayer.Repositories;
 using DomainLayer.Entities;
 using DomainLayer.Interfaces;
 using System;
@@ -28,7 +30,17 @@ namespace ApplicationLayer.Services
             var rating = await _ratingRepository.GetByIdAsync(id);
             return _mapper.Map<RatingReadDto>(rating);
         }
+        public async Task<List<RatingReadDto>> GetByDentistIdAsync(int dentistId)
+        {
+            var ratings = await _ratingRepository.GetByDentistIdAsync(dentistId);
+            return _mapper.Map<List<RatingReadDto>>(ratings);
+        }
 
+        public async Task<List<RatingReadDto>> GetByPatientIdAsync(int patientId)
+        {
+            var ratings = await _ratingRepository.GetByPatientIdAsync(patientId);
+            return _mapper.Map<List<RatingReadDto>>(ratings);
+        }
         public async Task<List<RatingReadDto>> GetAllRatingsAsync()
         {
             var ratings = await _ratingRepository.GetAllAsync();

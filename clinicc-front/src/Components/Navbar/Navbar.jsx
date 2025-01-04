@@ -63,6 +63,12 @@ function Navbars() {
                             </NavDropdown.Item>
                         )}
                         <NavDropdown.Divider />
+                        {role === "Dentist" && (
+                            <NavDropdown.Item as={Link} to="/DentistProfile">
+                                My Profile
+                            </NavDropdown.Item>
+                        )}
+                        <NavDropdown.Divider />
                         <NavDropdown.Item onClick={handleLogout} as={Link} to="/">
                             Logout
                         </NavDropdown.Item>

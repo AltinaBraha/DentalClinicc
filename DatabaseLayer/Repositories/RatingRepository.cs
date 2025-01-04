@@ -30,6 +30,22 @@ namespace DatabaseLayer.Repositories
             return await _context.Ratings.ToListAsync();
         }
 
+        public async Task<List<Rating>> GetByDentistIdAsync(int dentistId)
+        {
+            return await _context.Ratings
+                .Include(a => a.Patient)
+                .Where(a => a.DentistId == dentistId)
+                .ToListAsync();
+        }
+
+        public async Task<List<Rating>> GetByPatientIdAsync(int patientId)
+        {
+            return await _context.Ratings
+                .Include(a => a.Dentist)
+                .Where(a => a.PatientId == patientId)
+                .ToListAsync();
+        }
+
         public async Task<Rating> UpdateAsync(Rating rating)
         {
             _context.Ratings.Update(rating);
