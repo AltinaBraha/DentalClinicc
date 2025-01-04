@@ -2,25 +2,31 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { AiFillEdit } from "react-icons/ai";
 import { MdDepartureBoard, MdEmail, MdPerson } from "react-icons/md";
-import { BsTelephone, BsPersonCircle, BsClock, BsHourglass } from "react-icons/bs";
+import { BsTelephone, BsPersonCircle, BsClock, BsHourglass, BsFileText } from "react-icons/bs";
 import { Button, message, Modal, Select } from "antd";
 import { useParams } from "react-router-dom";
 import Sidebar from "../GlobalFiles/Sidebar";
 import "../CSS/Edit.css";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { BiSolidTime } from "react-icons/bi";
 
 const notify = (text) => toast(text);
 
-const EditAdmin = () => {
+const EditDentist = () => {
   const { id } = useParams(); // Get the patient ID from the URL
   const token = localStorage.getItem("accessToken"); // Retrieve the token from localStorage
 console.log(token);
 
   const [formData, setFormData] = useState({
-    adminId: id,
+    dentistId: id,
     emri: "",
     mbiemri: "",
+    mosha: "",
+    nrTelefonit: "",
+    specializimi: "",
+    oraFillimit: "",
+    oraMbarimit: "",
     email: "",
     imageId: "",
     departmentId: "",
@@ -49,9 +55,9 @@ console.log(token);
 
   // Fetch patient data when the component mounts
   useEffect(() => {
-    const fetchAdmin = async () => {
+    const fetchDentist = async () => {
       try {
-        const response = await axios.get(`https://localhost:7201/api/Admin/${id}`, {
+        const response = await axios.get(`https://localhost:7201/api/Dentist/${id}`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -59,22 +65,27 @@ console.log(token);
 
         const data = response.data;
         setFormData({
-          adminId: data.adminId,
+          dentistId: data.dentistId,
           emri: data.emri || "",
           mbiemri: data.mbiemri || "",
+          mosha: data.mosha || "",
+          nrTelefonit: data.nrTelefonit || "",
+          specializimi: data.specializimi || "",
+          oraFillimit: data.oraFillimit || "",
+          oraMbarimit: data.oraMbarimit || "",
           email: data.email || "",
           imageId: data.imageId,
           departmentId: data.departmentId,
         });
         setLoading(false);
       } catch (error) {
-        console.error("Error fetching admin data:", error.response?.data || error.message)
-        message.error("Failed to load Admin data.");
+        console.error("Error fetching Dentist data:", error.response?.data || error.message)
+        message.error("Failed to load Dentist data.");
         setLoading(false);
       }
     };
 
-    fetchAdmin();
+    fetchDentist();
   }, [id, token]);
 
   const success = (text) => {
@@ -103,7 +114,7 @@ console.log(token);
   const handleFormSubmit = async () => {
     try {
       const response = await axios.put(
-        `https://localhost:7201/api/Admin/${id}`,
+        `https://localhost:7201/api/Dentist/${id}`,
         formData,
         {
           headers: {
@@ -150,6 +161,26 @@ console.log(token);
                 <p>Surname: {formData.mbiemri}</p>
               </div>
               <div className="singleitemdiv">
+                <BsHourglass className="singledivicons" />
+                <p>Age: {formData.mosha}</p>
+              </div>
+              <div className="singleitemdiv">
+                <BsTelephone className="singledivicons" />
+                <p>Phone Number: {formData.nrTelefonit}</p>
+              </div>
+              <div className="singleitemdiv">
+                <BsFileText className="singledivicons" />
+                <p>Specializimi: {formData.specializimi}</p>
+              </div>
+              <div className="singleitemdiv">
+                <BiSolidTime className="singledivicons" />
+                <p>Ora Fillimit: {formData.oraFillimit}</p>
+              </div>
+              <div className="singleitemdiv">
+                <BiSolidTime className="singledivicons" />
+                <p>Ora Mbarimit: {formData.oraMbarimit}</p>
+              </div>
+              <div className="singleitemdiv">
                 <MdEmail className="singledivicons" />
                 <p>Email: {formData.email}</p>
               </div>
@@ -194,6 +225,46 @@ console.log(token);
                     type="text"
                     placeholder="Surname"
                   />
+                  <label htmlFor="mosha">Age</label>
+                  <input
+                    name="mosha"
+                    value={formData.mosha}
+                    onChange={handleFormChange}
+                    type="number"
+                    placeholder="Age"
+                  />
+                  <label htmlFor="nrTelefonit">Phone Number</label>
+                  <input
+                    name="nrTelefonit"
+                    value={formData.nrTelefonit}
+                    onChange={handleFormChange}
+                    type="number"
+                    placeholder="Phone Number"
+                  />
+                  <label htmlFor="specializimi">Specializimi</label>
+                  <input
+                    name="specializimi"
+                    value={formData.specializimi}
+                    onChange={handleFormChange}
+                    type="text"
+                    placeholder="Specializimi"
+                  />
+                  <label htmlFor="oraFillimit">Ora Fillimit</label>
+                  <input
+                    name="oraFillimit"
+                    value={formData.oraFillimit}
+                    onChange={handleFormChange}
+                    type="text"
+                    placeholder="hh:mm:ss"
+                  />
+                  <label htmlFor="oraMbarimit">Ora Mbarimit</label>
+                  <input
+                    name="oraMbarimit"
+                    value={formData.oraMbarimit}
+                    onChange={handleFormChange}
+                    type="text"
+                    placeholder="hh:mm:ss"
+                  />
                   <label htmlFor="email">Email</label>
                   <input
                     name="email"
@@ -226,4 +297,4 @@ console.log(token);
   );
 };
 
-export default EditAdmin;
+export default EditDentist;

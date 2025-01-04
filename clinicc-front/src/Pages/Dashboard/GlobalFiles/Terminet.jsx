@@ -6,23 +6,72 @@ import { useNavigate } from "react-router-dom";
 
 const Terminet = () => {
   const [terminets, setTerminet] = useState([]);
+  const [dentists, setDentists] = useState([]);
+  const [patients, setPatients] = useState([]);
   const [refresh, setRefresh] = useState(false);
   const token1 = localStorage.getItem("accessToken");
 
   const navigate = useNavigate();
 
-  
-  const fetchTerminet = async () => {
+  const fetchDentists = async () => {
     try {
-      const response = await axios.get("https://localhost:7201/api/Appointments", {
+      const response = await axios.get("https://localhost:7201/api/Dentist", {
         headers: { Authorization: `Bearer ${token1}` },
       });
-      setTerminet(response.data?.$values || []);
+      setDentists(response.data?.$values || []);
     } catch (error) {
-      console.error("Failed to fetch appointments:", error);
+      console.error("Failed to fetch Dentist:", error);
     }
   };
 
+    const fetchPatients = async () => {
+      try {
+        const response = await axios.get("https://localhost:7201/api/Patient", {
+          headers: { Authorization: `Bearer ${token1}` },
+        });
+        setPatients(response.data?.$values || []);
+      } catch (error) {
+        console.error("Failed to fetch Patient:", error);
+      }
+    };
+  
+    const fetchTerminet = async (patientsList, dentistsList) => {
+      try {
+        const response = await axios.get("https://localhost:7201/api/Appointments", {
+          headers: { Authorization: `Bearer ${token1}` },
+        });
+        const appointmentsData = response.data?.$values || [];
+        // Map dentist and patient names to ratings
+        const appointmentsWithNames = appointmentsData.map((terminet) => {
+          const dentist = dentistsList.find((d) => d.dentistId === terminet.dentistId);
+          const patient = patientsList.find((p) => p.patientId === terminet.patientId);
+          return {
+            ...terminet,
+            dentistName: dentist ? dentist.emri : "Unknown Dentist", // Fallback if not found
+            patientName: patient ? patient.emri : "Unknown Patient", // Fallback if not found
+          };
+        });
+        setTerminet(appointmentsWithNames);
+      } catch (error) {
+        console.error("Failed to fetch Appointments:", error);
+      }
+    };
+
+    useEffect(() => {
+        const fetchData = async () => {
+          if (token1) {
+            await fetchPatients(); // Fetch departments first
+            await fetchDentists();
+          }
+        };
+        fetchData();
+      }, [token1]);
+    
+      useEffect(() => {
+        if (patients.length > 0 && dentists.length > 0) {// Fetch dentists only after departments are fetched and updated
+          fetchTerminet(patients, dentists);
+        }
+      }, [patients,dentists, refresh]); 
   // API call to delete an appointment
   const deleteTerminet = async (appointmentId) => {
     try {
@@ -41,8 +90,8 @@ const Terminet = () => {
     { title: "Reason", dataIndex: "ceshtja", key: "ceshtja" },
     { title: "Time", dataIndex: "ora", key: "ora" },
     { title: "Email", dataIndex: "email", key: "email" },
-    { title: "Dentist-ID", dataIndex: "dentistId", key: "dentistId" },
-    { title: "Patient-ID", dataIndex: "patientId", key: "patientId" },
+    { title: "Dentist", dataIndex: "dentistName", key: "dentistName" },
+    { title: "Patient", dataIndex: "patientName", key: "patientName" },
     {
       title: "Actions",
       key: "action",
@@ -64,9 +113,6 @@ const Terminet = () => {
     },
   ];
 
-  useEffect(() => {
-    fetchTerminet();
-  }, [refresh]);
 
   return (
     <>

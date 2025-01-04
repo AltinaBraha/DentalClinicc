@@ -26,9 +26,15 @@ import Rating from './Pages/Dashboard/GlobalFiles/Rating';
 import Complaint from './Pages/Dashboard/GlobalFiles/Complaint';
 import Contacts from './Pages/Dashboard/GlobalFiles/Contact';
 import AddAppointment from './Pages/Dashboard/Create/Add_Appointment';
+import AddPatient from './Pages/Dashboard/Create/Add_Patient';
+import AddDentist from './Pages/Dashboard/Create/Add_Dentist';
+import AddAdmin from './Pages/Dashboard/Create/Add_Admin';
+import AddDepartment from './Pages/Dashboard/Create/Add_Department';
+import AddClinic from './Pages/Dashboard/Create/Add_Clinic';
 import EditPatient from './Pages/Dashboard/Update/EditPatient';
 import EditAppointment from './Pages/Dashboard/Update/EditAppointment';
 import EditAdmin from './Pages/Dashboard/Update/EditAdmin';
+import EditDentist from './Pages/Dashboard/Update/EditDentist';
 
 
 
@@ -67,9 +73,15 @@ function App() {
               <Route path="/Complaint" element={<Complaint />} />
               <Route path="/Contacts" element={<Contacts />} />
               <Route path="/Add_Termini" element={<AddAppointment />} />
+              <Route path="/Add_Patient" element={<AddPatient />} />
+              <Route path="/Add_Dentist" element={<AddDentist />} />
+              <Route path="/Add_Admin" element={<AddAdmin />} />
+              <Route path="/Add_Department" element={<AddDepartment />} />
+              <Route path="/Add_Clinic" element={<AddClinic />} />
               <Route path="EditPatient/:id" element={<EditPatient />} />
               <Route path="EditAppointment/:id" element={<EditAppointment />} />
               <Route path="EditAdmin/:id" element={<EditAdmin />} />
+              <Route path="EditDentist/:id" element={<EditDentist />} />
               <Route path="/DentistProfile" element={<DentistProfile />} />
 
 

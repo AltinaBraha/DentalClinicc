@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { AiOutlineUserAdd } from "react-icons/ai";
 import { SlUserFollow } from "react-icons/sl";
 import { BsBookmarkPlus, BsFillBookmarkCheckFill } from "react-icons/bs";
-import { FaUserMd } from "react-icons/fa";
+import { FaClinicMedical, FaHospitalSymbol, FaPlaneDeparture, FaUserMd } from "react-icons/fa";
 import { MdHome } from "react-icons/md";
 import { Link } from "react-router-dom";
 import { ImMenu } from "react-icons/im";
@@ -138,6 +138,41 @@ const Sidebar = () => {
                   className="link_text11"
                 >
                   Add Admin
+                </div>
+              </Link>
+            ) : null}
+
+            {user?.adminId ? (
+              <Link
+                className="link1"
+                activeclassname="active"
+                to={"/Add_Department"}
+              >
+                <div className="icon1">
+                  <FaClinicMedical className="mainIcon1" />
+                </div>
+                <div
+                  style={{ display: isOpen ? "block" : "none" }}
+                  className="link_text1"
+                >
+                  Add Department
+                </div>
+              </Link>
+            ) : null}
+            {user?.adminId ? (
+              <Link
+                className="link1"
+                activeclassname="active"
+                to={"/Add_Clinic"}
+              >
+                <div className="icon1">
+                  <FaClinicMedical className="mainIcon1" />
+                </div>
+                <div
+                  style={{ display: isOpen ? "block" : "none" }}
+                  className="link_text1"
+                >
+                  Add Clinic
                 </div>
               </Link>
             ) : null}
