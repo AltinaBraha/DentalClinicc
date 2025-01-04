@@ -11,6 +11,11 @@ namespace DomainLayer.Entities
         public int DepartmentId { get; set; }
 
         public string Emri { get; set; }
+
+        public int ClinicId { get; set; }
+
+        public Clinic Clinic { get; set; }
+
         public ICollection<Dentist> Dentists { get; set; } = new List<Dentist>();
         public ICollection<Admin> Admins { get; set; } = new List<Admin>();
     }

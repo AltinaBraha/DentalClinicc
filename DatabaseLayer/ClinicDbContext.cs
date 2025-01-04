@@ -25,6 +25,9 @@ namespace DatabaseLayer
         public DbSet<MedicalRecord> MedicalRecords { get; set; }
         public DbSet<Prescription> Prescriptions { get; set; }
         public DbSet<Rating> Ratings { get; set; }
+
+        public DbSet<Clinic> Clinics { get; set; }
+
         public DbSet<SmtpSettings> SmtpSettingss { get; set; }
 
     }
