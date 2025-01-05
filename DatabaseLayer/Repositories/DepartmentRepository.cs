@@ -57,5 +57,12 @@ namespace DatabaseLayer.Repositories
                 await _context.SaveChangesAsync();
             }
         }
+
+        public async Task<int> CountByClinicNameAsync(string clinicName)
+        {
+            return await _context.Departments
+                                 .Where(d => d.Clinic.ClinicName == clinicName)
+                                 .CountAsync();
+        }
     }
 }

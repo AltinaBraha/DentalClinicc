@@ -30,5 +30,49 @@ namespace DatabaseLayer
 
         public DbSet<SmtpSettings> SmtpSettingss { get; set; }
 
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+
+            // Configure the relationship for Prescription
+            modelBuilder.Entity<Prescription>()
+                .HasOne(p => p.Patient)
+                .WithMany()
+                .HasForeignKey(p => p.PatientId)
+                .OnDelete(DeleteBehavior.SetNull);
+
+            modelBuilder.Entity<Prescription>()
+                .HasOne(p => p.Dentist)
+                .WithMany()
+                .HasForeignKey(p => p.DentistId)
+                .OnDelete(DeleteBehavior.SetNull);
+
+            // Configure the relationship for MedicalRecord
+            modelBuilder.Entity<MedicalRecord>()
+                .HasOne(m => m.Patient)
+                .WithMany()
+                .HasForeignKey(m => m.PatientId)
+                .OnDelete(DeleteBehavior.SetNull);
+
+            modelBuilder.Entity<MedicalRecord>()
+                .HasOne(m => m.Dentist)
+                .WithMany()
+                .HasForeignKey(m => m.DentistId)
+                .OnDelete(DeleteBehavior.SetNull);
+
+            // Configure the relationship for Appointment
+            modelBuilder.Entity<Appointment>()
+                .HasOne(a => a.Patient)
+                .WithMany()
+                .HasForeignKey(a => a.PatientId)
+                .OnDelete(DeleteBehavior.SetNull);
+
+            modelBuilder.Entity<Appointment>()
+                .HasOne(a => a.Dentist)
+                .WithMany()
+                .HasForeignKey(a => a.DentistId)
+                .OnDelete(DeleteBehavior.SetNull);
+        }
+
     }
 }

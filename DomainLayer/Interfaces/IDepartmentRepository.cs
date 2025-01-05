@@ -14,5 +14,6 @@ namespace DomainLayer.Interfaces
         Task<List<Department>> GetAllAsync();
         Task<Department> UpdateAsync(Department department);
         Task DeleteAsync(int id);
+        Task<int> CountByClinicNameAsync(string clinicName);
     }
 }

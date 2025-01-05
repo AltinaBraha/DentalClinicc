@@ -62,5 +62,10 @@ namespace ApplicationLayer.Services
         {
             await _departmentRepository.DeleteAsync(id);
         }
+
+        public async Task<int> CountDepartmentsByClinicNameAsync(string clinicName)
+        {
+            return await _departmentRepository.CountByClinicNameAsync(clinicName);
+        }
     }
 }

@@ -255,9 +255,11 @@ namespace ApplicationLayer.Services
             // Fetch appointments for the dentist
             var appointments = await _appointmentRepository.GetByDentistIdAsync(dentistId);
 
-            // Extract unique patient IDs
+            // Extract unique patient IDs, filtering out nulls
             var patientIds = appointments
                 .Select(a => a.PatientId)
+                .Where(id => id.HasValue) // Only take non-null values
+                .Select(id => id.Value)  // Extract the value from nullable int
                 .Distinct()
                 .ToList();
 
@@ -272,6 +274,7 @@ namespace ApplicationLayer.Services
             // Map to DTOs and return
             return _mapper.Map<List<PatientReadDto>>(patients);
         }
+
 
         public async Task<List<PatientReadDto>> SearchByNameAsync(string name)
         {

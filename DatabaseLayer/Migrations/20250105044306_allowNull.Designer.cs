@@ -4,6 +4,7 @@ using DatabaseLayer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DatabaseLayer.Migrations
 {
     [DbContext(typeof(ClinicDbContext))]
-    partial class ClinicDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250105044306_allowNull")]
+    partial class allowNull
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -90,9 +93,6 @@ namespace DatabaseLayer.Migrations
                     b.Property<int?>("DentistId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("DentistId1")
-                        .HasColumnType("int");
-
                     b.Property<string>("Email")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -103,18 +103,11 @@ namespace DatabaseLayer.Migrations
                     b.Property<int?>("PatientId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("PatientId1")
-                        .HasColumnType("int");
-
                     b.HasKey("AppointmentId");
 
                     b.HasIndex("DentistId");
 
-                    b.HasIndex("DentistId1");
-
                     b.HasIndex("PatientId");
-
-                    b.HasIndex("PatientId1");
 
                     b.ToTable("Appointments");
                 });
@@ -322,17 +315,11 @@ namespace DatabaseLayer.Migrations
                     b.Property<int?>("DentistId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("DentistId1")
-                        .HasColumnType("int");
-
                     b.Property<string>("Diagnosis")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int?>("PatientId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("PatientId1")
                         .HasColumnType("int");
 
                     b.Property<string>("Pershkrimi")
@@ -351,11 +338,7 @@ namespace DatabaseLayer.Migrations
 
                     b.HasIndex("DentistId");
 
-                    b.HasIndex("DentistId1");
-
                     b.HasIndex("PatientId");
-
-                    b.HasIndex("PatientId1");
 
                     b.ToTable("MedicalRecords");
                 });
@@ -422,9 +405,6 @@ namespace DatabaseLayer.Migrations
                     b.Property<int?>("DentistId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("DentistId1")
-                        .HasColumnType("int");
-
                     b.Property<string>("Diagnoza")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -436,18 +416,11 @@ namespace DatabaseLayer.Migrations
                     b.Property<int?>("PatientId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("PatientId1")
-                        .HasColumnType("int");
-
                     b.HasKey("PrescriptionId");
 
                     b.HasIndex("DentistId");
 
-                    b.HasIndex("DentistId1");
-
                     b.HasIndex("PatientId");
-
-                    b.HasIndex("PatientId1");
 
                     b.ToTable("Prescriptions");
                 });
@@ -532,22 +505,12 @@ namespace DatabaseLayer.Migrations
             modelBuilder.Entity("DomainLayer.Entities.Appointment", b =>
                 {
                     b.HasOne("DomainLayer.Entities.Dentist", "Dentist")
-                        .WithMany()
-                        .HasForeignKey("DentistId")
-                        .OnDelete(DeleteBehavior.SetNull);
-
-                    b.HasOne("DomainLayer.Entities.Dentist", null)
                         .WithMany("Appointments")
-                        .HasForeignKey("DentistId1");
+                        .HasForeignKey("DentistId");
 
                     b.HasOne("DomainLayer.Entities.Patient", "Patient")
-                        .WithMany()
-                        .HasForeignKey("PatientId")
-                        .OnDelete(DeleteBehavior.SetNull);
-
-                    b.HasOne("DomainLayer.Entities.Patient", null)
                         .WithMany("Appointments")
-                        .HasForeignKey("PatientId1");
+                        .HasForeignKey("PatientId");
 
                     b.Navigation("Dentist");
 
@@ -613,22 +576,12 @@ namespace DatabaseLayer.Migrations
             modelBuilder.Entity("DomainLayer.Entities.MedicalRecord", b =>
                 {
                     b.HasOne("DomainLayer.Entities.Dentist", "Dentist")
-                        .WithMany()
-                        .HasForeignKey("DentistId")
-                        .OnDelete(DeleteBehavior.SetNull);
-
-                    b.HasOne("DomainLayer.Entities.Dentist", null)
                         .WithMany("MedicalRecords")
-                        .HasForeignKey("DentistId1");
+                        .HasForeignKey("DentistId");
 
                     b.HasOne("DomainLayer.Entities.Patient", "Patient")
-                        .WithMany()
-                        .HasForeignKey("PatientId")
-                        .OnDelete(DeleteBehavior.SetNull);
-
-                    b.HasOne("DomainLayer.Entities.Patient", null)
                         .WithMany("MedicalRecords")
-                        .HasForeignKey("PatientId1");
+                        .HasForeignKey("PatientId");
 
                     b.Navigation("Dentist");
 
@@ -647,22 +600,12 @@ namespace DatabaseLayer.Migrations
             modelBuilder.Entity("DomainLayer.Entities.Prescription", b =>
                 {
                     b.HasOne("DomainLayer.Entities.Dentist", "Dentist")
-                        .WithMany()
-                        .HasForeignKey("DentistId")
-                        .OnDelete(DeleteBehavior.SetNull);
-
-                    b.HasOne("DomainLayer.Entities.Dentist", null)
                         .WithMany("Prescriptions")
-                        .HasForeignKey("DentistId1");
+                        .HasForeignKey("DentistId");
 
                     b.HasOne("DomainLayer.Entities.Patient", "Patient")
-                        .WithMany()
-                        .HasForeignKey("PatientId")
-                        .OnDelete(DeleteBehavior.SetNull);
-
-                    b.HasOne("DomainLayer.Entities.Patient", null)
                         .WithMany("Prescriptions")
-                        .HasForeignKey("PatientId1");
+                        .HasForeignKey("PatientId");
 
                     b.Navigation("Dentist");
 

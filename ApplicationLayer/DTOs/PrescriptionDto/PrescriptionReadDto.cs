@@ -11,9 +11,9 @@ namespace ApplicationLayer.DTOs.PrescriptionDto
         public int PrescriptionId { get; set; }
         public string Diagnoza { get; set; }
         public string Medicina { get; set; }
-        public int PatientId { get; set; }
+        public int? PatientId { get; set; }
         public string PatientName { get; set; }
-        public int DentistId { get; set; }
+        public int? DentistId { get; set; }
         public string DentistName { get; set; }
     }
 }

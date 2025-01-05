@@ -61,5 +61,12 @@ namespace PresentationLayer.Controllers
             await _departmentService.DeleteDepartmentAsync(id);
             return NoContent();
         }
+
+        [HttpGet("CountByClinicName/{clinicName}")]
+        public async Task<IActionResult> CountByClinicName(string clinicName)
+        {
+            var count = await _departmentService.CountDepartmentsByClinicNameAsync(clinicName);
+            return Ok(count);
+        }
     }
 }

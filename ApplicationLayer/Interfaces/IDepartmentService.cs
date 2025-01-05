@@ -12,5 +12,6 @@ namespace ApplicationLayer.Interfaces
         Task<DepartmentReadDto> CreateDepartmentAsync(DepartmentCreateDto departmentDto);
         Task<DepartmentReadDto> UpdateDepartmentAsync(DepartmentUpdateDto departmentDto);
         Task DeleteDepartmentAsync(int id);
+        Task<int> CountDepartmentsByClinicNameAsync(string clinicName);
     }
 }
