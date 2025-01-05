@@ -17,6 +17,8 @@ import Knowledge from './Pages/Knowledge';
 import EditMedicalRecord from './Pages/UpdateModals/EditMedicalRecord';
 import EditPrescription from './Pages/UpdateModals/EditPrescription';
 import DentistProfile from './Pages/DentistProfile';
+import Marketing from './Pages/Marketing';
+
 
 import FrontPage from './Pages/Dashboard/GlobalFiles/FrontPage';
 import Terminet from './Pages/Dashboard/GlobalFiles/Terminet';
@@ -87,6 +89,7 @@ function App() {
               <Route path="EditAdmin/:id" element={<EditAdmin />} />
               <Route path="EditDentist/:id" element={<EditDentist />} />
               <Route path="/DentistProfile" element={<DentistProfile />} />
+              <Route path="/Marketing" element={<Marketing />} />
 
 
             </Routes>

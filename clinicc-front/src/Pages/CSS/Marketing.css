@@ -1,0 +1,374 @@
+/* Hero Section */
+.hero-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 3rem;
+    background: #2d89ef;
+    color: white;
+    flex-wrap: wrap; /* Allow content to wrap on smaller screens */
+}
+
+.hero-content {
+    flex: 1;
+    padding: 2rem;
+}
+
+.hero-image-container {
+    flex: 1;
+    padding: 1rem;
+    max-width: 50%; /* Ensure it doesn’t stretch too wide */
+}
+
+.hero-image {
+    width: 100%;
+    border-radius: 10px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    object-fit: cover; /* Ensure image doesn't get stretched */
+}
+
+/* Button */
+.cta-button {
+    background-color: #e91e63;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.cta-button:hover {
+    background-color: #d81b60;
+}
+
+/* What We Offer Section */
+.what-we-offer-section {
+  padding: 4rem 2rem;
+  background-color: #f4f4f4;
+}
+
+.section-title {
+  font-size: 2.8rem;
+  margin-bottom: 3rem;
+  color: #2d89ef;
+  text-align: center;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 3 kolona në një rresht */
+  gap: 2rem; /* Hapësira midis kartave */
+  justify-items: center; /* Qendron kartat horizontalisht */
+}
+
+.service-card {
+  background: white;
+  border: 3px solid #2d89ef; /* Kufiri blu më i theksuar */
+  border-radius: 12px; /* Këndet pak më të rrumbullakosura */
+  padding: 2rem;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); /* Hijet më të theksuara */
+  text-align: center;
+  width: 100%; /* Madhësia uniforme */
+  height: 380px; /* Lartësia fikse për të gjitha kartat */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  flex-grow: 1; /* Siguron që të gjitha kartat janë të njëjtë në madhësi */
+}
+
+.service-card img {
+  width: 120px;
+  height: 120px;
+  margin-bottom: 1.5rem;
+  object-fit: cover; /* Siguron që imazhet të jenë uniforme */
+  border-radius: 50%; /* Opsionale: Imazhet rrethore */
+  border: 3px solid #2d89ef; /* Kufiri përputhet me atë të kartës */
+}
+
+.service-card h3 {
+  font-size: 1.6rem;
+  margin: 1rem 0 0.5rem;
+  color: #333;
+}
+
+.service-card p {
+  font-size: 1rem;
+  color: #666;
+  margin: 0;
+  line-height: 1.5;
+}
+
+/* Për ekranet më të vogla */
+@media (max-width: 768px) {
+  .row {
+      grid-template-columns: repeat(2, 1fr); /* 2 kolona për ekranet mesatare */
+  }
+}
+
+@media (max-width: 576px) {
+  .row {
+      grid-template-columns: 1fr; /* 1 kolonë për ekranet e vogla */
+  }
+}
+
+
+
+/* Appointment Section */
+.appointment-section {
+    background-color: #e9f7ff;
+    padding: 3rem 1rem;
+    text-align: center;
+}
+
+.appointment-section h2 {
+    font-size: 2.5rem;
+    color: #2d89ef;
+}
+
+.appointment-section p {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+}
+
+/* Contact Section */
+.contact-section {
+  padding: 4rem 2rem;
+  background-color: #f9f9f9;
+  text-align: center;
+}
+
+.section-title {
+  font-size: 2.5rem;
+  margin-bottom: 3rem;
+  color: #2d89ef;
+}
+
+.row {
+  display: flex;
+  justify-content: space-between;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.col {
+  flex: 1 1 calc(33.33% - 2rem); /* Siguron 3 kolona në ekran më të gjerë */
+  max-width: calc(33.33% - 2rem);
+  margin-bottom: 2rem;
+}
+
+.contact-card {
+  background: white;
+  border: 3px solid #2d89ef;
+  border-radius: 12px;
+  padding: 2rem;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.contact-card h3 {
+  font-size: 1.6rem;
+  margin-bottom: 1rem;
+  color: #333;
+}
+
+.contact-card p {
+  font-size: 1rem;
+  color: #666;
+  margin: 0;
+  line-height: 1.5;
+}
+
+.contact-info-text {
+  font-size: 1.2rem;
+  color: #333;
+  margin: 2rem 0;
+  font-weight: 500;
+}
+
+.cta-button {
+  background-color: #2d89ef;
+  color: white;
+  font-size: 1.2rem;
+  padding: 1rem 2rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-top: 2rem;
+  transition: background-color 0.3s ease;
+  text-transform: uppercase; /* Përdorimi i uppercase për butonin */
+}
+
+.cta-button:hover {
+  background-color: #1a6bb0;
+}
+
+/* Për ekranet më të vogla */
+@media (max-width: 768px) {
+  .row {
+      flex-direction: column; /* Kartat shfaqen njëra mbi tjetrën për ekranet më të vogla */
+      align-items: center;
+  }
+
+  .col {
+      width: 100%; /* Kartat do të mbushin të gjithë hapësirën për ekranet më të vogla */
+      margin-bottom: 1rem;
+  }
+}
+
+
+
+/* Responsive Grid */
+.row {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.col-lg-4 {
+    width: 30%;
+    padding: 0 1rem;
+    box-sizing: border-box; /* Ensure padding doesn't break layout */
+}
+
+@media (max-width: 768px) {
+    .col-lg-4 {
+        width: 100%;
+        margin-bottom: 2rem;
+    }
+
+    .hero-section {
+        flex-direction: column; /* Stack items vertically */
+    }
+
+    .hero-image-container {
+        max-width: 100%; /* Image takes full width */
+        padding: 0;
+    }
+
+    .service-card {
+        width: 100%; /* Ensure service cards take full width on small screens */
+    }
+}
+
+/* Slider (Carousel) Styles */
+/* Slider (Carousel) Styles */
+/* Slider (Carousel) Styles */
+/* Carousel Item Content */
+/* Hero-like Background for Carousel */
+/* Hero-like Background for Carousel */
+/* Hero-like Background for Carousel */
+.home23-sec_6 {
+    background-color: #2d89ef; /* Ngjyra e kaltër e ngjashme me hero-section */
+    color: white;
+    padding: 5rem 0; /* Rritur padding për më shumë hapësirë vertikale */
+  }
+  
+  .home23-sec_6 h2 {
+    color: white; /* Titulli në të bardhë */
+    font-size: 3rem; /* Rritur madhësia e titullit */
+    margin-bottom: 2rem;
+  }
+  
+  /* Carousel Item Content */
+  .carousel-item-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 3rem;
+  }
+  
+  .carousel-image {
+    flex: 1;
+    max-width: 45%; /* Rritur gjerësinë e figurës */
+    margin-right: 3rem; /* Rritur hapësirën midis figurës dhe përshkrimit */
+  }
+  
+  .carousel-description {
+    flex: 1;
+    max-width: 50%; /* Rritur gjerësinë e përshkrimit */
+  }
+  
+  .carousel-image img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+    object-fit: cover;
+  }
+  
+  .carousel-description h3 {
+    color: #fff; /* Titujt në të bardhë */
+    font-size: 2rem; /* Rritur madhësinë e titujve */
+    margin-bottom: 1rem;
+  }
+  
+  .carousel-description p {
+    font-size: 1.3rem; /* Rritur madhësinë e përshkrimit */
+    color: #f4f4f4;
+    line-height: 1.6;
+  }
+  
+  /* Carousel Controls */
+  /* Carousel Controls */
+.carousel-control-prev,
+.carousel-control-next {
+  color: white; /* Shigjetat në të bardhë */
+  font-size: 2rem; /* Rritur madhësinë e shigjetave */
+  background-color: rgba(0, 0, 0, 0.5); /* Background për shigjetat */
+  border-radius: 50%;
+  position: absolute;
+  top: 50%; /* Pozicionimi në mes */
+  transform: translateY(-50%); /* Qendron në mes vertikalisht */
+}
+
+.carousel-control-prev {
+  left: 15px; /* Largësia nga e majta */
+}
+
+.carousel-control-next {
+  right: 15px; /* Largësia nga e djathta */
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  filter: invert(1); /* Shigjetat e bardha */
+  background-color: white; /* Background për shigjetat e bardha */
+  border-radius: 50%;
+}
+
+  
+  /* Optional: Adjusting the responsiveness for smaller screens */
+  @media (max-width: 768px) {
+    .carousel-item-content {
+      flex-direction: column;
+      text-align: center;
+      padding: 2rem; /* Më pak padding për ekrane më të vogla */
+    }
+  
+    .carousel-image {
+      max-width: 100%;
+      margin-right: 0;
+    }
+  
+    .carousel-description {
+      max-width: 100%;
+    }
+  
+    .home23-sec_6 h2 {
+      font-size: 2.5rem; /* Rritur madhësia e titullit në ekrane të vogla */
+    }
+  
+    .carousel-description h3 {
+      font-size: 1.8rem; /* Rritur madhësia e titullit të përshkrimit */
+    }
+  
+    .carousel-description p {
+      font-size: 1.2rem; /* Rritur madhësia e përshkrimit në ekrane më të vogla */
+    }
+  }
+  
