@@ -11,6 +11,7 @@ import Navbar from "../Components/Navbar/Navbar";
 import Footer from '../Components/Footer/Footer';
 import defaultImage from "../Assets/person.png"; // Default placeholder image
 
+const BASE_URL = "https://localhost:7201";
 
 const PatientProfile = () => {
     const patient1 = (() => {
@@ -22,6 +23,7 @@ const PatientProfile = () => {
         }
       })();
   const [patient, setPatient] = useState(null);
+  const [imageUrl, setImageUrl] = useState(defaultImage);
   const [appointments, setAppointments] = useState([]);
   const [medicalRecords, setMedicalRecords] = useState([]);
   const [prescriptions, setPrescriptions] = useState([]);
@@ -58,8 +60,28 @@ const PatientProfile = () => {
             email: patientData.email,
             imageId:patientData.imageId,
         });
+
+        if (patientData.imageId) {
+          fetchImageUrl(patientData.imageId);
+        }
       } catch (error) {
         console.error("Failed to fetch patient data:", error);
+      }
+    };
+    const fetchImageUrl = async (imageId) => {
+      try {
+        const token = localStorage.getItem("accessToken");
+        const response = await axios.get(`https://localhost:7201/api/images/${imageId}`, {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+        if (response.data?.filePath) {
+          const fullUrl = `${BASE_URL}${response.data.filePath}`;
+          console.log(fullUrl);
+          setImageUrl(fullUrl);
+        }
+      } catch (error) {
+        console.error("Failed to fetch image URL:", error);
+        setImageUrl(defaultImage);
       }
     };
 
@@ -107,6 +129,78 @@ const PatientProfile = () => {
   const handleFormChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
+  const refetchPatientData = async () => {
+    try {
+      const token = localStorage.getItem("accessToken");
+      const response = await axios.get(`https://localhost:7201/api/Patient/${patient1.patientId}`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      setPatient(response.data);
+    } catch (error) {
+      console.error("Failed to refetch Patient data:", error);
+    }
+  };
+
+
+  const handleImageUpload = async (file) => {
+    try {
+      const formData = new FormData();
+      const uniqueFileName = `${Date.now()}_${file.name}`;
+      formData.append("File", file);
+      formData.append("FileName", uniqueFileName);
+      formData.append("FileDescription", "Profile picture upload");
+  
+      const token = localStorage.getItem("accessToken");
+      const response = await axios.post("https://localhost:7201/api/images", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+          Authorization: `Bearer ${token}`,
+        },
+      });
+  
+      console.log("Image uploaded successfully:", response.data);
+  
+      const newImageId = response.data.imageId;
+      setFormData((prev) => ({ ...prev, imageId: newImageId }));
+      setPatient((prev) => {
+        if (!prev) return null;
+        return { ...prev, imageId: newImageId };
+      });
+  
+      console.log("Updated Patient after image upload:", patient);
+  
+      // Refetch dentist data to ensure sync with backend
+      await refetchPatientData();
+      message.success("Image uploaded successfully!");
+    } catch (error) {
+      console.error("Error uploading image:", error.response?.data || error.message);
+      message.error("Failed to upload image. Please try again.");
+    }
+  };
+
+  const handleRemovePhoto = async () => {
+    try {
+      const token = localStorage.getItem("accessToken");
+      const response = await axios.delete(
+        `https://localhost:7201/api/images/${patient?.imageId}`,
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
+      setFormData((prevFormData) => ({
+        ...prevFormData,
+        imageId: "", // Reset imageId to empty, which will fallback to the default image
+      }));
+      setPatient((prev) => ({
+        ...prev,
+        imageId: "", // Reset the imageId in the dentist state as well
+      }));
+      message.success("Photo removed successfully!");
+      window.location.reload();
+    } catch (error) {
+      console.error("Error removing photo:", error);
+      message.error("Failed to remove photo. Please try again.");
+    }
+  };
+
 
   const handleFormSubmit = async () => {
     try {
@@ -135,12 +229,6 @@ const PatientProfile = () => {
     }
   };
 
-  const getImageUrl = () => {
-    if (patient?.imageId) {
-      return `https://localhost:7201/images/${patient.imageId}`;
-    }
-    return defaultImage;
-  };
 
   const medicalRecordColumns = [
     { title: "Description", dataIndex: "pershkrimi", key: "pershkrimi" },
@@ -165,7 +253,15 @@ const PatientProfile = () => {
         <div className="AfterSideBar1">
           <div className="maindoctorProfile">
             <div className="firstBox">
-              <img src={getImageUrl()} alt="Patient" />
+            <img
+                  src={imageUrl}
+                  alt="Profile"
+                  className="img-thumbnail"
+                  style={{ width: "200px", height: "200px" }}
+                  onError={(e) => {
+                    e.target.src = defaultImage;
+                  }}
+                />
               <br />
               <br />
               <br />
@@ -190,6 +286,13 @@ const PatientProfile = () => {
               <Button onClick={() => setIsUpdatePatientVisible(true)} id="editbtn">
                 <AiFillEdit /> Edit Profile
               </Button>
+              <button
+                type="button"
+                className="btn btn-danger mb-3"
+                onClick={handleRemovePhoto}
+              >
+                Remove Photo
+              </button>
               <Modal
                 title="Edit Patient Details"
                 open={isUpdatePatientVisible}
@@ -236,6 +339,14 @@ const PatientProfile = () => {
                     value={formData.email}
                     onChange={handleFormChange}
                     type="email"
+                  />
+                  <label htmlFor="email">Profile Photo</label>
+                  <input
+                    type="file"
+                    className="form-control mb-3"
+                    id="foto"
+                    name="foto"
+                    onChange={(e) => handleImageUpload(e.target.files[0])}
                   />
                 </form>
               </Modal>

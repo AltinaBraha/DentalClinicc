@@ -9,7 +9,9 @@ import { FaMoneyBillWave, FaMapMarkedAlt, FaBirthdayCake, FaClock, FaUserMd, FaP
 import { Button, message, Modal, Table } from "antd";
 import Navbar from "../Components/Navbar/Navbar";
 import Footer from '../Components/Footer/Footer';
-import defaultImage from "../Assets/person.png"; 
+import defaultImage from "../Assets/person.png";
+
+const BASE_URL = "https://localhost:7201";
 
 const DentistProfile = () => {
   const dentist1 = (() => {
@@ -22,6 +24,7 @@ const DentistProfile = () => {
   })();
 
   const [dentist, setDentist] = useState(null);
+  const [imageUrl, setImageUrl] = useState(defaultImage);
   const [ratings, setRatings] = useState([]);
   const [appointments, setAppointments] = useState([]);
   const [complaints, setComplaints] = useState([]);
@@ -60,14 +63,35 @@ const DentistProfile = () => {
           oraMbarimit: dentistData.oraMbarimit,
           imageId: dentistData.imageId,
         });
+
+        // Fetch the image URL
+        if (dentistData.imageId) {
+          fetchImageUrl(dentistData.imageId);
+        }
       } catch (error) {
-        console.error("Failed to fetch patient data:", error);
+        console.error("Failed to fetch dentist data:", error);
+      }
+    };
+
+    const fetchImageUrl = async (imageId) => {
+      try {
+        const token = localStorage.getItem("accessToken");
+        const response = await axios.get(`https://localhost:7201/api/images/${imageId}`, {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+        if (response.data?.filePath) {
+          const fullUrl = `${BASE_URL}${response.data.filePath}`;
+          console.log(fullUrl);
+          setImageUrl(fullUrl);
+        }
+      } catch (error) {
+        console.error("Failed to fetch image URL:", error);
+        setImageUrl(defaultImage);
       }
     };
 
     fetchDentistData();
   }, []);
-
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -103,39 +127,74 @@ const DentistProfile = () => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleImageUpload = async (file) => {
-    const formData = new FormData();
-    formData.append("file", file); // Shtoni imazhin në formData
-  
+  const refetchDentistData = async () => {
     try {
-      const response = await axios.post("https://localhost:7201/api/Images", formData, {
+      const token = localStorage.getItem("accessToken");
+      const response = await axios.get(`https://localhost:7201/api/Dentist/${dentist1.dentistId}`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      setDentist(response.data);
+    } catch (error) {
+      console.error("Failed to refetch dentist data:", error);
+    }
+  };
+  
+
+  const handleImageUpload = async (file) => {
+    try {
+      const formData = new FormData();
+      const uniqueFileName = `${Date.now()}_${file.name}`;
+      formData.append("File", file);
+      formData.append("FileName", uniqueFileName);
+      formData.append("FileDescription", "Profile picture upload");
+  
+      const token = localStorage.getItem("accessToken");
+      const response = await axios.post("https://localhost:7201/api/images", formData, {
         headers: {
-          "Content-Type": "multipart/form-data", // Sigurohuni që përdorni Content-Type të duhur
-          Authorization: `Bearer ${localStorage.getItem("accessToken")}`, // Sigurohuni që token-i është valid
+          "Content-Type": "multipart/form-data",
+          Authorization: `Bearer ${token}`,
         },
       });
   
       console.log("Image uploaded successfully:", response.data);
-      // Update UI nëse është ngarkuar me sukses
+  
+      const newImageId = response.data.imageId;
+      setFormData((prev) => ({ ...prev, imageId: newImageId }));
+      setDentist((prev) => {
+        if (!prev) return null;
+        return { ...prev, imageId: newImageId };
+      });
+  
+      console.log("Updated dentist after image upload:", dentist);
+  
+      // Refetch dentist data to ensure sync with backend
+      await refetchDentistData();
+      message.success("Image uploaded successfully!");
     } catch (error) {
-      console.error("Error uploading image:", error.response ? error.response.data : error.message);
-      alert("Failed to upload image. Please try again.");
+      console.error("Error uploading image:", error.response?.data || error.message);
+      message.error("Failed to upload image. Please try again.");
     }
   };
+  
   
 
   const handleRemovePhoto = async () => {
     try {
       const token = localStorage.getItem("accessToken");
       const response = await axios.delete(
-        `https://localhost:7201/api/Images/remove/${dentist?.imageId}`,
+        `https://localhost:7201/api/images/${dentist?.imageId}`,
         { headers: { Authorization: `Bearer ${token}` } }
       );
       setFormData((prevFormData) => ({
         ...prevFormData,
-        foto: defaultImage, // Reset to default image
+        imageId: "", // Reset imageId to empty, which will fallback to the default image
+      }));
+      setDentist((prev) => ({
+        ...prev,
+        imageId: "", // Reset the imageId in the dentist state as well
       }));
       message.success("Photo removed successfully!");
+      window.location.reload();
     } catch (error) {
       console.error("Error removing photo:", error);
       message.error("Failed to remove photo. Please try again.");
@@ -153,12 +212,12 @@ const DentistProfile = () => {
       message.success("Profile updated successfully.");
       setDentist(response.data);
       setIsUpdateDentistVisible(false);
+      window.location.reload();
     } catch (error) {
       console.error("Error updating profile:", error);
       message.error("Failed to update profile.");
     }
   };
-
 
   const ratingsColumns = [
     { title: "Sherbimi", dataIndex: "sherbimi", key: "sherbimi" },
@@ -173,8 +232,6 @@ const DentistProfile = () => {
     { title: "Time", dataIndex: "ora", key: "time" },
     { title: "Patient", dataIndex: "patientName", key: "patientName" }, 
   ];
-
-
   return (
     <>
       <Navbar />
@@ -183,11 +240,14 @@ const DentistProfile = () => {
           <div className="maindoctorProfile">
             <div className="firstBox">
               <div className="mb-3">
-                <img
-                  src={formData.imageId ? `https://localhost:7201/api/Images/${formData.imageId}` : defaultImage}
+              <img
+                  src={imageUrl}
                   alt="Profile"
                   className="img-thumbnail"
                   style={{ width: "200px", height: "200px" }}
+                  onError={(e) => {
+                    e.target.src = defaultImage;
+                  }}
                 />
               </div>
               <hr />
@@ -225,13 +285,6 @@ const DentistProfile = () => {
               >
                 Remove Photo
               </button>
-              <input
-                type="file"
-                className="form-control mb-3"
-                id="foto"
-                name="foto"
-                onChange={(e) => handleImageUpload(e.target.files[0])}
-              />
               <Modal
                 title="Edit Dentist Details"
                 open={isUpdateDentistVisible}
@@ -279,7 +332,7 @@ const DentistProfile = () => {
                     onChange={handleFormChange}
                     type="email"
                   />
-                   <label htmlFor="specializmi">Specializimi</label>
+                   <label htmlFor="specializimi">Specializimi</label>
                   <input
                     name="specializimi"
                     value={formData.specializimi}
@@ -293,12 +346,20 @@ const DentistProfile = () => {
                     onChange={handleFormChange}
                     type="oraFillimit"
                   />
-                   <label htmlFor="oraMbarimit">OraMbarimit</label>
+                  <label htmlFor="oraMbarimit">OraMbarimit</label>
                   <input
                     name="oraMbarimit"
                     value={formData.oraMbarimit}
                     onChange={handleFormChange}
                     type="oraMbarimit"
+                  />
+                  <label htmlFor="oraMbarimit">Profile Photo</label>
+                  <input
+                    type="file"
+                    className="form-control mb-3"
+                    id="foto"
+                    name="foto"
+                    onChange={(e) => handleImageUpload(e.target.files[0])}
                   />
                 </form>
               </Modal>

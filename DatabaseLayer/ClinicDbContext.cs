@@ -72,6 +72,24 @@ namespace DatabaseLayer
                 .WithMany()
                 .HasForeignKey(a => a.DentistId)
                 .OnDelete(DeleteBehavior.SetNull);
+
+            modelBuilder.Entity<Dentist>()
+                .HasOne(p => p.Image)
+                .WithMany()
+                .HasForeignKey(p => p.ImageId)
+                .OnDelete(DeleteBehavior.SetNull);
+
+            modelBuilder.Entity<Patient>()
+               .HasOne(p => p.Image)
+               .WithMany()
+               .HasForeignKey(p => p.ImageId)
+               .OnDelete(DeleteBehavior.SetNull);
+
+            modelBuilder.Entity<Admin>()
+               .HasOne(p => p.Image)
+               .WithMany()
+               .HasForeignKey(p => p.ImageId)
+               .OnDelete(DeleteBehavior.SetNull);
         }
 
     }
