@@ -20,6 +20,7 @@ import DentistProfile from './Pages/DentistProfile';
 import Marketing from './Pages/Marketing';
 
 
+
 import FrontPage from './Pages/Dashboard/GlobalFiles/FrontPage';
 import Terminet from './Pages/Dashboard/GlobalFiles/Terminet';
 import MedicalRecords from './Pages/Dashboard/GlobalFiles/MedicalRecords';
@@ -39,7 +40,8 @@ import EditAppointment from './Pages/Dashboard/Update/EditAppointment';
 import EditAdmin from './Pages/Dashboard/Update/EditAdmin';
 import EditDentist from './Pages/Dashboard/Update/EditDentist';
 import EditMedicalRecords from './Pages/Dashboard/Update/EditMedicalRecords';
-
+import EditPrescription from './Pages/Dashboard/Update/EditPrescription';
+import Prescription from './Pages/Dashboard/GlobalFiles/Prescription';
 
 
 import {
@@ -90,6 +92,8 @@ function App() {
               <Route path="EditDentist/:id" element={<EditDentist />} />
               <Route path="/DentistProfile" element={<DentistProfile />} />
               <Route path="/Marketing" element={<Marketing />} />
+              <Route path="EditPrescription/:id" element={<EditPrescription />} />
+              <Route path="/prescription" element={<Prescription />} />
 
 
             </Routes>

@@ -11,6 +11,7 @@ import Ratings from "./Rating";
 import Complaint from "./Complaint";
 import Contact from "./Contact";
 import MedicalRecords from "./MedicalRecords";
+import Prescription from "./Prescription";
 import "../CSS/CommonCSS.css";
 const FrontPage = () => {
     const [patients, setPatients] = useState([]);
@@ -117,6 +118,7 @@ const FrontPage = () => {
         <Complaint/>
         <Contact/>
         <MedicalRecords/>
+        <Prescription/>
         </div>
     </div>
     )
