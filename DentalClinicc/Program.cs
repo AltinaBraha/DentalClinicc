@@ -13,6 +13,8 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text.Json.Serialization;
 using Microsoft.OpenApi.Models;
 using Microsoft.Extensions.FileProviders;
+using SendGrid;
+using DomainLayer.Entities;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -21,6 +23,7 @@ builder.Configuration.AddJsonFile("appsettings.json", optional: false, reloadOnC
 // Add AutoMapper
 builder.Services.AddAutoMapper(typeof(AutoMapperProfile));
 
+builder.Services.Configure<SmtpSettings>(builder.Configuration.GetSection("SmtpSettings"));
 
 // Regjistrimi i shërbimit të AppointmentService
 builder.Services.AddScoped<IAppointmentService, AppointmentService>();
@@ -35,6 +38,7 @@ builder.Services.AddScoped<IAdminService, AdminService>();
 builder.Services.AddScoped<IRatingService, RatingService>();
 builder.Services.AddScoped<IImageService, ImageService>();
 builder.Services.AddScoped<IClinicService, ClinicService>();
+builder.Services.AddScoped<MailService>();
 
 
 //Regjistrimi i Repositoryt

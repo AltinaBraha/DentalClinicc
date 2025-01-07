@@ -63,6 +63,21 @@ const Prescription = () => {
     setLoading(false); // End loading
   };
 
+  useEffect(() => {
+    const fetchData = async () => {
+      if (token) {
+        await fetchPatients(); // Fetch departments first
+        await fetchDentists();
+      }
+    };
+    fetchData();
+  }, [token]);
+
+  useEffect(() => {
+    if (patients.length > 0 && dentists.length > 0) {// Fetch dentists only after departments are fetched and updated
+      fetchPrescriptions(patients, dentists);
+    }
+  }, [patients,dentists, refresh]);
   // Delete Prescription
   const deletePrescription = async (prescriptionId) => {
     try {
@@ -75,18 +90,6 @@ const Prescription = () => {
     }
   };
 
-  useEffect(() => {
-    if (token) {
-      fetchPatients();
-      fetchDentists();
-    }
-  }, [token]);
-
-  useEffect(() => {
-    if (patients.length > 0 && dentists.length > 0) {
-      fetchPrescriptions();
-    }
-  }, [patients, dentists, refresh]);
 
   // Table Columns
   const columns = [
