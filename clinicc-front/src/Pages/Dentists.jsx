@@ -3,8 +3,8 @@ import { ToastContainer, toast } from 'react-toastify';
 import { Table } from 'antd';
 import axios from 'axios';
 import Navbar from '../Components/Navbar/Navbar';
-import DentistModal from './DentistModal';
 import './CSS/Dentists.css';
+import DentistModal from './DentistModal';
 
 const Dentists = () => {
     const [dentists, setDentists] = useState([]); // State to hold dentists data
@@ -127,9 +127,9 @@ const Dentists = () => {
                 render: (departmentId) => {
                     const department = departments.find(department => department.DepartmentId === departmentId);
                     if (department) {
-                        return department.emri; // Display department name
+                        return department.emri; 
                     } else {
-                        return 'N/A'; // Fallback in case department is not found
+                        return 'N/A'; 
                     }
                 },
             },
@@ -137,7 +137,7 @@ const Dentists = () => {
             title: "Actions",
             key: "actions",
             render: (text, record) => (
-                <button onClick={() => handleCheck(record)}>Check</button>
+                <button class="check" onClick={() => handleCheck(record)}>Check</button>
             ),
         },
     ];

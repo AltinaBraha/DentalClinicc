@@ -41,12 +41,12 @@ const Contact = () => {
         headers: { Authorization: `Bearer ${token1}` },
       });
       const contactsData = response.data?.$values || [];
-      // Map department names to admins
+      
       const contactsWithPatients = contactsData.map((contact) => {
         const patient = patientsList.find((d) => d.patientId === contact.patientId);
         return {
           ...contact,
-          patientName: patient ? patient.emri : "Unknown", // Fallback if department not found
+          patientName: patient ? patient.emri : "Unknown", 
           messageDate: formatDate(contact.messageDate),
         };
       });
@@ -56,15 +56,15 @@ const Contact = () => {
     }
   };
 
-  // Combined Fetch to Ensure Sequential Execution
+
       useEffect(() => {
         const fetchData = async () => {
           if (token1) {
-            await fetchPatients(); // Fetch departments first
+            await fetchPatients(); 
           }
         };
         fetchData();
-      }, [token1]); // Fetch departments when token changes
+      }, [token1]); 
   
       useEffect(() => {
           if (patients.length > 0) {

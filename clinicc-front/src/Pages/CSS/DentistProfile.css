@@ -1,8 +1,8 @@
 .inputForm {
     display: flex;
     flex-direction: column;
-    gap: 1rem; /* Add space between input fields */
-    padding: 1rem; /* Padding around the form */
+    gap: 1rem; 
+    padding: 1rem; 
   }
   
   .container1{
@@ -22,11 +22,11 @@
   .inputForm label {
     font-size: 1.2rem;
     margin-bottom: 0.3rem;
-    color: #333; /* Change label color for better visibility */
+    color: #333; 
   }
   
   .inputForm button {
-    margin-top: 1rem; /* Add margin to the button for spacing */
+    margin-top: 1rem; 
   }
   
   .modal-content {
@@ -94,7 +94,15 @@
     border-radius: 2rem;
     height: 45%;
   }
-  
+  #editbtn {
+    margin-left: 20px;
+    height: 37px;
+  }
+
+  #btnremove{
+    margin-left: 50px;
+    margin-top: 27px;
+  }
   .singleitemdiv button {
     width: 50%;
     margin: auto;
@@ -182,7 +190,7 @@
   }
     .inputForm input,
     .inputForm select {
-      width: 90%; /* Adjust width for smaller screens */
+      width: 90%; 
     }
   }
   

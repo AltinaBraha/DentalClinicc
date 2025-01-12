@@ -1,14 +1,13 @@
-/* General Modal Styles */
 .dentist-modal .antd-modal {
-    border-radius: 8px; /* Rounded corners for the modal */
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Modern font family */
+    border-radius: 8px; 
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
 }
 
 .dentist-modal .antd-modal-header {
-    background: #007bff; /* Primary color for the header */
-    color: #ffffff; /* White text color */
-    border-bottom: 1px solid #0056b3; /* Darker border for better contrast */
-    border-radius: 8px 8px 0 0; /* Rounded top corners */
+    background: #007bff; 
+    color: #ffffff; 
+    border-bottom: 1px solid #0056b3; 
+    border-radius: 8px 8px 0 0; 
 }
 
 .dentist-modal .antd-modal-title {
@@ -59,3 +58,4 @@
     background: #f1f3f5; /* Light gray background on hover */
     border-color: #0056b3; /* Border color on hover */
 }
+

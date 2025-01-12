@@ -4,7 +4,7 @@ import './CSS/Marketing.css';
 import Navbar from '../Components/Navbar/Navbar';
 import Footer from '../Components/Footer/Footer';
 
-// Import assets with fallback handling
+
 import HeroImage from '../Assets/heroImage.png';
 import GeneralDentistryImg from '../Assets/GeneralDenistry.png';
 import CosmeticDentistryImg from '../Assets/CosmeticSurgery.png';
@@ -68,19 +68,19 @@ const Marketing = () => {
 
         {/* What We Offer Section */}
         <section className="what-we-offer-section">
-  <h2 className="section-title">What We Offer</h2>
-  <div className="row">
-    {services.map((service, index) => (
-      <div className="col" key={index}>
-        <div className="service-card">
-          <img src={service.img || '/placeholder.png'} alt={service.title} className="service-image" />
-          <h3>{service.title}</h3>
-          <p>{service.description}</p>
-        </div>
-      </div>
-    ))}
-  </div>
-</section>
+            <h2 className="section-title">What We Offer</h2>
+            <div className="row">
+              {services.map((service, index) => (
+                <div className="col" key={index}>
+                  <div className="service-card">
+                    <img src={service.img || '/placeholder.png'} alt={service.title} className="service-image" />
+                    <h3>{service.title}</h3>
+                    <p>{service.description}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+        </section>
 
 
 
@@ -130,20 +130,20 @@ const Marketing = () => {
 
         {/* Contact Section */}
         <section className="contact-section">
-  <h2 className="section-title">How You Can Contact Us</h2>
-  <div className="row">
-    {contacts.map((contact, index) => (
-      <div className="col" key={index}>
-        <div className="contact-card">
-          <h3>{contact.title}</h3>
-          <p>{contact.description}</p>
-        </div>
-      </div>
-    ))}
-  </div>
-  <p className="contact-info-text">For more information or to reach us directly, feel free to contact us below:</p>
-  <button className="cta-button" onClick={handleContactClick}>Contact Us</button>
-</section>
+            <h2 className="section-title">How You Can Contact Us</h2>
+            <div className="row">
+              {contacts.map((contact, index) => (
+                <div className="col" key={index}>
+                  <div className="contact-card">
+                    <h3>{contact.title}</h3>
+                    <p>{contact.description}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+            <p className="contact-info-text">For more information or to reach us directly, feel free to contact us below:</p>
+            <button className="cta-button" onClick={handleContactClick}>Contact Us</button>
+        </section>
 
 
         <Footer />

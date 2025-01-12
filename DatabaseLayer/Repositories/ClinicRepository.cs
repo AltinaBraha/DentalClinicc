@@ -27,22 +27,23 @@ namespace DatabaseLayer.Repositories
         public async Task<Clinic?> GetByIdAsync(int id)
         {
             return await _context.Clinics
-                .Include(c => c.Departments) // Përfshijmë Departments
-                    .ThenInclude(d => d.Dentists) // Përfshijmë Dentists brenda Departments
+                .Include(c => c.Departments) 
+                    .ThenInclude(d => d.Dentists) 
                 .Include(c => c.Departments)
-                    .ThenInclude(d => d.Admins) // Përfshijmë Admins brenda Departments
-                .FirstOrDefaultAsync(c => c.ClinicId == id); // Kërkojmë Klinikën sipas ID-së
+                    .ThenInclude(d => d.Admins) 
+                .FirstOrDefaultAsync(c => c.ClinicId == id); 
+
         }
 
 
         public async Task<List<Clinic>> GetAllAsync()
         {
             return await _context.Clinics
-                .Include(c => c.Departments) // Përfshijmë Departments
-                    .ThenInclude(d => d.Dentists) // Përfshijmë Dentists brenda Departments
+                .Include(c => c.Departments) 
+                    .ThenInclude(d => d.Dentists) 
                 .Include(c => c.Departments)
-                    .ThenInclude(d => d.Admins) // Përfshijmë Admins brenda Departments
-                .ToListAsync(); // Kthejmë të gjitha Klinikat
+                    .ThenInclude(d => d.Admins) 
+                .ToListAsync(); 
         }
 
 
@@ -67,7 +68,7 @@ namespace DatabaseLayer.Repositories
         public async Task<List<Clinic>> GetByLocationNameAsync(string location)
         {
             return await _context.Clinics
-                .Where(c => c.Location.ToLower() == location.ToLower()) // Krahasim i ndjeshëm ndaj të shkronjave
+                .Where(c => c.Location.ToLower() == location.ToLower()) 
                 .ToListAsync();
         }
 

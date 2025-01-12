@@ -51,7 +51,7 @@ namespace ApplicationLayer.Services
             var appointment = _mapper.Map<Appointment>(appointmentDto);
             var createdAppointment = await _appointmentRepository.AddAsync(appointment);
 
-            // Email notification logic
+            
             var subject = "Appointment Confirmation";
             var body = $"Your appointment has been successfully created. Details: {appointmentDto.Ceshtja}, {appointmentDto.Data}, {appointmentDto.Ora}";
             await _mailService.SendEmailAsync(appointmentDto.Email, subject, body);
@@ -62,29 +62,29 @@ namespace ApplicationLayer.Services
 
         public async Task<AppointmentReadDto> UpdateAppointmentAsync(AppointmentUpdateDto appointmentDto)
         {
-            // Get the existing appointment from the repository
+           
             var appointment = await _appointmentRepository.GetByIdAsync(appointmentDto.AppointmentId);
 
             if (appointment == null)
             {
-                return null; // Return null if the appointment is not found
+                return null; 
             }
 
-            // Update appointment properties
+            
             appointment.Data = appointmentDto.Data;
             appointment.Ora = appointmentDto.Ora;
             appointment.Ceshtja = appointmentDto.Ceshtja;
             appointment.PatientId = appointmentDto.PatientId;
             appointment.DentistId = appointmentDto.DentistId;
 
-            // Call repository to update the appointment
+           
             var updatedAppointment = await _appointmentRepository.UpdateAsync(appointment);
 
             var subject = "Appointment Update";
             var body = $"Your appointment has been updated. New details: {appointmentDto.Ceshtja}, {appointmentDto.Data}, {appointmentDto.Ora}";
             await _mailService.SendEmailAsync(appointmentDto.Email, subject, body);
 
-            // Return the updated appointment as a DTO
+           
             return _mapper.Map<AppointmentReadDto>(updatedAppointment);
         }
 

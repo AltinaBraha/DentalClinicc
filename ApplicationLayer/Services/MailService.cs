@@ -9,7 +9,7 @@ public class MailService
 
     public MailService(IOptions<SmtpSettings> smtpSettings)
     {
-        _smtpSettings = smtpSettings.Value; // Get the SmtpSettings from configuration
+        _smtpSettings = smtpSettings.Value; 
     }
 
     public async Task SendEmailAsync(string toEmail, string subject, string body)
@@ -35,7 +35,7 @@ public class MailService
         }
         catch (Exception ex)
         {
-            // Handle exceptions (log, rethrow, etc.)
+           
             throw new Exception("Failed to send email", ex);
         }
     }

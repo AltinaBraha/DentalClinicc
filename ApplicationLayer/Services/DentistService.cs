@@ -53,8 +53,8 @@ namespace ApplicationLayer.Services
             var response = new ServiceResponse<List<Dentist>>();
             Authentication auth = new Authentication();
 
-            // Check if the admin already exists
-            var dentists = await _dentistRepository.GetAllAsync(); // Await to get the list
+            
+            var dentists = await _dentistRepository.GetAllAsync(); 
             if (dentists.Any(a => a.Email.ToLower() == dentistDto.Email.ToLower()))
             {
                 response.Success = false;
@@ -62,23 +62,23 @@ namespace ApplicationLayer.Services
                 return response;
             }
 
-            // Map DTO to Admin entity
+           
             var dentist = _mapper.Map<Dentist>(dentistDto);
 
-            // Create password hash and salt
+            
             auth.CreatePasswordHash(password, out byte[] passwordHash, out byte[] passwordSalt);
             dentist.PasswordHash = passwordHash;
             dentist.PasswordSalt = passwordSalt;
 
-            // Automatically generate a refresh token
+           
             dentist.RefreshToken = GenerateRefreshToken();
-            dentist.RefreshTokenExpiryTime = DateTime.UtcNow.AddDays(7); // Set expiry for refresh token
+            dentist.RefreshTokenExpiryTime = DateTime.UtcNow.AddDays(7); 
 
-            // Add admin to the repository
+            
             await _dentistRepository.AddAsync(dentist);
 
-            // Return all admins
-            response.Data = _context.Dentists.ToList(); // Use LINQ ToList on the list
+            
+            response.Data = _context.Dentists.ToList(); 
             response.Success = true;
             response.Message = "Dentist created successfully";
             return response;
@@ -93,7 +93,7 @@ namespace ApplicationLayer.Services
 
 
 
-            // Map the list of Dentist entities to a list of DentistReadDto
+            
             return _mapper.Map<List<DentistReadDto>>(dentists);
         }
 
@@ -122,7 +122,7 @@ namespace ApplicationLayer.Services
             dentist.OraFillimit = dentistDto.OraFillimit;
             dentist.OraMbarimit = dentistDto.OraMbarimit;
 
-            // Update ImageId if it's present in the DTO
+            
              if (dentistDto.ImageId.HasValue)
              {
                  dentist.ImageId = dentistDto.ImageId.Value;
@@ -158,17 +158,17 @@ namespace ApplicationLayer.Services
                 return response;
             }
 
-            // Generate Access Token
+            
             string accessToken = CreateToken(dentist);
 
-            // Generate Refresh Token
+            
             string refreshToken = CreateRefreshToken();
             dentist.RefreshToken = refreshToken;
             dentist.RefreshTokenExpiryTime = DateTime.Now.AddDays(1);
 
-            await _context.SaveChangesAsync(); // Save refresh token in database
+            await _context.SaveChangesAsync(); 
 
-            // Return both tokens in response
+            
             response.Data = new LoginResponse
             {
                 AccessToken = accessToken,
@@ -224,7 +224,7 @@ namespace ApplicationLayer.Services
             var tokenDescriptor = new SecurityTokenDescriptor
             {
                 Subject = new ClaimsIdentity(claims),
-                Expires = DateTime.Now.AddMinutes(15), // Access token valid for 15 minutes
+                Expires = DateTime.Now.AddMinutes(15), 
                 SigningCredentials = creds
             };
 
@@ -246,15 +246,15 @@ namespace ApplicationLayer.Services
                 return response;
             }
 
-            // Generate new access token
+           
             string newAccessToken = CreateToken(dentist);
 
-            // Optionally, generate a new refresh token for added security
+           
             string newRefreshToken = CreateRefreshToken();
             dentist.RefreshToken = newRefreshToken;
-            dentist.RefreshTokenExpiryTime = DateTime.Now.AddDays(7); // New refresh token valid for 7 more days
+            dentist.RefreshTokenExpiryTime = DateTime.Now.AddDays(7); 
 
-            await _context.SaveChangesAsync(); // Update the database
+            await _context.SaveChangesAsync();
 
             response.Data = new LoginResponse
             {

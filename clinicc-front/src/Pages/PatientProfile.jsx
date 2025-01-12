@@ -5,11 +5,11 @@ import { BiTime } from "react-icons/bi";
 import { AiFillEdit } from "react-icons/ai";
 import { MdEmail } from "react-icons/md";
 import { BsPersonCircle, BsGenderAmbiguous } from "react-icons/bs";
-import { FaMoneyBillWave, FaMapMarkedAlt, FaBirthdayCake } from "react-icons/fa";
+import { FaMoneyBillWave, FaMapMarkedAlt, FaBirthdayCake, FaClock, FaUserMd, FaPhoneAlt } from "react-icons/fa";
 import { Button, message, Modal, Table } from "antd";
 import Navbar from "../Components/Navbar/Navbar";
 import Footer from '../Components/Footer/Footer';
-import defaultImage from "../Assets/person.png"; // Default placeholder image
+import defaultImage from "../Assets/person.png"; 
 
 const BASE_URL = "https://localhost:7201";
 
@@ -276,7 +276,7 @@ const PatientProfile = () => {
                 <p>{patient?.mosha} years old</p>
               </div>
               <div className="singleitemdiv">
-                <BsGenderAmbiguous className="singledivicons" />
+                 <FaPhoneAlt className="singledivicons" />
                 <p>{patient?.nrTelefonit}</p>
               </div>
               <div className="singleitemdiv">
@@ -288,10 +288,11 @@ const PatientProfile = () => {
               </Button>
               <button
                 type="button"
+                id="btnremove"
                 className="btn btn-danger mb-3"
                 onClick={handleRemovePhoto}
               >
-                Remove Photo
+                Remove 
               </button>
               <Modal
                 title="Edit Patient Details"

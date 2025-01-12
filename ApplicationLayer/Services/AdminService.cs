@@ -54,8 +54,8 @@ namespace ApplicationLayer.Services
             var response = new ServiceResponse<List<Admin>>();
             Authentication auth = new Authentication();
 
-            // Check if the admin already exists
-            var admins = await _adminRepository.GetAllAsync(); // Await to get the list
+            
+            var admins = await _adminRepository.GetAllAsync(); 
             if (admins.Any(a => a.Email.ToLower() == adminDto.Email.ToLower()))
             {
                 response.Success = false;
@@ -66,20 +66,20 @@ namespace ApplicationLayer.Services
             // Map DTO to Admin entity
             var admin = _mapper.Map<Admin>(adminDto);
 
-            // Create password hash and salt
+        
             auth.CreatePasswordHash(password, out byte[] passwordHash, out byte[] passwordSalt);
             admin.PasswordHash = passwordHash;
             admin.PasswordSalt = passwordSalt;
 
-            // Automatically generate a refresh token
+            
             admin.RefreshToken = GenerateRefreshToken();
-            admin.RefreshTokenExpiryTime = DateTime.UtcNow.AddDays(7); // Set expiry for refresh token
+            admin.RefreshTokenExpiryTime = DateTime.UtcNow.AddDays(7); 
 
-            // Add admin to the repository
+            
             await _adminRepository.AddAsync(admin);
 
-            // Return all admins
-            response.Data = _context.Admins.ToList(); // Use LINQ ToList on the list
+            
+            response.Data = _context.Admins.ToList(); 
             response.Success = true;
             response.Message = "Admin created successfully";
             return response;
@@ -140,17 +140,16 @@ namespace ApplicationLayer.Services
                 return response;
             }
 
-            // Generate Access Token
+            
             string accessToken = CreateToken(admin);
 
-            // Generate Refresh Token
+          
             string refreshToken = CreateRefreshToken();
             admin.RefreshToken = refreshToken;
             admin.RefreshTokenExpiryTime = DateTime.Now.AddDays(1);
 
-            await _context.SaveChangesAsync(); // Save refresh token in database
+            await _context.SaveChangesAsync(); 
 
-            // Return both tokens in response
             response.Data = new LoginResponse
             {
                 AccessToken = accessToken,
@@ -200,7 +199,7 @@ namespace ApplicationLayer.Services
             var tokenDescriptor = new SecurityTokenDescriptor
             {
                 Subject = new ClaimsIdentity(claims),
-                Expires = DateTime.Now.AddMinutes(15), // Access token valid for 15 minutes
+                Expires = DateTime.Now.AddMinutes(15), 
                 SigningCredentials = creds
             };
 
@@ -222,15 +221,15 @@ namespace ApplicationLayer.Services
                 return response;
             }
 
-            // Generate new access token
+           
             string newAccessToken = CreateToken(admin);
 
-            // Optionally, generate a new refresh token for added security
+            
             string newRefreshToken = CreateRefreshToken();
             admin.RefreshToken = newRefreshToken;
-            admin.RefreshTokenExpiryTime = DateTime.Now.AddDays(7); // New refresh token valid for 7 more days
+            admin.RefreshTokenExpiryTime = DateTime.Now.AddDays(7); 
 
-            await _context.SaveChangesAsync(); // Update the database
+            await _context.SaveChangesAsync();
 
             response.Data = new LoginResponse
             {

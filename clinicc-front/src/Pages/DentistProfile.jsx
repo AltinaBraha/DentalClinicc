@@ -280,10 +280,11 @@ const DentistProfile = () => {
               </Button>
               <button
                 type="button"
+                id="btnremove"
                 className="btn btn-danger mb-3"
                 onClick={handleRemovePhoto}
               >
-                Remove Photo
+                Remove 
               </button>
               <Modal
                 title="Edit Dentist Details"

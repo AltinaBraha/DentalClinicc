@@ -150,6 +150,10 @@ html, body {
   height: 3rem;
   font-size: 1.3rem;
 }
+.rightside button {
+  font-size: 1.1rem;
+
+}
 
 form h5 {
   text-align: left;

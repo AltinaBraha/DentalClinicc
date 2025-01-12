@@ -42,7 +42,7 @@ namespace ApplicationLayer.Services
 
         public async Task<ClinicReadDto> UpdateClinicAsync(ClinicUpdateDto clinicDto)
         {
-            // Get the patient from the repository
+           
             var clinic = await _clinicRepository.GetByIdAsync(clinicDto.ClinicId);
 
             
@@ -51,15 +51,15 @@ namespace ApplicationLayer.Services
                 return null;  
             }
 
-            // Update the patient properties
+            
             clinic.ClinicName = clinicDto.ClinicName;
             clinic.Location = clinicDto.Location;
     
 
-            // Call the repository to update the patient
+            
             var updatedClinic = await _clinicRepository.UpdateAsync(clinic);
 
-            // Return the updated patient as a DTO
+            
             return _mapper.Map<ClinicReadDto>(updatedClinic);
         }
 
@@ -70,7 +70,7 @@ namespace ApplicationLayer.Services
             await _clinicRepository.DeleteAsync(id);
         }
 
-        // Shto metodën për të marrë klinikat sipas lokacionit
+        
         public async Task<List<ClinicReadDto>> GetClinicsByLocationAsync(string location)
         {
             var clinics = await _clinicRepository.GetByLocationNameAsync(location);
@@ -78,7 +78,7 @@ namespace ApplicationLayer.Services
         }
 
 
-        // Shto metodën për të kontrolluar ekzistencën e një klinike
+      
         public async Task<bool> ClinicExistsAsync(string clinicName, string location)
         {
             return await _clinicRepository.ExistsClinicAsync(clinicName, location);

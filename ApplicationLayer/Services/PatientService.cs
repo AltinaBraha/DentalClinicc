@@ -51,8 +51,8 @@ namespace ApplicationLayer.Services
             var response = new ServiceResponse<List<Patient>>();
             Authentication auth = new Authentication();
 
-            // Check if the admin already exists
-            var patients = await _patientRepository.GetAllAsync(); // Await to get the list
+           
+            var patients = await _patientRepository.GetAllAsync(); 
             if (patients.Any(a => a.Email.ToLower() == patientDto.Email.ToLower()))
             {
                 response.Success = false;
@@ -60,22 +60,22 @@ namespace ApplicationLayer.Services
                 return response;
             }
 
-            // Map DTO to Admin entity
+            
             var patient = _mapper.Map<Patient>(patientDto);
 
-            // Create password hash and salt
+            
             auth.CreatePasswordHash(password, out byte[] passwordHash, out byte[] passwordSalt);
             patient.PasswordHash = passwordHash;
             patient.PasswordSalt = passwordSalt;
 
-            // Automatically generate a refresh token
+            
             patient.RefreshToken = GenerateRefreshToken();
-            patient.RefreshTokenExpiryTime = DateTime.UtcNow.AddDays(7); // Set expiry for refresh token
+            patient.RefreshTokenExpiryTime = DateTime.UtcNow.AddDays(7); 
 
-            // Add admin to the repository
+            
             await _patientRepository.AddAsync(patient);
 
-            response.Data = _context.Patients.ToList(); // Use LINQ ToList on the list
+            response.Data = _context.Patients.ToList(); 
             response.Success = true;
             response.Message = "Patient created successfully";
             return response;
@@ -88,33 +88,33 @@ namespace ApplicationLayer.Services
 
         public async Task<PatientReadDto> UpdatePatientAsync(PatientUpdateDto patientDto)
         {
-            // Get the patient from the repository
+            
             var patient = await _patientRepository.GetByIdAsync(patientDto.PatientId);
 
-            // Check if the patient exists
+            
             if (patient == null)
             {
-                return null;  // Patient not found
+                return null;  
             }
 
-            // Update the patient properties
+            
             patient.Emri = patientDto.Emri;
             patient.Mbiemri = patientDto.Mbiemri;
             patient.Mosha = patientDto.Mosha;
             patient.NrTelefonit = patientDto.NrTelefonit;
             patient.Email = patientDto.Email;
 
-            // Update ImageId if it's present in the DTO
+           
            if (patientDto.ImageId.HasValue)
             {
                 patient.ImageId = patientDto.ImageId.Value;
             }
 
 
-            // Call the repository to update the patient
+            
             var updatedPatient = await _patientRepository.UpdateAsync(patient);
 
-            // Return the updated patient as a DTO
+            
             return _mapper.Map<PatientReadDto>(updatedPatient);
         }
 
@@ -145,17 +145,17 @@ namespace ApplicationLayer.Services
                 return response;
             }
 
-            // Generate Access Token
+            
             string accessToken = CreateToken(patient);
 
-            // Generate Refresh Token
+            
             string refreshToken = CreateRefreshToken();
             patient.RefreshToken = refreshToken;
             patient.RefreshTokenExpiryTime = DateTime.Now.AddDays(1);
 
-            await _context.SaveChangesAsync(); // Save refresh token in database
+            await _context.SaveChangesAsync(); 
 
-            // Return both tokens in response
+            
             response.Data = new LoginResponse
             {
                 AccessToken = accessToken,
@@ -207,7 +207,7 @@ namespace ApplicationLayer.Services
             var tokenDescriptor = new SecurityTokenDescriptor
             {
                 Subject = new ClaimsIdentity(claims),
-                Expires = DateTime.Now.AddMinutes(15), // Access token valid for 15 minutes
+                Expires = DateTime.Now.AddMinutes(15), 
                 SigningCredentials = creds
             };
 
@@ -229,15 +229,15 @@ namespace ApplicationLayer.Services
                 return response;
             }
 
-            // Generate new access token
+            
             string newAccessToken = CreateToken(patient);
 
-            // Optionally, generate a new refresh token for added security
+            
             string newRefreshToken = CreateRefreshToken();
             patient.RefreshToken = newRefreshToken;
-            patient.RefreshTokenExpiryTime = DateTime.Now.AddDays(7); // New refresh token valid for 7 more days
+            patient.RefreshTokenExpiryTime = DateTime.Now.AddDays(7); 
 
-            await _context.SaveChangesAsync(); // Update the database
+            await _context.SaveChangesAsync();
 
             response.Data = new LoginResponse
             {
@@ -252,14 +252,14 @@ namespace ApplicationLayer.Services
 
         public async Task<List<PatientReadDto>> GetPatientsByDentistIdAsync(int dentistId)
         {
-            // Fetch appointments for the dentist
+           
             var appointments = await _appointmentRepository.GetByDentistIdAsync(dentistId);
 
-            // Extract unique patient IDs, filtering out nulls
+            
             var patientIds = appointments
                 .Select(a => a.PatientId)
-                .Where(id => id.HasValue) // Only take non-null values
-                .Select(id => id.Value)  // Extract the value from nullable int
+                .Where(id => id.HasValue) 
+                .Select(id => id.Value) 
                 .Distinct()
                 .ToList();
 
@@ -268,10 +268,10 @@ namespace ApplicationLayer.Services
                 return new List<PatientReadDto>();
             }
 
-            // Fetch patient details by IDs
+            
             var patients = await _patientRepository.GetByIdsAsync(patientIds);
 
-            // Map to DTOs and return
+            
             return _mapper.Map<List<PatientReadDto>>(patients);
         }
 
@@ -285,7 +285,7 @@ namespace ApplicationLayer.Services
 
 
 
-            // Map the list of Dentist entities to a list of DentistReadDto
+           
             return _mapper.Map<List<PatientReadDto>>(patients);
         }
 
