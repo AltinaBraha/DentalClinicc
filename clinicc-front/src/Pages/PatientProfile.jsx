@@ -39,10 +39,9 @@ const PatientProfile = () => {
   });
 
   useEffect(() => {
-    // Fetch patient data
     const fetchPatientData = async () => {
       try {
-        const token = localStorage.getItem("accessToken"); // Adjust as per your auth mechanism
+        const token = localStorage.getItem("accessToken"); 
         console.log(token);
         const response = await axios.get(`https://localhost:7201/api/Patient/${patient1.patientId}`, {
           headers: { Authorization: `Bearer ${token}` },
@@ -89,7 +88,6 @@ const PatientProfile = () => {
   }, []);
 
   useEffect(() => {
-    // Fetch patient-related data
     const fetchData = async () => {
       try {
         const token = localStorage.getItem("accessToken");
@@ -169,7 +167,6 @@ const PatientProfile = () => {
   
       console.log("Updated Patient after image upload:", patient);
   
-      // Refetch dentist data to ensure sync with backend
       await refetchPatientData();
       message.success("Image uploaded successfully!");
     } catch (error) {
@@ -187,11 +184,11 @@ const PatientProfile = () => {
       );
       setFormData((prevFormData) => ({
         ...prevFormData,
-        imageId: "", // Reset imageId to empty, which will fallback to the default image
+        imageId: "", 
       }));
       setPatient((prev) => ({
         ...prev,
-        imageId: "", // Reset the imageId in the dentist state as well
+        imageId: "", 
       }));
       message.success("Photo removed successfully!");
       window.location.reload();
@@ -215,6 +212,7 @@ const PatientProfile = () => {
       message.success("Profile updated successfully.");
       setPatient(response.data);
       setIsUpdatePatientVisible(false);
+      window.location.reload();
     } catch (error) {
         if (error.response) {
             console.error("Response data:", error.response.data);

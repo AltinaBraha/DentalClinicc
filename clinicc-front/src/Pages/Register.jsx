@@ -20,7 +20,7 @@ const Register = () => {
     password: "",
   });
 
-  const navigate = useNavigate(); // Hook to programmatically navigate to another page
+  const navigate = useNavigate(); 
 
   const handleChange = (e) => {
     setFormValue({ ...formValue, [e.target.name]: e.target.value });
@@ -47,9 +47,8 @@ const Register = () => {
       const response = await axios.post(apiEndpoint, payload);
 
       setLoading(false);
-      notify("Patient registered successfully!"); // Notify the user
+      notify("Patient registered successfully!"); 
 
-      // Clear form fields
       setFormValue({
         emri: "",
         mbiemri: "",
@@ -59,10 +58,9 @@ const Register = () => {
         password: "",
       });
 
-      // Redirect to login page after successful registration
       setTimeout(() => {
-        navigate("/Login"); // Redirect to the login page
-      }, 2000); // Delay the redirect to allow the success message to be visible
+        navigate("/Login"); 
+      }, 2000); 
     } catch (error) {
       setLoading(false);
       console.error("Error response:", error.response);

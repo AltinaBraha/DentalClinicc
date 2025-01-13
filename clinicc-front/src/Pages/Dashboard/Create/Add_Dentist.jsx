@@ -227,7 +227,7 @@ const AddDentist = () => {
                     <option value="">Select a Department</option>
                     {departments.map((department) => (
                       <option key={department.departmentId} value={department.departmentId}>
-                        {department.emri}{/* Display dentist name */}
+                        {department.emri}
                       </option>
                     ))}
                   </select>

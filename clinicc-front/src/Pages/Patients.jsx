@@ -27,50 +27,52 @@ const Patients = () => {
     console.log('Token in patients', token1);
 
 
-    // Fetch all patients initially
     useEffect(() => {
         const fetchPatients = async () => {
-          try {
-            const response = await axios.get(`https://localhost:7201/api/Patient/byDentist/${dentist1.dentistId}`, {
-              headers: { Authorization: `Bearer ${token1}` },
-            });
-            const patientsData = response.data?.$values || [];
-            console.log(patientsData);
-            setPatients(patientsData);
-          } catch (error) {
-            console.error("Failed to fetch patients:", error);
-            notify("Failed to fetch patients");
-          }
+            setLoading(true);
+            try {
+                let response;
+                
+                if (dentist1.dentistId) {
+                    response = await axios.get(`https://localhost:7201/api/Patient/byDentist/${dentist1.dentistId}`, {
+                        headers: { Authorization: `Bearer ${token1}` },
+                    });
+                } else {
+                    response = await axios.get('https://localhost:7201/api/Patient', {
+                        headers: { Authorization: `Bearer ${token1}` },
+                    });
+                }
+
+                const patientsData = response.data?.$values || [];
+                console.log(patientsData);
+                setPatients(patientsData);
+            } catch (error) {
+                console.error("Failed to fetch patients:", error);
+                notify("Failed to fetch patients");
+                setError("Failed to fetch patients");
+            } finally {
+                setLoading(false);
+            }
         };
-    
+
         if (token1) fetchPatients();
-    }, [token1]);
-
-      const searchPatients = (searchTerm) => {
-        console.log('Filtering Patients with search term:', searchTerm); // Log the search term
-        const filteredPatients = patients.filter(patient => 
-            patient.emri.toLowerCase().includes(searchTerm.toLowerCase()) ||
-            patient.mbiemri.toLowerCase().includes(searchTerm.toLowerCase())
-        );
-        console.log('Filtered Patients:', filteredPatients); // Log the filtered results
-        setPatients(filteredPatients);
-     };
-
+    }, [token1, dentist1.dentistId]);
 
     const handleSearch = async (e) => {
         const searchValue = e.target.value;
         setSearchTerm(searchValue);
-        console.log('Search value:', searchValue); // Log the search term to ensure it's being captured
+        console.log('Search value:', searchValue);
     
-        // If search term is empty, fetch all dentists from the API
         if (searchValue === '') {
             setLoading(true);
             try {
                 console.log('Fetching all patients...');
-                const response = await axios.get(`https://localhost:7201/api/Patient/byDentist/${dentist1.dentistId}`, {
+                const response = await axios.get(dentist1.dentistId ? 
+                    `https://localhost:7201/api/Patient/byDentist/${dentist1.dentistId}` : 
+                    'https://localhost:7201/api/Patient', {
                     headers: { Authorization: `Bearer ${token1}` },
                 });
-                console.log('API Response:', response.data); // Log API response for debugging
+                console.log('API Response:', response.data);
                 setPatients(response.data?.$values || []);
             } catch (error) {
                 console.error("Failed to fetch patients:", error);
@@ -80,9 +82,18 @@ const Patients = () => {
                 setLoading(false);
             }
         } else {
-            // Otherwise, filter dentists based on the search term
             searchPatients(searchValue);
         }
+    };
+
+    const searchPatients = (searchTerm) => {
+        console.log('Filtering Patients with search term:', searchTerm);
+        const filteredPatients = patients.filter(patient =>
+            patient.emri.toLowerCase().includes(searchTerm.toLowerCase()) ||
+            patient.mbiemri.toLowerCase().includes(searchTerm.toLowerCase())
+        );
+        console.log('Filtered Patients:', filteredPatients);
+        setPatients(filteredPatients);
     };
 
 
@@ -102,7 +113,7 @@ const Patients = () => {
                 type="text"
                 placeholder="Search patients by name..."
                 value={searchTerm}
-                onChange={handleSearch}  // Call handleSearch when typing
+                onChange={handleSearch}  
             />
             <div className="background">
                 <h1>Patients</h1>

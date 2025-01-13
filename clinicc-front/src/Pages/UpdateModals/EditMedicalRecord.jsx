@@ -15,8 +15,8 @@ import "react-toastify/dist/ReactToastify.css";
 const notify = (text) => toast(text);
 
 const EditMedicalRecord = () => {
-  const { id } = useParams(); // Get the patient ID from the URL
-  const token = localStorage.getItem("accessToken"); // Retrieve the token from localStorage
+  const { id } = useParams(); 
+  const token = localStorage.getItem("accessToken"); 
 
   const [formData, setFormData] = useState({
     medicalRecordId: id,
@@ -34,7 +34,6 @@ const EditMedicalRecord = () => {
   const [confirmLoading, setConfirmLoading] = useState(false);
   const [messageApi, contextHolder] = message.useMessage();
 
-  // Fetch patient data when the component mounts
   useEffect(() => {
     const fetchMedicalRecord = async () => {
       try {

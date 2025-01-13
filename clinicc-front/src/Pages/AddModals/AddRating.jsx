@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import React, { useState } from "react";
 import { Modal, Button, Rate, notification, Input } from 'antd';
-import axios from 'axios'; // Import axios për kërkesa API
+import axios from 'axios'; 
 
 const RatingModal = ({ dentist, visible, onClose }) => {
     const navigate = useNavigate();
@@ -18,7 +18,10 @@ const RatingModal = ({ dentist, visible, onClose }) => {
             return {};
         }
     })();
+    const role = localStorage.getItem("role");
     const token = localStorage.getItem("accessToken");
+    const [successMessage, setSuccessMessage] = useState("");
+    const [errorMessage, setErrorMessage] = useState("");
 
     const handleSubmit = async () => {
         const ratingData = {
@@ -30,14 +33,22 @@ const RatingModal = ({ dentist, visible, onClose }) => {
             behaviourRating
         };
 
+        if (!token || role !== "Patient") {
+            setErrorMessage(
+              role !== "Patient"
+                ? "Ju nuk jeni të autorizuar të përdorni këtë formë."
+                : "Ju nuk jeni autentikuar. Ju lutem kyçuni."
+            );
+            return;
+        }
+
         try {
-            // Përdorim axios për të bërë kërkesë POST për të krijuar një vlerësim
             const response = await axios.post(
-                'https://localhost:7201/api/rating', // Endpoint-i i API-së që do të thirret
-                ratingData, // Të dhënat që dërgohen në API
+                'https://localhost:7201/api/rating', 
+                ratingData, 
                 {
                     headers: {
-                        Authorization: `Bearer ${patient1.token}`, // Dërgojmë token-in për autentifikim
+                        Authorization: `Bearer ${token}`, 
                     }
                 }
             );
@@ -47,8 +58,8 @@ const RatingModal = ({ dentist, visible, onClose }) => {
                     message: 'Success',
                     description: 'Rating submitted successfully.',
                 });
-                onClose(); // Mbyll modalin pas dorëzimit
-                navigate('/Dentists'); // Kthehu në faqen e dentistëve
+                onClose(); 
+                navigate('/Dentists'); 
             } else {
                 notification.error({
                     message: 'Error',

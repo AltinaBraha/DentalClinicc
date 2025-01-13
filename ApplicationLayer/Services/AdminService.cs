@@ -1,7 +1,7 @@
 ﻿using ApplicationLayer.DTOs.AdminDto;
 using ApplicationLayer.Interfaces;
 using AutoMapper;
-using DatabaseLayer;
+using InfrastructureLayer;
 using DomainLayer.Entities;
 using DomainLayer.Interfaces;
 using Microsoft.EntityFrameworkCore;

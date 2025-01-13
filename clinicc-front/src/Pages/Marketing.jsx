@@ -23,7 +23,6 @@ const Marketing = () => {
   const handleAppointmentClick = () => navigate('/appointment');
   const handleContactClick = () => navigate('/contact');
 
-  // Services data
   const services = [
     { title: 'General Dentistry', img: GeneralDentistryImg, description: 'Comprehensive care for your oral health and prevention.' },
     { title: 'Cosmetic Dentistry', img: CosmeticDentistryImg, description: 'Enhance your smile with teeth whitening, veneers, and more.' },
@@ -33,14 +32,12 @@ const Marketing = () => {
     { title: 'Oral Surgery', img: OralSurgeryImg, description: 'Procedures to remove damaged teeth or treat other advanced dental issues.' },
   ];
 
-  // Doctors data
   const doctors = [
     { name: 'Dr. John Doe', img: Doctor1Img, specialty: 'General Dentistry', bio: 'Highly skilled dentist with years of experience.' },
     { name: 'Dr. Jane Smith', img: Doctor2Img, specialty: 'Cosmetic Dentistry', bio: 'Helps patients achieve their dream smile.' },
     { name: 'Dr. Mark Lee', img: Doctor3Img, specialty: 'Orthodontics', bio: 'Specializes in straightening and improving smiles.' },
   ];
 
-  // Contact data
   const contacts = [
     { title: 'Phone', description: 'Call us at: +383 44 111 222' },
     { title: 'Email', description: 'dentalclinic@gmail.com' },
@@ -51,7 +48,6 @@ const Marketing = () => {
     <>
       <Navbar />
       <div className="marketing-page">
-        {/* Hero Section */}
         <section className="hero-section">
           <div className="hero-content">
             <h1>Your Smile, Our Priority</h1>
@@ -66,7 +62,6 @@ const Marketing = () => {
           </div>
         </section>
 
-        {/* What We Offer Section */}
         <section className="what-we-offer-section">
             <h2 className="section-title">What We Offer</h2>
             <div className="row">
@@ -83,8 +78,6 @@ const Marketing = () => {
         </section>
 
 
-
-        {/* Our Doctors Section */}
         <section className="home23-sec_6">
           <div className="container">
             <div className="row text-center">
@@ -119,7 +112,6 @@ const Marketing = () => {
           </div>
         </section>
 
-        {/* Appointment Section */}
         <section className="appointment-section">
           <div className="appointment-content">
             <h2>Make Your Appointment</h2>
@@ -128,7 +120,6 @@ const Marketing = () => {
           </div>
         </section>
 
-        {/* Contact Section */}
         <section className="contact-section">
             <h2 className="section-title">How You Can Contact Us</h2>
             <div className="row">

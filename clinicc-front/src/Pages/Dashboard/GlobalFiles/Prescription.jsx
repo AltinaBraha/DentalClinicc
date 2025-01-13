@@ -8,13 +8,12 @@ const Prescription = () => {
   const [prescriptions, setPrescriptions] = useState([]);
   const [patients, setPatients] = useState([]);
   const [dentists, setDentists] = useState([]);
-  const [loading, setLoading] = useState(false); // Loading state
-  const [refresh, setRefresh] = useState(false); // Refresh state to reload data
+  const [loading, setLoading] = useState(false); 
+  const [refresh, setRefresh] = useState(false); 
   const token = localStorage.getItem("accessToken");
 
   const navigate = useNavigate();
 
-  // Fetch Patients
   const fetchPatients = async () => {
     try {
       const response = await axios.get("https://localhost:7201/api/Patient", {
@@ -26,7 +25,6 @@ const Prescription = () => {
     }
   };
 
-  // Fetch Dentists
   const fetchDentists = async () => {
     try {
       const response = await axios.get("https://localhost:7201/api/Dentist", {
@@ -38,9 +36,8 @@ const Prescription = () => {
     }
   };
 
-  // Fetch Prescriptions and Map Data
   const fetchPrescriptions = async () => {
-    setLoading(true); // Start loading
+    setLoading(true); 
     try {
       const response = await axios.get("https://localhost:7201/api/Prescription", {
         headers: { Authorization: `Bearer ${token}` },
@@ -51,7 +48,7 @@ const Prescription = () => {
         const dentist = dentists.find((d) => d.dentistId === prescription.dentistId);
         return {
           ...prescription,
-          key: prescription.prescriptionId, // Required for Ant Design Table
+          key: prescription.prescriptionId, 
           patientName: patient ? `${patient.emri} ${patient.mbiemri}` : "Unknown Patient",
           dentistName: dentist ? `${dentist.emri} ${dentist.mbiemri}` : "Unknown Dentist",
         };
@@ -60,13 +57,13 @@ const Prescription = () => {
     } catch (error) {
       console.error("Failed to fetch prescriptions:", error);
     }
-    setLoading(false); // End loading
+    setLoading(false); 
   };
 
   useEffect(() => {
     const fetchData = async () => {
       if (token) {
-        await fetchPatients(); // Fetch departments first
+        await fetchPatients(); 
         await fetchDentists();
       }
     };
@@ -74,24 +71,23 @@ const Prescription = () => {
   }, [token]);
 
   useEffect(() => {
-    if (patients.length > 0 && dentists.length > 0) {// Fetch dentists only after departments are fetched and updated
+    if (patients.length > 0 && dentists.length > 0) {
       fetchPrescriptions(patients, dentists);
     }
   }, [patients,dentists, refresh]);
-  // Delete Prescription
+
   const deletePrescription = async (prescriptionId) => {
     try {
       await axios.delete(`https://localhost:7201/api/Prescription/${prescriptionId}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
-      setRefresh(!refresh); // Trigger refresh
+      setRefresh(!refresh); 
     } catch (error) {
       console.error(`Failed to delete prescription with ID ${prescriptionId}:`, error);
     }
   };
 
 
-  // Table Columns
   const columns = [
     { title: "Diagnoza", dataIndex: "diagnoza", key: "diagnoza" },
     { title: "Medicina", dataIndex: "medicina", key: "medicina" },
@@ -104,7 +100,7 @@ const Prescription = () => {
         <>
           <EditFilled
             className="edit"
-            style={{ color: "#1890ff", cursor: "pointer" }}
+            style={{ cursor: "pointer" }}
             onClick={() => navigate(`/EditPrescription/${record.prescriptionId}`)}
           />
           <DeleteOutlined
@@ -118,7 +114,7 @@ const Prescription = () => {
   ];
 
   return (
-    <div className="prescriptionDetails">
+    <div className="patientDetails1">
       <h1>Prescription Details</h1>
       {loading ? (
         <p>Loading prescriptions...</p>

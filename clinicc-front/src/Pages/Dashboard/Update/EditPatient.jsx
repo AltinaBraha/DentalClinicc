@@ -9,8 +9,8 @@ import Sidebar from "../GlobalFiles/Sidebar";
 import "../CSS/Edit.css";
 
 const EditPatient = () => {
-  const { id } = useParams(); // Get the patient ID from the URL
-  const token = localStorage.getItem("accessToken"); // Retrieve the token from localStorage
+  const { id } = useParams(); 
+  const token = localStorage.getItem("accessToken"); 
 
   const [formData, setFormData] = useState({
     patientId: id,
@@ -26,7 +26,6 @@ const EditPatient = () => {
   const [open, setOpen] = useState(false);
   const [messageApi, contextHolder] = message.useMessage();
 
-  // Fetch patient data when the component mounts
   useEffect(() => {
     const fetchPatient = async () => {
       try {

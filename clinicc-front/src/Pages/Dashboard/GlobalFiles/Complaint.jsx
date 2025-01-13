@@ -41,14 +41,13 @@ const Complaint = () => {
         headers: { Authorization: `Bearer ${token1}` },
       });
       const complaintsData = response.data?.$values || [];
-      // Map dentist and patient names to ratings
       const complaintsWithNames = complaintsData.map((complaint) => {
         const dentist = dentistsList.find((d) => d.dentistId === complaint.dentistId);
         const patient = patientsList.find((p) => p.patientId === complaint.patientId);
         return {
           ...complaint,
-          dentistName: dentist ? dentist.emri : "Unknown Dentist", // Fallback if not found
-          patientName: patient ? patient.emri : "Unknown Patient", // Fallback if not found
+          dentistName: dentist ? dentist.emri : "Unknown Dentist", 
+          patientName: patient ? patient.emri : "Unknown Patient", 
         };
       });
       setComplaints(complaintsWithNames);
@@ -61,7 +60,7 @@ const Complaint = () => {
   useEffect(() => {
     const fetchData = async () => {
       if (token1) {
-        await fetchPatients(); // Fetch departments first
+        await fetchPatients(); 
         await fetchDentists();
       }
     };
@@ -69,17 +68,16 @@ const Complaint = () => {
   }, [token1]);
 
   useEffect(() => {
-    if (patients.length > 0 && dentists.length > 0) {// Fetch dentists only after departments are fetched and updated
+    if (patients.length > 0 && dentists.length > 0) {
       fetchComplaints(patients, dentists);
     }
   }, [patients,dentists, refresh]); 
-  // API call to delete an appointment
   const deleteComplaint = async (complaintsId) => {
     try {
       await axios.delete(`https://localhost:7201/api/Complaints/${complaintsId}`, {
         headers: { Authorization: `Bearer ${token1}` },
       });
-      setRefresh(!refresh); // Trigger re-fetch after deletion
+      setRefresh(!refresh); 
       console.log(`Complaint with ID ${complaintsId} deleted successfully`);
     } catch (error) {
       console.error(`Failed to delete Complaint with ID ${complaintsId}:`, error);

@@ -3,6 +3,7 @@ using ApplicationLayer.DTOs.RatingDto;
 using ApplicationLayer.Interfaces;
 using ApplicationLayer.Services;
 using DomainLayer.Entities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -37,12 +38,14 @@ namespace PresentationLayer.Controllers
             return Ok(ratings);
         }
 
+        [Authorize(Roles = "Patient")]
         [HttpPost]
         public async Task<IActionResult> CreateRating([FromBody] RatingCreateDto ratingDto)
         {
             var rating = await _ratingService.CreateRatingAsync(ratingDto);
             return CreatedAtAction(nameof(GetRatingById), new { id = rating.RatingId }, rating);
         }
+
         [HttpGet("dentist/{dentistId}")]
         public async Task<IActionResult> GetByDentistId(int dentistId)
         {

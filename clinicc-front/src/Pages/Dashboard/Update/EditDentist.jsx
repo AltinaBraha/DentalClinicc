@@ -14,8 +14,8 @@ import { BiSolidTime } from "react-icons/bi";
 const notify = (text) => toast(text);
 
 const EditDentist = () => {
-  const { id } = useParams(); // Get the patient ID from the URL
-  const token = localStorage.getItem("accessToken"); // Retrieve the token from localStorage
+  const { id } = useParams(); 
+  const token = localStorage.getItem("accessToken"); 
 console.log(token);
 
   const [formData, setFormData] = useState({
@@ -53,7 +53,6 @@ console.log(token);
     if (token) fetchDepartments();
   }, [token]);
 
-  // Fetch patient data when the component mounts
   useEffect(() => {
     const fetchDentist = async () => {
       try {
@@ -283,7 +282,7 @@ console.log(token);
                   >
                   {departments.map((department) => (
                     <Select.Option key={department.departmentId} value={department.departmentId}>
-                      {department.emri}{/* Adjust based on your patient object */}
+                      {department.emri}
                     </Select.Option>
                   ))}
                   </Select>

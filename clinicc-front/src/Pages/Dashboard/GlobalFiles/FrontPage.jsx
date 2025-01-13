@@ -45,7 +45,7 @@ const FrontPage = () => {
       await axios.delete(`https://localhost:7201/api/Patient/${patientId}`, {
         headers: { Authorization: `Bearer ${token1}` },
       });
-      setRefresh(!refresh); // Trigger a re-fetch of the patients list
+      setRefresh(!refresh); 
       console.log(`Patient with ID ${patientId} deleted successfully`);
     } catch (error) {
         if (error.response && error.response.status === 404) {
@@ -114,11 +114,11 @@ const FrontPage = () => {
         <Admins/>
         <Dentists/>
         <Terminet/>
+        <MedicalRecords/>
+        <Prescription/>
         <Ratings/>
         <Complaint/>
         <Contact/>
-        <MedicalRecords/>
-        <Prescription/>
         </div>
     </div>
     )

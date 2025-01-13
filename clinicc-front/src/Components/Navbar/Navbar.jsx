@@ -10,12 +10,12 @@ function Navbars() {
 
     useEffect(() => {
         const userRole = localStorage.getItem("role");
-        setRole(userRole); // Retrieve the role from localStorage
+        setRole(userRole); 
     }, []);
 
     const handleLogout = () => {
-        localStorage.clear(); // Clear all stored data on logout
-        window.location.href = "/Login"; // Redirect to login page
+        localStorage.clear(); 
+        window.location.href = "/Login"; 
     };
 
 
@@ -32,7 +32,6 @@ function Navbars() {
                         <Nav.Link href="/Marketing">Marketing</Nav.Link>
                         <Nav.Link href="/Contact">Contact Us</Nav.Link>
                         
-                        {/* Links based on user role */}
                         {(role === "Dentist" || role === "Admin") && (
                             <Link to="/Patients" className="nav-link">
                                 <span>Patients</span>

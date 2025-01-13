@@ -41,14 +41,13 @@ const Ratings = () => {
         headers: { Authorization: `Bearer ${token1}` },
       });
       const ratingsData = response.data?.$values || [];
-      // Map dentist and patient names to ratings
       const ratingsWithNames = ratingsData.map((rating) => {
         const dentist = dentists.find((d) => d.dentistId === rating.dentistId);
         const patient = patients.find((p) => p.patientId === rating.patientId);
         return {
           ...rating,
-          dentistName: dentist ? dentist.emri : "Unknown Dentist", // Fallback if not found
-          patientName: patient ? patient.emri : "Unknown Patient", // Fallback if not found
+          dentistName: dentist ? dentist.emri : "Unknown Dentist", 
+          patientName: patient ? patient.emri : "Unknown Patient", 
         };
       });
       setRatings(ratingsWithNames);
@@ -62,7 +61,7 @@ const Ratings = () => {
   useEffect(() => {
     const fetchData = async () => {
       if (token1) {
-        await fetchPatients(); // Fetch departments first
+        await fetchPatients(); 
         await fetchDentists();
         }
     };
@@ -70,18 +69,17 @@ const Ratings = () => {
   }, [token1]);
     
   useEffect(() => {
-    if (patients.length > 0 && dentists.length > 0) {// Fetch dentists only after departments are fetched and updated
+    if (patients.length > 0 && dentists.length > 0) {
       fetchRatings(patients, dentists);
     }
   }, [patients,dentists, refresh]); 
 
-  // API call to delete an appointment
   const deleteRating = async (ratingId) => {
     try {
       await axios.delete(`https://localhost:7201/api/Rating/${ratingId}`, {
         headers: { Authorization: `Bearer ${token1}` },
       });
-      setRefresh(!refresh); // Trigger re-fetch after deletion
+      setRefresh(!refresh); 
       console.log(`Rating with ID ${ratingId} deleted successfully`);
     } catch (error) {
       console.error(`Failed to delete Rating with ID ${ratingId}:`, error);

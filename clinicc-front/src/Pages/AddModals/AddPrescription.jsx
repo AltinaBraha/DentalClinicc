@@ -35,8 +35,8 @@ const PrescriptionModal = ({ patient, visible, onClose, onAdded }) => {
                   headers: { Authorization: `Bearer ${token1}` },
                 }
               );
-            onAdded(); // Call the onAdded callback to refetch data
-            onClose(); // Close the modal
+            onAdded(); 
+            onClose(); 
         } catch (error) {
             console.error('Error adding prescription:', error);
             notification.error({
@@ -50,7 +50,6 @@ const PrescriptionModal = ({ patient, visible, onClose, onAdded }) => {
         const doc = new jsPDF();
         const currentDate = moment().format("MMMM Do YYYY");
     
-        // Add Title and Patient Information
         doc.setFontSize(18);
         doc.setTextColor(34, 139, 34);
         doc.text("Patient Prescription", 14, 20);
@@ -85,7 +84,6 @@ const PrescriptionModal = ({ patient, visible, onClose, onAdded }) => {
         doc.setFont("helvetica", "normal");
         doc.text(`${patient.email}`, 40, 70);
     
-        // Add Prescription Data
         doc.setFontSize(14);
         doc.setTextColor(255, 0, 0);
         doc.text("Prescription", 14, 90);
@@ -105,7 +103,6 @@ const PrescriptionModal = ({ patient, visible, onClose, onAdded }) => {
         doc.text(`${medicine}`, 50, 110);
 
     
-        // Add Dentist Information
         doc.setFontSize(12);
         doc.setFont("helvetica", "bold");
         doc.text("Dentist Name:", 150, 100);
@@ -116,7 +113,6 @@ const PrescriptionModal = ({ patient, visible, onClose, onAdded }) => {
         doc.text("Signature:", 150, 120);
         doc.line(150, 125, 190, 125);
     
-        // Save the PDF
         doc.save("Prescription.pdf");
       };
 

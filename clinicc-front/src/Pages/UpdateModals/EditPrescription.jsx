@@ -15,8 +15,8 @@ import "react-toastify/dist/ReactToastify.css";
 const notify = (text) => toast(text);
 
 const EditPrescription = () => {
-  const { id } = useParams(); // Get the patient ID from the URL
-  const token = localStorage.getItem("accessToken"); // Retrieve the token from localStorage
+  const { id } = useParams(); 
+  const token = localStorage.getItem("accessToken"); 
 
   const [formData, setFormData] = useState({
     prescriptionId: id,
@@ -32,7 +32,6 @@ const EditPrescription = () => {
   const [confirmLoading, setConfirmLoading] = useState(false);
   const [messageApi, contextHolder] = message.useMessage();
 
-  // Fetch patient data when the component mounts
   useEffect(() => {
     const fetchPrescription = async () => {
       try {

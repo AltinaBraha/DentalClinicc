@@ -2,8 +2,8 @@
 using ApplicationLayer.DTOs.AdminDto;
 using ApplicationLayer.Interfaces;
 using AutoMapper;
-using DatabaseLayer;
-using DatabaseLayer.Repositories;
+using InfrastructureLayer;
+using InfrastructureLayer.Repositories;
 using DomainLayer.Entities;
 using DomainLayer.Interfaces;
 using InfrastructureLayer.Repositories;

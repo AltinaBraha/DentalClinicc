@@ -14,8 +14,8 @@ import "react-toastify/dist/ReactToastify.css";
 const notify = (text) => toast(text);
 
 const EditPrescription = () => {
-  const { id } = useParams(); // Get the prescription ID from the URL
-  const token = localStorage.getItem("accessToken"); // Retrieve the token from localStorage
+  const { id } = useParams(); 
+  const token = localStorage.getItem("accessToken"); 
 
   const [formData, setFormData] = useState({
     prescriptionId: id,

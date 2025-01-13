@@ -35,7 +35,6 @@ const Login = () => {
       try {
         const response = await axios.post(endpoint.url, formValue);
 
-        // If successful, stop trying other endpoints
         setLoading(false);
         notify(`Logged in as ${endpoint.role}`);
 
@@ -62,7 +61,7 @@ const Login = () => {
         return;
       } catch (error) {
         console.error(`Failed to login as ${endpoint.role}`, error.response?.data);
-        // Continue to the next API if login fails
+        
       }
     }
 

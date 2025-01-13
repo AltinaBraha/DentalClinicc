@@ -14,8 +14,8 @@ import "react-toastify/dist/ReactToastify.css";
 const notify = (text) => toast(text);
 
 const EditAppointment = () => {
-  const { id } = useParams(); // Get the patient ID from the URL
-  const token = localStorage.getItem("accessToken"); // Retrieve the token from localStorage
+  const { id } = useParams(); 
+  const token = localStorage.getItem("accessToken"); 
 
   const [formData, setFormData] = useState({
     appointmentId: id,
@@ -66,7 +66,6 @@ const EditAppointment = () => {
     if (token) fetchPatients();
   }, [token]);
 
-  // Fetch patient data when the component mounts
   useEffect(() => {
     const fetchAppointment = async () => {
       try {
@@ -248,7 +247,7 @@ const EditAppointment = () => {
                   >
                   {patients.map((patient) => (
                     <Select.Option key={patient.patientId} value={patient.patientId}>
-                      {patient.emri} {patient.mbiemri}{/* Adjust based on your patient object */}
+                      {patient.emri} {patient.mbiemri}
                     </Select.Option>
                   ))}
                   </Select>
@@ -262,7 +261,7 @@ const EditAppointment = () => {
                   >
                   {dentists.map((dentist) => (
                     <Select.Option key={dentist.dentistId} value={dentist.dentistId}>
-                      {dentist.emri} {dentist.mbiemri}{/* Adjust based on your dentist object */}
+                      {dentist.emri} {dentist.mbiemri}
                     </Select.Option>
                   ))}
                   </Select>

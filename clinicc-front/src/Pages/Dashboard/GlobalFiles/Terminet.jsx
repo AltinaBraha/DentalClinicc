@@ -13,7 +13,6 @@ const Terminet = () => {
 
   const navigate = useNavigate();
 
-  // Funksioni për formatimin e datës
   const formatDate = (dateString) => {
     const date = new Date(dateString);
     const year = date.getFullYear();
@@ -51,14 +50,13 @@ const Terminet = () => {
           headers: { Authorization: `Bearer ${token1}` },
         });
         const appointmentsData = response.data?.$values || [];
-        // Map dentist and patient names to ratings
         const appointmentsWithNames = appointmentsData.map((terminet) => {
           const dentist = dentistsList.find((d) => d.dentistId === terminet.dentistId);
           const patient = patientsList.find((p) => p.patientId === terminet.patientId);
           return {
             ...terminet,
-            dentistName: dentist ? dentist.emri : "Unknown Dentist", // Fallback if not found
-            patientName: patient ? patient.emri : "Unknown Patient", // Fallback if not found
+            dentistName: dentist ? dentist.emri : "Unknown Dentist", 
+            patientName: patient ? patient.emri : "Unknown Patient", 
             data: formatDate(terminet.data),
           };
         });
@@ -71,7 +69,7 @@ const Terminet = () => {
     useEffect(() => {
         const fetchData = async () => {
           if (token1) {
-            await fetchPatients(); // Fetch departments first
+            await fetchPatients(); 
             await fetchDentists();
           }
         };
@@ -79,17 +77,16 @@ const Terminet = () => {
       }, [token1]);
     
       useEffect(() => {
-        if (patients.length > 0 && dentists.length > 0) {// Fetch dentists only after departments are fetched and updated
+        if (patients.length > 0 && dentists.length > 0) {
           fetchTerminet(patients, dentists);
         }
       }, [patients,dentists, refresh]); 
-  // API call to delete an appointment
   const deleteTerminet = async (appointmentId) => {
     try {
       await axios.delete(`https://localhost:7201/api/Appointments/${appointmentId}`, {
         headers: { Authorization: `Bearer ${token1}` },
       });
-      setRefresh(!refresh); // Trigger re-fetch after deletion
+      setRefresh(!refresh); 
       console.log(`Appointment with ID ${appointmentId} deleted successfully`);
     } catch (error) {
       console.error(`Failed to delete appointment with ID ${appointmentId}:`, error);

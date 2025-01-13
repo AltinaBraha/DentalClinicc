@@ -42,14 +42,13 @@ const MedicalRecords = () => {
             headers: { Authorization: `Bearer ${token1}` },
           });
           const medicalRecordsData = response.data?.$values || [];
-          // Map dentist and patient names to ratings
           const medicalRecordsWithNames = medicalRecordsData.map((medicalRecord) => {
             const dentist = dentists.find((d) => d.dentistId === medicalRecord.dentistId);
             const patient = patients.find((p) => p.patientId === medicalRecord.patientId);
             return {
               ...medicalRecord,
-              dentistName: dentist ? dentist.emri : "Unknown Dentist", // Fallback if not found
-              patientName: patient ? patient.emri : "Unknown Patient", // Fallback if not found
+              dentistName: dentist ? dentist.emri : "Unknown Dentist", 
+              patientName: patient ? patient.emri : "Unknown Patient", 
             };
           });
           setMedicalRecords(medicalRecordsWithNames);
@@ -61,7 +60,7 @@ const MedicalRecords = () => {
       useEffect(() => {
           const fetchData = async () => {
             if (token1) {
-              await fetchPatients(); // Fetch departments first
+              await fetchPatients(); 
               await fetchDentists();
               }
           };
@@ -69,7 +68,7 @@ const MedicalRecords = () => {
         }, [token1]);
           
         useEffect(() => {
-          if (patients.length > 0 && dentists.length > 0) {// Fetch dentists only after departments are fetched and updated
+          if (patients.length > 0 && dentists.length > 0) {
             fetchMedicalRecords(patients, dentists);
           }
         }, [patients,dentists, refresh]); 
@@ -79,7 +78,7 @@ const MedicalRecords = () => {
       await axios.delete(`https://localhost:7201/api/MedicalRecord/${medicalRecordId}`, {
         headers: { Authorization: `Bearer ${token1}` },
       });
-      setRefresh(!refresh); // Trigger re-fetch after deletion
+      setRefresh(!refresh); 
       console.log(`MedicalRecords with ID ${medicalRecordId} deleted successfully`);
     } catch (error) {
       console.error(`Failed to delete medicalRecords with ID ${medicalRecordId}:`, error);

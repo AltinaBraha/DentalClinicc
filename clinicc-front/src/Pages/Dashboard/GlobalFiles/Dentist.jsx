@@ -12,7 +12,6 @@ const Dentist = () => {
 
   const navigate = useNavigate();
 
-  // Fetch Departments
   const fetchDepartments = async () => {
     try {
       const response = await axios.get("https://localhost:7201/api/Department", {
@@ -24,7 +23,6 @@ const Dentist = () => {
     }
   };
 
-  // Fetch Dentists
   const fetchDentists = async (departmentList) => {
     try {
       const response = await axios.get("https://localhost:7201/api/Dentist", {
@@ -32,12 +30,11 @@ const Dentist = () => {
       });
       const dentistsData = response.data?.$values || [];
 
-      // Map department names to dentists using the provided department list
       const dentistsWithDepartments = dentistsData.map((dentist) => {
         const department = departmentList.find((d) => d.departmentId === dentist.departmentId);
         return {
           ...dentist,
-          departmentName: department ? department.emri : "Unknown", // Fallback if department not found
+          departmentName: department ? department.emri : "Unknown", 
         };
       });
       setDentists(dentistsWithDepartments);
@@ -46,30 +43,27 @@ const Dentist = () => {
     }
   };
 
-  // Combined Fetch to Ensure Sequential Execution
   useEffect(() => {
     const fetchData = async () => {
       if (token1) {
-        await fetchDepartments(); // Fetch departments first
+        await fetchDepartments(); 
       }
     };
     fetchData();
-  }, [token1]); // Fetch departments when token changes
+  }, [token1]); 
 
   useEffect(() => {
     if (departments.length > 0) {
-      // Fetch dentists only after departments are fetched and updated
       fetchDentists(departments);
     }
-  }, [departments, refresh]); // Re-fetch dentists when departments or refresh changes
+  }, [departments, refresh]); 
 
-  // Delete Dentist
   const deleteDentist = async (dentistId) => {
     try {
       await axios.delete(`https://localhost:7201/api/Dentist/${dentistId}`, {
         headers: { Authorization: `Bearer ${token1}` },
       });
-      setRefresh(!refresh); // Trigger re-fetch after deletion
+      setRefresh(!refresh); 
       console.log(`Dentist with ID ${dentistId} deleted successfully`);
     } catch (error) {
       console.error(`Failed to delete Dentist with ID ${dentistId}:`, error);

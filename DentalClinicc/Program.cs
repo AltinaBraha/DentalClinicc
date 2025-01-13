@@ -1,10 +1,9 @@
 using Microsoft.EntityFrameworkCore;
-using DatabaseLayer;
+using InfrastructureLayer;
 using ApplicationLayer.Mappings;
 using AutoMapper;
 using ApplicationLayer.Interfaces;
 using ApplicationLayer.Services;
-using DatabaseLayer.Repositories;
 using DomainLayer.Interfaces;
 using InfrastructureLayer.Repositories;
 using System.Text;

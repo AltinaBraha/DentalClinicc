@@ -170,7 +170,7 @@ const AddTermini = () => {
                     <option value="">Select a Dentist</option>
                     {dentists.map((dentist) => (
                       <option key={dentist.dentistId} value={dentist.dentistId}>
-                        {dentist.emri} {dentist.mbiemri}{/* Display dentist name */}
+                        {dentist.emri} {dentist.mbiemri}
                       </option>
                     ))}
                   </select>
@@ -188,7 +188,7 @@ const AddTermini = () => {
                     <option value="">Select a Patient</option>
                     {patients.map((patient) => (
                       <option key={patient.patientId} value={patient.patientId}>
-                        {patient.emri} {patient.mbiemri}{/* Display patient name */}
+                        {patient.emri} {patient.mbiemri}
                       </option>
                     ))}
                   </select>

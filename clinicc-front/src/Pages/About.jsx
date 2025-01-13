@@ -9,7 +9,7 @@ function About() {
         <div>
             <section className="section about-area">
                 <div className="container-fluid">
-                    <div className="row align-items-center">
+                    <div className="row align-items-center" id='row'>
                         <div className="col-lg-6 mb-30">
                             <div className="about-images">
                                 <ul>

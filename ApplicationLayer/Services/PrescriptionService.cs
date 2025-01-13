@@ -3,7 +3,7 @@ using ApplicationLayer.DTOs.MedicalRecordDto;
 using ApplicationLayer.DTOs.PrescriptionDto;
 using ApplicationLayer.Interfaces;
 using AutoMapper;
-using DatabaseLayer.Repositories;
+using InfrastructureLayer.Repositories;
 using DomainLayer.Entities;
 using DomainLayer.Interfaces;
 using System;

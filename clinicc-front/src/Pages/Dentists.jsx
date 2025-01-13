@@ -7,19 +7,18 @@ import './CSS/Dentists.css';
 import DentistModal from './DentistModal';
 
 const Dentists = () => {
-    const [dentists, setDentists] = useState([]); // State to hold dentists data
-    const [selectedDentist, setSelectedDentist] = useState(null); // State for selected dentist
-    const [searchTerm, setSearchTerm] = useState(''); // State for search input
-    const [loading, setLoading] = useState(false); // Loading state for dentists
-    const [departments, setDepartments] = useState([]); // State for departments
-    const [loadingDepartments, setLoadingDepartments] = useState(false); // Loading state for departments
-    const [error, setError] = useState(null); // Error state
+    const [dentists, setDentists] = useState([]); 
+    const [selectedDentist, setSelectedDentist] = useState(null); 
+    const [searchTerm, setSearchTerm] = useState(''); 
+    const [loading, setLoading] = useState(false); 
+    const [departments, setDepartments] = useState([]); 
+    const [loadingDepartments, setLoadingDepartments] = useState(false); 
+    const [error, setError] = useState(null); 
 
     const notify = (message) => toast(message);
 
     const token = localStorage.getItem("accessToken");
 
-    // Fetch departments and dentists data
     useEffect(() => {
         const fetchDepartments = async () => {
             setLoadingDepartments(true);
@@ -28,7 +27,7 @@ const Dentists = () => {
                     headers: { Authorization: `Bearer ${token}` },
                 });
                 const Ddata = response.data?.$values || [];
-                console.log("Departments data: ", Ddata);  // Log departments data
+                console.log("Departments data: ", Ddata);  
                 setDepartments(Ddata);
             } catch (error) {
                 console.error("Failed to fetch departments:", error);
@@ -45,7 +44,7 @@ const Dentists = () => {
                     headers: { Authorization: `Bearer ${token}` },
                 });
                 const dentistsData = response.data?.$values || [];
-                console.log("Dentists data: ", dentistsData);  // Log dentists data
+                console.log("Dentists data: ", dentistsData);  
                 setDentists(dentistsData);
             } catch (error) {
                 console.error("Failed to fetch dentists:", error);
@@ -59,29 +58,26 @@ const Dentists = () => {
         if (token) {
             fetchDentists();
         }
-        fetchDepartments(); // Fetch departments in parallel
+        fetchDepartments(); 
     
     }, [token]);
     
 
-    // Fetch dentists based on search term
     const searchDentists = (searchTerm) => {
-        console.log('Filtering dentists with search term:', searchTerm); // Log the search term
+        console.log('Filtering dentists with search term:', searchTerm); 
         const filteredDentists = dentists.filter(dentist => 
             dentist.emri.toLowerCase().includes(searchTerm.toLowerCase()) ||
             dentist.mbiemri.toLowerCase().includes(searchTerm.toLowerCase())
         );
-        console.log('Filtered Dentists:', filteredDentists); // Log the filtered results
+        console.log('Filtered Dentists:', filteredDentists); 
         setDentists(filteredDentists);
     };
 
-    // Handle search input change
     const handleSearch = async (e) => {
         const searchValue = e.target.value;
         setSearchTerm(searchValue);
-        console.log('Search value:', searchValue); // Log the search term to ensure it's being captured
+        console.log('Search value:', searchValue); 
     
-        // If search term is empty, fetch all dentists from the API
         if (searchValue === '') {
             setLoading(true);
             try {
@@ -89,7 +85,7 @@ const Dentists = () => {
                 const response = await axios.get('https://localhost:7201/api/Dentist', {
                     headers: { Authorization: `Bearer ${token}` },
                 });
-                console.log('API Response:', response.data); // Log API response for debugging
+                console.log('API Response:', response.data); 
                 setDentists(response.data?.$values || []);
             } catch (error) {
                 console.error("Failed to fetch dentists:", error);
@@ -99,7 +95,6 @@ const Dentists = () => {
                 setLoading(false);
             }
         } else {
-            // Otherwise, filter dentists based on the search term
             searchDentists(searchValue);
         }
     };
@@ -107,13 +102,10 @@ const Dentists = () => {
 
     
     
-
-    // Handle dentist selection for modal
     const handleCheck = (dentist) => {
         setSelectedDentist(dentist);
     };
 
-    // Table columns definition
     const columns = [
         { title: "Name", dataIndex: "emri", key: "emri" },
         { title: "Surname", dataIndex: "mbiemri", key: "mbiemri" },

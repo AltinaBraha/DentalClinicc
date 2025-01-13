@@ -3,6 +3,7 @@ using ApplicationLayer.DTOs.ContactDto;
 using ApplicationLayer.Interfaces;
 using ApplicationLayer.Services;
 using DomainLayer.Entities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -37,6 +38,7 @@ namespace PresentationLayer.Controllers
             return Ok(complaints);
         }
 
+        [Authorize(Roles = "Patient")]
         [HttpPost]
         public async Task<IActionResult> CreateComplaints([FromBody] ComplaintsCreateDto complaintsDto)
         {

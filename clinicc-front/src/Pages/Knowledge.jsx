@@ -1,10 +1,10 @@
 import React from "react";
 import Navbar from '../Components/Navbar/Navbar';
 import Footer from '../Components/Footer/Footer';
-import KnowledgePic1 from "../Assets/Knowledge1.png"; // Zëvendëso me foton që përfaqëson 'Dental Clinic Knowledge'
-import KnowledgePic2 from "../Assets/Knowledge2.png"; // Zëvendëso me foton që përfaqëson 'Dental Care Importance'
-import KnowledgePic3 from "../Assets/Knowledge3.png"; // Zëvendëso me foton që përfaqëson 'Tips for Maintaining Oral Health'
-import KnowledgePic4 from "../Assets/Knowledge4.png"; // Zëvendëso me foton që përfaqëson 'Advanced Technology'
+import KnowledgePic1 from "../Assets/Knowledge1.png"; 
+import KnowledgePic2 from "../Assets/Knowledge2.png"; 
+import KnowledgePic3 from "../Assets/Knowledge3.png"; 
+import KnowledgePic4 from "../Assets/Knowledge4.png"; 
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import "./CSS/Knowledge.css";
 

@@ -99,7 +99,6 @@ const Appointment = () => {
         style={{ backgroundImage: `url(${backgroundImage})` }}
       >
         <div className="content-container">
-          {/* Left Side */}
           <div className="text-container">
             <h1>The Complete Dental Examination</h1>
             <p>
@@ -116,7 +115,6 @@ const Appointment = () => {
             </div>
           </div>
 
-          {/* Right Side */}
           <div className="appointment-form">
             <h1>Book an Appointment</h1>
             <img src={termini} alt="doctor" className="avatarimg" />

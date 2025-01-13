@@ -12,7 +12,6 @@ const Admin = () => {
 
   const navigate = useNavigate();
 
-  // Fetch Departments
   const fetchDepartments = async () => {
     try {
       const response = await axios.get("https://localhost:7201/api/Department", {
@@ -24,7 +23,6 @@ const Admin = () => {
     }
   };
 
-  // Fetch Admins
   const fetchAdmins = async (departmentList) => {
     try {
       const response = await axios.get("https://localhost:7201/api/Admin", {
@@ -32,12 +30,11 @@ const Admin = () => {
       });
       const adminsData = response.data?.$values || [];
 
-      // Map department names to admins
       const adminsWithDepartments = adminsData.map((admin) => {
         const department = departmentList.find((d) => d.departmentId === admin.departmentId);
         return {
           ...admin,
-          departmentName: department ? department.emri : "Unknown", // Fallback if department not found
+          departmentName: department ? department.emri : "Unknown", 
         };
       });
       setAdmins(adminsWithDepartments);
@@ -46,30 +43,26 @@ const Admin = () => {
     }
   };
 
-  // Combined Fetch to Ensure Sequential Execution
     useEffect(() => {
       const fetchData = async () => {
         if (token1) {
-          await fetchDepartments(); // Fetch departments first
+          await fetchDepartments(); 
         }
       };
       fetchData();
-    }, [token1]); // Fetch departments when token changes
-
+    }, [token1]); 
     useEffect(() => {
         if (departments.length > 0) {
-          // Fetch dentists only after departments are fetched and updated
           fetchAdmins(departments);
         }
-      }, [departments, refresh]); // Re-fetch dentists when departments or refresh changes
+      }, [departments, refresh]); 
 
-  // API call to delete an appointment
   const deleteAdmin = async (adminId) => {
     try {
       await axios.delete(`https://localhost:7201/api/Admin/${adminId}`, {
         headers: { Authorization: `Bearer ${token1}` },
       });
-      setRefresh(!refresh); // Trigger re-fetch after deletion
+      setRefresh(!refresh); 
       console.log(`Admin with ID ${adminId} deleted successfully`);
     } catch (error) {
       console.error(`Failed to delete admin with ID ${adminId}:`, error);

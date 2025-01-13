@@ -97,7 +97,6 @@ input:focus {
     border-color: #007bff; 
     background-color: #f0f8ff; 
 }
-/* Add media queries for better responsiveness */
 
 @media (max-width: 768px) {
     .patient-list {

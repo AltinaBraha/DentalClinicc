@@ -59,11 +59,11 @@ body, html {
 /* **********************   SIDEBAR STYLE PART  ************************* */
 .container1 {
   display: flex;
-  gap: 2rem; /* Adjust or remove this if needed */
+  gap: 2rem; 
   background-color: rgba(131, 220, 255, 0.29);
   width: 100%;
-  margin: 0; /* Ensure no margins are applied */
-  padding: 0; /* Ensure no padding is applied */
+  margin: 0; 
+  padding: 0; 
 }
 
 .main1 {

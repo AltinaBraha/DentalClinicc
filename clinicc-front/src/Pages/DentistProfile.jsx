@@ -64,7 +64,6 @@ const DentistProfile = () => {
           imageId: dentistData.imageId,
         });
 
-        // Fetch the image URL
         if (dentistData.imageId) {
           fetchImageUrl(dentistData.imageId);
         }
@@ -167,7 +166,6 @@ const DentistProfile = () => {
   
       console.log("Updated dentist after image upload:", dentist);
   
-      // Refetch dentist data to ensure sync with backend
       await refetchDentistData();
       message.success("Image uploaded successfully!");
     } catch (error) {
@@ -187,11 +185,11 @@ const DentistProfile = () => {
       );
       setFormData((prevFormData) => ({
         ...prevFormData,
-        imageId: "", // Reset imageId to empty, which will fallback to the default image
+        imageId: "", 
       }));
       setDentist((prev) => ({
         ...prev,
-        imageId: "", // Reset the imageId in the dentist state as well
+        imageId: "", 
       }));
       message.success("Photo removed successfully!");
       window.location.reload();

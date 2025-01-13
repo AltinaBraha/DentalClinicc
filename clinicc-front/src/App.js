@@ -18,6 +18,7 @@ import EditMedicalRecord from './Pages/UpdateModals/EditMedicalRecord';
 import EditPrescription from './Pages/UpdateModals/EditPrescription';
 import DentistProfile from './Pages/DentistProfile';
 import Marketing from './Pages/Marketing';
+import ProtectedRoute from './ProtectedRoute';
 
 
 
@@ -56,6 +57,7 @@ function App() {
             <Routes>
               <Route path="/Login" element={<Login/>}/>
               <Route path="/" element={<Register/>}/>
+              <Route element={<ProtectedRoute />}>
               <Route path="/About" element={<About />} />
               <Route path="/Home" element={<Home />} />
               <Route path="/Services2" element={<Services2 />} />
@@ -94,7 +96,7 @@ function App() {
               <Route path="/Marketing" element={<Marketing />} />
               <Route path="EditPrescription/:id" element={<EditPrescription1 />} />
               <Route path="/prescription" element={<Prescription />} />
-
+              </Route>
 
             </Routes>
         </Router>

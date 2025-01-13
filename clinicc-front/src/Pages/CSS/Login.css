@@ -80,19 +80,19 @@ html, body {
 .form-row {
   display: flex;
   align-items: center;
-  margin-bottom: 15px; /* Add spacing between rows */
+  margin-bottom: 15px; 
 }
 
 .form-row h5 {
-  width: 150px; /* Adjust width for consistent alignment */
-  margin: 0; /* Remove default margin */
+  width: 150px; 
+  margin: 0; 
 }
 
 .form-row input {
-  flex: 1; /* Allow input to take the remaining space */
-  padding: 8px; /* Add padding for better usability */
-  border: 1px solid #ccc; /* Optional: Add a border */
-  border-radius: 4px; /* Optional: Add rounded corners */
+  flex: 1; 
+  padding: 8px; 
+  border: 1px solid #ccc; 
+  border-radius: 4px; 
 }
 
 
@@ -145,7 +145,7 @@ html, body {
 }
 
 .rightside button:hover {
-  background-color: #6a6fdc; /* Ensure no padding or border changes */
+  background-color: #6a6fdc; 
   width: 100%;
   height: 3rem;
   font-size: 1.3rem;

@@ -45,7 +45,7 @@ const PatientModal = ({ patient, onClose }) => {
       await axios.delete(`https://localhost:7201/api/Prescription/${prescriptionId}`, {
         headers: { Authorization: `Bearer ${token1}` },
       });
-      setRefresh(!refresh); // Trigger re-fetch after deletion
+      setRefresh(!refresh); 
       console.log(`Prescription with ID ${prescriptionId} deleted successfully`);
     } catch (error) {
       console.error(`Failed to delete Prescription with ID ${prescriptionId}:`, error);
@@ -57,7 +57,7 @@ const PatientModal = ({ patient, onClose }) => {
       await axios.delete(`https://localhost:7201/api/MedicalRecord/${medicalRecordId}`, {
         headers: { Authorization: `Bearer ${token1}` },
       });
-      setRefresh(!refresh); // Trigger re-fetch after deletion
+      setRefresh(!refresh); 
       console.log(`Medical Record with ID ${medicalRecordId} deleted successfully`);
     } catch (error) {
       console.error(`Failed to delete Medical Record with ID ${medicalRecordId}:`, error);
@@ -158,7 +158,6 @@ const PatientModal = ({ patient, onClose }) => {
         </div>
       </div>
 
-      {/* Modals for adding new data */}
       <MedicalRecordModal
         patient={patient}
         visible={isMedicalRecordVisible}
