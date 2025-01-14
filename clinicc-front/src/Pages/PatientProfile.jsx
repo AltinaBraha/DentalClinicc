@@ -255,7 +255,7 @@ const PatientProfile = () => {
                   src={imageUrl}
                   alt="Profile"
                   className="img-thumbnail"
-                  style={{ width: "200px", height: "200px" }}
+                  style={{ width: "200px", height: "200px", marginLeft:"100px"}}
                   onError={(e) => {
                     e.target.src = defaultImage;
                   }}

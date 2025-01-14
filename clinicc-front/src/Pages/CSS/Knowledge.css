@@ -35,12 +35,12 @@
 
 /* Text Section Styles */
 .text-container {
-    width: 60%; /* Text takes 60% of the space */
+    width: 60%; 
     text-align: left;
     padding-right: 20px;
-    background-color: #ffffff; /* White background for better readability */
-    padding: 20px; /* Padding inside the text container */
-    border-radius: 8px; /* Rounded corners for the text box */
+    background-color: #ffffff; 
+    padding: 20px; 
+    border-radius: 8px;
 }
 
 .title {
@@ -68,8 +68,8 @@
 
 /* Image Section Styles */
 .image-container {
-    width: 35%; /* Image takes 35% of the space */
-    padding: 10px; /* Prevent photo from overflowing */
+    width: 35%; 
+    padding: 10px; 
 }
 
 .Knowledge-pic {
@@ -83,7 +83,7 @@
     box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
 }
 
-/* Keyframe Animations */
+
 @keyframes fadeInDown {
     from {
         opacity: 0;
@@ -106,20 +106,20 @@
     }
 }
 
-/* Responsiveness for Mobile Devices */
+
 @media (max-width: 768px) {
     .content-container {
-        flex-direction: column; /* Stack the text and image vertically */
+        flex-direction: column; 
         align-items: center;
     }
 
     .content-container.reverse {
-        flex-direction: column; /* Stack the text and image vertically when reversed */
+        flex-direction: column; 
     }
 
     .text-container, .image-container {
-        width: 90%; /* Ensure both text and image take 90% of the width on mobile */
-        text-align: center; /* Center align the content on mobile */
+        width: 90%; 
+        text-align: center; 
     }
 
     .text-container {

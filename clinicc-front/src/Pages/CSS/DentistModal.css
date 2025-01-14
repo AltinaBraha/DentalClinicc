@@ -11,51 +11,51 @@
 }
 
 .dentist-modal .antd-modal-title {
-    color: #ffffff; /* White title text */
-    font-size: 18px; /* Slightly larger font size for the title */
+    color: #ffffff; 
+    font-size: 18px; 
 }
 
 .dentist-modal .antd-modal-body {
-    background: #f8f9fa; /* Light gray background for modal content */
-    color: #495057; /* Darker text color for readability */
-    font-size: 16px; /* Larger font size for better readability */
-    line-height: 1.5; /* Improve readability with line-height */
+    background: #f8f9fa; 
+    color: #495057;
+    font-size: 16px; 
+    line-height: 1.5; 
 }
 
 .dentist-modal .modal-footer {
     display: flex;
-    justify-content: space-between; /* Position buttons in the corners */
-    padding: 16px; /* Add padding for spacing */
-    background: #f8f9fa; /* Match the body background color */
-    border-top: 1px solid #dee2e6; /* Subtle border to separate footer */
+    justify-content: space-between; 
+    padding: 16px; 
+    background: #f8f9fa; 
+    border-top: 1px solid #dee2e6; 
 }
 
 .dentist-modal .antd-btn-primary, .dentist-modal .antd-btn-default {
-    border-radius: 4px; /* Rounded corners for buttons */
-    padding: 10px 20px; /* Adequate padding for buttons */
-    font-size: 16px; /* Larger font size for button text */
-    transition: background-color 0.3s, border-color 0.3s; /* Smooth transition for hover effects */
+    border-radius: 4px; 
+    padding: 10px 20px; 
+    font-size: 16px; 
+    transition: background-color 0.3s, border-color 0.3s; 
 }
 
 .dentist-modal .antd-btn-primary {
-    background: #ffffff; /* Primary button background color */
-    border-color: #dee2e6; /* Primary button border color */
-    color: #007bff; /* White text color */
+    background: #ffffff; 
+    border-color: #dee2e6; 
+    color: #007bff; 
 }
 
 .dentist-modal .antd-btn-primary:hover {
-    background: #f1f3f5; /* Darker blue on hover */
-    border-color: #0056b3; /* Border color on hover */
+    background: #f1f3f5; 
+    border-color: #0056b3; 
 }
 
 .dentist-modal .antd-btn-default {
-    background: #ffffff; /* Default button background */
-    border-color: #dee2e6; /* Default button border color */
-    color: #007bff; /* Primary color for text */
+    background: #ffffff; 
+    border-color: #dee2e6; 
+    color: #007bff; 
 }
 
 .dentist-modal .antd-btn-default:hover {
-    background: #f1f3f5; /* Light gray background on hover */
-    border-color: #0056b3; /* Border color on hover */
+    background: #f1f3f5;
+    border-color: #0056b3; 
 }
 
